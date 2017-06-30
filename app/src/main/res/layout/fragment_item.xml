@@ -33,17 +33,31 @@
             android:text="Amount" />
 
         <EditText
-            android:id="@+id/edt_Amount"
+            android:id="@+id/edt_ItemAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="numberDecimal" />
 
-        <!--<Button
-            android:id="@+id/btnNewItem"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Save" />-->
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnItemSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Save" />
+
+            <Button
+                android:id="@+id/btnItemClose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Close" />
+        </LinearLayout>
     </LinearLayout>
 
 </FrameLayout>
