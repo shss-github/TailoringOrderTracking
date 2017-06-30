@@ -9,4 +9,5 @@
     </string-array>
     <string name="title_activity_pay">PayActivity</string>
 
+    <string name="dialog_title_items">Add Item</string>
 </resources>
