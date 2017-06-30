@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="in.collectiva.tailoringordertracking.Register"
-    >
+    tools:context="in.collectiva.tailoringordertracking.HomeMenu">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -15,58 +14,55 @@
         tools:layout_editor_absoluteX="8dp"
         android:layout_margin="10dp" >
 
-
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/txtWelcomeMsg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name"/>
-
-        <EditText
-            android:id="@+id/edtName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mobile Number" />
-
-        <EditText
-            android:id="@+id/edtMobileNo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="phone" />
-
-        <TextView
-            android:id="@+id/txtPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Password" />
-
-        <EditText
-            android:id="@+id/edtPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword" />
-
-        <!--<CheckBox
-            android:id="@+id/chkTerms"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="I accept the Terms and Conditions" />-->
+            android:textAlignment="center"
+            android:text="Welcome {Name}"
+            android:textSize="18dp"/>
 
         <Button
-            android:id="@+id/btnRegisterNow"
+            android:id="@+id/btnMenuItems"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create a New Account" />
+            android:text="Items" />
 
+        <Button
+            android:id="@+id/btnMenuMyOrders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="My Orders" />
+
+        <Button
+            android:id="@+id/btnMenuOrderTracking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Order Tracking" />
+
+        <Button
+            android:id="@+id/btnMenuMakeList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Make List" />
+
+        <Button
+            android:id="@+id/btnMenuReadyList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ready List" />
+
+        <Button
+            android:id="@+id/btnMenuEditProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit Profile" />
+
+        <Button
+            android:id="@+id/btnMenuLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout" />
 
     </LinearLayout>
 
