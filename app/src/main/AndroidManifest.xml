@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppThemeActionBar">
         <activity android:name=".MainActivity" />
         <activity android:name=".Home">
             <intent-filter>
@@ -22,7 +22,7 @@
         </activity>
         <activity android:name=".Register" />
         <activity android:name=".Login" />
-        <activity android:name=".HomeMenu" />
+        <activity android:name=".HomeMenu" android:theme="@style/AppThemeNoActionBar" />
         <activity android:name=".Item"></activity>
     </application>
 
