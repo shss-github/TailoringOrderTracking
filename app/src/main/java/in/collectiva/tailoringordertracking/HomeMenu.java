@@ -75,6 +75,7 @@ public class HomeMenu extends AppCompatActivity {
         drawerItem[4] = new DataModel(R.drawable.fixtures, "Ready List");
         drawerItem[5] = new DataModel(R.drawable.fixtures, "Edit Profile");
         drawerItem[6] = new DataModel(R.drawable.fixtures, "Logout");
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -107,7 +108,7 @@ public class HomeMenu extends AppCompatActivity {
     }
 
     private void selectItem(int position) {
-        Fragment fragment = null;
+        /*Fragment fragment = null;*/
 
         switch (position) {
             case 0:
@@ -138,7 +139,7 @@ public class HomeMenu extends AppCompatActivity {
                 break;
         }
 
-        if (fragment != null) {
+        /*if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
@@ -149,7 +150,7 @@ public class HomeMenu extends AppCompatActivity {
 
         } else {
             Log.e("MainActivity", "Error in creating fragment");
-        }
+        }*/
     }
 
 }

@@ -20,11 +20,18 @@
             android:text="Item Name" />
 
         <EditText
+            android:id="@+id/txtItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <!--<EditText
             android:id="@+id/edt_ItemName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="phone" />
+            android:inputType="phone" />-->
 
         <TextView
             android:id="@+id/txtAmount"
