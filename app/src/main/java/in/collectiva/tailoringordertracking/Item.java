@@ -29,7 +29,9 @@ import java.util.Map;
 import in.collectiva.tailoringordertracking.CommonFunction.CRUDProcess;
 import in.collectiva.tailoringordertracking.CommonFunction.JSONAdapter;
 import in.collectiva.tailoringordertracking.CommonFunction.SessionManagement;
+import in.collectiva.tailoringordertracking.Fragments.EditItem;
 import in.collectiva.tailoringordertracking.Fragments.ItemFragment;
+import in.collectiva.tailoringordertracking.JSONFiles.JSONItems;
 import in.collectiva.tailoringordertracking.cConstant.clsItems;
 import in.collectiva.tailoringordertracking.cConstant.clsParameters;
 
@@ -67,6 +69,11 @@ public class Item extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
+        BindListView();
+    }
+
+    public void BindListView()
+    {
         ArrayList<clsParameters> lstParameters = new ArrayList<>();
         clsParameters objParam = new clsParameters();
         objParam.ParameterName = "UserId";
@@ -83,7 +90,7 @@ public class Item extends AppCompatActivity {
 
         ListView lstItem = (ListView) findViewById(R.id.lstItems);
 
-        SimpleAdapter simpleAdapter = new SimpleAdapter(this, parse(jsonString), R.layout.row,
+        SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONItems.newInstance().GetJSONItemList(jsonString), R.layout.row,
                 new String[] {"ItemId", "ItemDetail", "Amount"},
                 new int[] {R.id.txtRowItemId, R.id.ItemDetail, R.id.txtRowAmount});
         lstItem.setAdapter(simpleAdapter);
@@ -93,9 +100,9 @@ public class Item extends AppCompatActivity {
 
                 // selected item
                 String selected = ((TextView) view.findViewById(R.id.txtRowItemId)).getText().toString();
+                //showAlertDialog();
+                showEditAlertDialog(selected);
 
-                Toast toast = Toast.makeText(getApplicationContext(), selected, Toast.LENGTH_SHORT);
-                toast.show();
             }
         });
     }
@@ -107,131 +114,25 @@ public class Item extends AppCompatActivity {
         }
     };
 
+    private void showEditAlertDialog(String SelectedItemID) {
+        FragmentManager fm = getSupportFragmentManager();
+        EditItem alertDialog = EditItem.newInstance(SelectedItemID);
+        alertDialog.show(fm, "fragment_edit_item");
+    }
+
     private void showAlertDialog() {
         FragmentManager fm = getSupportFragmentManager();
         ItemFragment alertDialog = ItemFragment.newInstance("Add Item");
         alertDialog.show(fm, "fragment_item");
     }
 
-
-    public List<HashMap<String,String>> parse(String jsonString){
-
-        JSONArray jItems = null;
-        try {
-            JSONObject jObject = new JSONObject(jsonString);
-            /** Retrieves all the elements in the 'countries' array */
-            jItems = jObject.getJSONArray("Items");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        /** Invoking getCountries with the array of json object
-         * where each json object represent a country
-         */
-        return getItems(jItems);
-    }
-
-
-    private List<HashMap<String, String>> getItems(JSONArray jItems){
-        int countryCount = jItems.length();
-        List<HashMap<String, String>> lItemList = new ArrayList<HashMap<String,String>>();
-        HashMap<String, String> lItem = null;
-
-        /** Taking each country, parses and adds to list object */
-        for(int i=0; i<countryCount;i++){
-            try {
-                /** Call getCountry with country JSON object to parse the country */
-
-                lItem = getItem((JSONObject)jItems.get(i), String.valueOf(i + 1));
-                lItemList.add(lItem);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return lItemList;
-    }
-
-    /** Parsing the Country JSON object */
-    private HashMap<String, String> getItem(JSONObject lItem, String lSerialNo){
-
-        HashMap<String, String> lItemMap = new HashMap<String, String>();
-        String ItemId = "";
-        String ItemName = "";
-        String Amount = "";
-
-        try {
-            ItemId = lItem.getString("ItemId");
-            ItemName = lItem.getString("ItemName");
-            Amount = lItem.getString("Amount");
-
-            lItemMap.put("ItemId", ItemId);
-            lItemMap.put("ItemDetail", lSerialNo + ". " + ItemName);
-            lItemMap.put("Amount", Amount);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return lItemMap;
-    }
-
-
-    /*List<Map<String,String>> ItemList = new ArrayList<Map<String,String>>();
-    private void initList(){
-
-        try{
-            JSONObject jsonResponse = new JSONObject(jsonString);
-            JSONArray jsonMainNode = jsonResponse.optJSONArray("Items");
-
-            for(int i = 0; i<jsonMainNode.length();i++){
-                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
-                String lItemName = jsonChildNode.optString("ItemName");
-                String lItemId = jsonChildNode.optString("ItemId");
-                String outPut = (i+1) + ". " + lItemName;
-                ItemList.add(CreateItem("Items", outPut));
-            }
-        }
-        catch(JSONException e){
-            Toast.makeText(getApplicationContext(), "Error"+e.toString(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private HashMap<String, String>CreateItem(String name, String number){
-        HashMap<String, String> ItemDetail = new HashMap<String, String>();
-        ItemDetail.put(name, number);
-        return ItemDetail;
-    }*/
-
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }*/
 
-    /*List<Map<String,String>> employeeList = new ArrayList<Map<String,String>>();
-    private void initList(){
 
-        try{
-            JSONObject jsonResponse = new JSONObject(jsonString);
-            JSONArray jsonMainNode = jsonResponse.optJSONArray("employee");
 
-            for(int i = 0; i<jsonMainNode.length();i++){
-                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
-                String name = jsonChildNode.optString("emp_name");
-                String number = jsonChildNode.optString("emp_no");
-                String outPut = name + "-" +number;
-                employeeList.add(createEmployee("employees", outPut));
-            }
-        }
-        catch(JSONException e){
-            Toast.makeText(getApplicationContext(), "Error"+e.toString(), Toast.LENGTH_SHORT).show();
-        }
-    }
 
-    private HashMap<String, String>createEmployee(String name,String number){
-        HashMap<String, String> employeeNameNo = new HashMap<String, String>();
-        employeeNameNo.put(name, number);
-        return employeeNameNo;
-    }*/
 }

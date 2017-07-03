@@ -24,6 +24,7 @@ import java.util.HashMap;
 import in.collectiva.tailoringordertracking.CommonFunction.CRUDProcess;
 import in.collectiva.tailoringordertracking.CommonFunction.SessionManagement;
 import in.collectiva.tailoringordertracking.HomeMenu;
+import in.collectiva.tailoringordertracking.Item;
 import in.collectiva.tailoringordertracking.R;
 import in.collectiva.tailoringordertracking.Register;
 import in.collectiva.tailoringordertracking.cConstant.clsParameters;
@@ -131,7 +132,11 @@ public class ItemFragment extends DialogFragment {
 
                 Toast.makeText(getActivity().getApplicationContext(), "Successfully Saved!", Toast.LENGTH_LONG).show();
 
-                ItemFragment.this.getDialog().cancel();
+                ItemFragment.this.getDialog().dismiss();
+
+                //Refresh the Grid in the Parent
+                Item activity = (Item) getActivity();
+                activity.BindListView();
             } catch (Exception e) {
                 Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
             }
