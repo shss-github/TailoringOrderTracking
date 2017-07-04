@@ -153,10 +153,11 @@ public class HomeMenu extends AppCompatActivity {
                 startActivity(new Intent(HomeMenu.this, MyOrders.class));
                 break;
             case 3:
-                //fragment = new TableFragment();
-                Toast.makeText(getApplicationContext(), "KYC", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(HomeMenu.this, MakeList.class));
                 break;
-
+            case 4:
+                startActivity(new Intent(HomeMenu.this, ReadyList.class));
+                break;
             default:
                 break;
         }

@@ -13,9 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeActionBar">
         <activity android:name=".MainActivity" />
-        <activity android:name=".Home">
-
-        </activity>
+        <activity android:name=".Home" />
         <activity android:name=".Register" />
         <activity android:name=".Login">
             <intent-filter>
@@ -27,21 +25,36 @@
         <activity
             android:name=".HomeMenu"
             android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".Item"
+            android:parentActivityName=".HomeMenu">
 
-        <activity android:name=".Item"
-            android:parentActivityName=".HomeMenu" >
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeMenu" />
         </activity>
-
         <activity android:name=".ItemAdd" />
         <activity android:name=".ItemModify" />
-
-        <activity android:name=".MyOrders"
-            android:parentActivityName=".HomeMenu" >
-            <!-- Parent activity meta-data to support 4.0 and lower -->
+        <activity
+            android:name=".MyOrders"
+            android:parentActivityName=".HomeMenu">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeMenu" />
+        </activity>
+        <activity
+            android:name=".MakeList"
+            android:label="@string/title_activity_make_list"
+            android:parentActivityName=".HomeMenu">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeMenu" />
+        </activity>
+        <activity
+            android:name=".ReadyList"
+            android:label="@string/title_activity_ready_list"
+            android:parentActivityName=".HomeMenu">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeMenu" />
