@@ -17,19 +17,22 @@
 
         </activity>
         <activity android:name=".Register" />
-        <activity android:name=".Login" />
-        <activity
-            android:name=".HomeMenu"
-            android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".Item" >
+        <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            </activity>
+        </activity>
+        <activity
+            android:name=".HomeMenu"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity android:name=".Item">
+
+        </activity>
         <activity android:name=".ItemAdd" />
-        <activity android:name=".ItemModify"></activity>
+        <activity android:name=".ItemModify" />
+        <activity android:name=".MyOrders" />
     </application>
 
 </manifest>

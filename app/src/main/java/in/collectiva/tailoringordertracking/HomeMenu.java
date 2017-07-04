@@ -124,7 +124,7 @@ public class HomeMenu extends AppCompatActivity {
                 break;
             case 1:
                 //fragment = new FixturesFragment();
-                Toast.makeText(getApplicationContext(), "Add Money", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(HomeMenu.this, MyOrders.class));
                 break;
             case 2:
                 //fragment = new TableFragment();

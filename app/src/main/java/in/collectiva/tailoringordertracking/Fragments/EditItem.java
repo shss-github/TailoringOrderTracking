@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class EditItem extends DialogFragment {
     private EditText ledtEditItemAmount;
     private Button lbtnEditItemUpdate;
     private Button lbtnEditItemDelete;
+
 
     // Session Manager Class
     SessionManagement session;
@@ -113,6 +115,13 @@ public class EditItem extends DialogFragment {
         lbtnEditItemDelete = (Button) view.findViewById(R.id.btnEditItemDelete);
         lbtnEditItemUpdate.setOnClickListener(lbtnEditItemUpdateListener);
         lbtnEditItemDelete.setOnClickListener(lbtnEditItemDeleteListener);
+
+        ImageView img = (ImageView) view.findViewById(R.id.imgEditItemClose);
+        img.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                EditItem.this.getDialog().dismiss();
+            }
+        });
 
         // Set title
         getDialog().setTitle(R.string.dialog_title_items);
