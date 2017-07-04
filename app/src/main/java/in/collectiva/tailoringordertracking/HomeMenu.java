@@ -131,10 +131,11 @@ public class HomeMenu extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Pass Book", Toast.LENGTH_SHORT).show();
                 break;
             case 3:
-                //fragment = new TableFragment();
-                Toast.makeText(getApplicationContext(), "KYC", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(HomeMenu.this, MakeList.class));
                 break;
-
+            case 4:
+                startActivity(new Intent(HomeMenu.this, ReadyList.class));
+                break;
             default:
                 break;
         }
