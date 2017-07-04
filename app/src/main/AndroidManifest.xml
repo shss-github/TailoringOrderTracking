@@ -38,7 +38,14 @@
 
         <activity android:name=".ItemAdd" />
         <activity android:name=".ItemModify" />
-        <activity android:name=".MyOrders" />
+
+        <activity android:name=".MyOrders"
+            android:parentActivityName=".HomeMenu" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeMenu" />
+        </activity>
     </application>
 
 </manifest>
