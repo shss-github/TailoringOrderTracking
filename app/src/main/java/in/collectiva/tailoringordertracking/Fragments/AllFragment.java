@@ -54,10 +54,23 @@ public class AllFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        /**
+         * Call this function whenever you want to check user login
+         * This will redirect user to LoginActivity is he is not
+         * logged in
+         * */
+        session.checkLogin();
+
+        // get user data from session
+        HashMap<String, String> user = session.getUserDetails();
+
+        // User Id
+        String lUserId = user.get(SessionManagement.KEY_USERID);
+
         ArrayList<clsParameters> lstParameters = new ArrayList<>();
         clsParameters objParam = new clsParameters();
         objParam.ParameterName = "UserId";
-        objParam.ParameterValue = "14";
+        objParam.ParameterValue = lUserId;
         lstParameters.add(objParam);
 
         objParam = new clsParameters();

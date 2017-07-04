@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +42,13 @@ public class HomeMenu extends AppCompatActivity {
         session = new SessionManagement(getApplicationContext());
 
         TextView ltxtWelcomeMsg = (TextView) findViewById(R.id.txtWelcomeMsg);
+        Button lbtnMenuItems = (Button) findViewById(R.id.btnMenuItems);
+        Button lbtnMenuMyOrders = (Button) findViewById(R.id.btnMenuMyOrders);
+        Button lbtnMenuOrderTracking = (Button) findViewById(R.id.btnMenuOrderTracking);
+        Button lbtnMenuMakeList = (Button) findViewById(R.id.btnMenuMakeList);
+        Button lbtnMenuReadyList = (Button) findViewById(R.id.btnMenuReadyList);
+        Button lbtnMenuEditProfile = (Button) findViewById(R.id.btnMenuEditProfile);
+        Button btnMenuLogout = (Button) findViewById(R.id.btnMenuLogout);
 
         /**
          * Call this function whenever you want to check user login
@@ -57,7 +65,23 @@ public class HomeMenu extends AppCompatActivity {
 
         ltxtWelcomeMsg.setText("Welcome " + lName + "!");
         DrawerLayoutInitialization();
+
+        lbtnMenuItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeMenu.this, Item.class));
+            }
+        });
+
+        lbtnMenuMyOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeMenu.this, MyOrders.class));
+            }
+        });
     }
+
+
 
     private void DrawerLayoutInitialization() {
         mTitle = mDrawerTitle = getTitle();
@@ -68,9 +92,9 @@ public class HomeMenu extends AppCompatActivity {
         setupToolbar();
         DataModel[] drawerItem = new DataModel[7];
 
-        drawerItem[0] = new DataModel(R.drawable.fixtures, "Items");
-        drawerItem[1] = new DataModel(R.drawable.fixtures, "My Orders");
-        drawerItem[2] = new DataModel(R.drawable.fixtures, "Order Tracking");
+        drawerItem[0] = new DataModel(R.drawable.fixtures, "Item Master");
+        drawerItem[1] = new DataModel(R.drawable.fixtures, "Order Entry");
+        drawerItem[2] = new DataModel(R.drawable.fixtures, "Order List");
         drawerItem[3] = new DataModel(R.drawable.fixtures, "Make List");
         drawerItem[4] = new DataModel(R.drawable.fixtures, "Ready List");
         drawerItem[5] = new DataModel(R.drawable.fixtures, "Edit Profile");
@@ -123,12 +147,10 @@ public class HomeMenu extends AppCompatActivity {
                 startActivity(new Intent(HomeMenu.this, Item.class));
                 break;
             case 1:
-                //fragment = new FixturesFragment();
-                startActivity(new Intent(HomeMenu.this, MyOrders.class));
                 break;
             case 2:
-                //fragment = new TableFragment();
-                Toast.makeText(getApplicationContext(), "Pass Book", Toast.LENGTH_SHORT).show();
+                //fragment = new FixturesFragment();
+                startActivity(new Intent(HomeMenu.this, MyOrders.class));
                 break;
             case 3:
                 //fragment = new TableFragment();

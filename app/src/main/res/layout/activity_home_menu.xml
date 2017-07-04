@@ -47,19 +47,19 @@
                     android:id="@+id/btnMenuItems"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Items" />
-
-                <Button
-                    android:id="@+id/btnMenuMyOrders"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="My Orders" />
+                    android:text="Item Master" />
 
                 <Button
                     android:id="@+id/btnMenuOrderTracking"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Order Tracking" />
+                    android:text="Order Entry" />
+
+                <Button
+                    android:id="@+id/btnMenuMyOrders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Order List" />
 
                 <Button
                     android:id="@+id/btnMenuMakeList"
