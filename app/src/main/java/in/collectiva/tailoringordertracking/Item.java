@@ -3,6 +3,7 @@ package in.collectiva.tailoringordertracking;
 import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.NavUtils;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -59,6 +60,8 @@ public class Item extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Button lbtnAddItem = (Button) findViewById(R.id.btnAddItem);
         lbtnAddItem.setOnClickListener(lbtnAddItemListener);
@@ -133,6 +136,15 @@ public class Item extends AppCompatActivity {
     }*/
 
 
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }
