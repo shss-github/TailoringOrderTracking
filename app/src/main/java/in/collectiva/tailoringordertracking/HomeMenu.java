@@ -114,13 +114,13 @@ public class HomeMenu extends AppCompatActivity {
         setupToolbar();
         DataModel[] drawerItem = new DataModel[7];
 
-        drawerItem[0] = new DataModel(R.drawable.fixtures, "Item Master");
-        drawerItem[1] = new DataModel(R.drawable.fixtures, "Order Entry");
-        drawerItem[2] = new DataModel(R.drawable.fixtures, "Order List");
-        drawerItem[3] = new DataModel(R.drawable.fixtures, "Make List");
-        drawerItem[4] = new DataModel(R.drawable.fixtures, "Ready List");
-        drawerItem[5] = new DataModel(R.drawable.fixtures, "Edit Profile");
-        drawerItem[6] = new DataModel(R.drawable.fixtures, "Logout");
+        drawerItem[0] = new DataModel(R.drawable.itemadd, "Item Master");
+        drawerItem[1] = new DataModel(R.drawable.itemadd, "Order Entry");
+        drawerItem[2] = new DataModel(R.drawable.list, "Order List");
+        drawerItem[3] = new DataModel(R.drawable.list, "Make List");
+        drawerItem[4] = new DataModel(R.drawable.list, "Ready List");
+        drawerItem[5] = new DataModel(R.drawable.editprofile, "Edit Profile");
+        drawerItem[6] = new DataModel(R.drawable.logout, "Logout");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -179,6 +179,12 @@ public class HomeMenu extends AppCompatActivity {
                 break;
             case 4:
                 startActivity(new Intent(HomeMenu.this, ReadyList.class));
+                break;
+            case 5: //Edit Profile
+                break;
+            case 6: //Logout
+                session.logoutUser();
+                startActivity(new Intent(HomeMenu.this, Home.class));
                 break;
             default:
                 break;
