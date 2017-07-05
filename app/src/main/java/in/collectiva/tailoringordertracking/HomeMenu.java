@@ -73,10 +73,17 @@ public class HomeMenu extends AppCompatActivity {
             }
         });
 
+        lbtnMenuOrderTracking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeMenu.this, Order.class));
+            }
+        });
+
         lbtnMenuMyOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            startActivity(new Intent(HomeMenu.this, MyOrders.class));
+                startActivity(new Intent(HomeMenu.this, MyOrders.class));
             }
         });
 
@@ -169,6 +176,7 @@ public class HomeMenu extends AppCompatActivity {
                 startActivity(new Intent(HomeMenu.this, Item.class));
                 break;
             case 1:
+                startActivity(new Intent(HomeMenu.this, Order.class));
                 break;
             case 2:
                 //fragment = new FixturesFragment();

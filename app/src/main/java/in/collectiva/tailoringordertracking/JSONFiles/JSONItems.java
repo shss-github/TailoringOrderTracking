@@ -71,6 +71,7 @@ public class JSONItems {
             Amount = lItem.getString("Amount");
 
             lItemMap.put("ItemId", ItemId);
+            lItemMap.put("ItemName", ItemName);
             lItemMap.put("ItemDetail", lSerialNo + ". " + ItemName);
             lItemMap.put("Amount", Amount);
 
