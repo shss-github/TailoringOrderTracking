@@ -10,9 +10,14 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import in.collectiva.tailoringordertracking.CommonFunction.CRUDProcess;
+import in.collectiva.tailoringordertracking.CommonFunction.SessionManagement;
 import in.collectiva.tailoringordertracking.cConstant.clsParameters;
 
 public class Register extends AppCompatActivity {
@@ -24,6 +29,9 @@ public class Register extends AppCompatActivity {
     //Creating Object For the CRUDProcess common class.
     final CRUDProcess objCRUD = new CRUDProcess();
     boolean isInternetConnected = false;
+
+    // Session Manager Class
+    SessionManagement session;
 
     private View.OnClickListener lbtnRegisterNowListener = new View.OnClickListener() {
         @Override
@@ -88,6 +96,8 @@ public class Register extends AppCompatActivity {
                         lMethodName = "InsertUser";
                         resultData = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
+                        session.createLoginSession(Integer.parseInt(resultData), ledtName.getText().toString(), ledtMobileNo.getText().toString());
+
                         startActivity(new Intent(Register.this, HomeMenu.class));
                         //Toast.makeText(Register.this, "Registered Successfully", Toast.LENGTH_LONG).show();
                     } catch (Exception e) {
@@ -102,6 +112,9 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        // Session Manager
+        session = new SessionManagement(getApplicationContext());
 
         Button lbtnRegisterNow = (Button) findViewById(R.id.btnRegisterNow);
         lbtnRegisterNow.setOnClickListener(lbtnRegisterNowListener);

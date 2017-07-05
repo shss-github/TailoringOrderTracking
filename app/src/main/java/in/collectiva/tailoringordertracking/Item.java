@@ -61,6 +61,9 @@ public class Item extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
 
+        // Session Manager
+        session = new SessionManagement(getApplicationContext());
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Button lbtnAddItem = (Button) findViewById(R.id.btnAddItem);
@@ -77,10 +80,16 @@ public class Item extends AppCompatActivity {
 
     public void BindListView()
     {
+        // get user data from session
+        HashMap<String, String> user = session.getUserDetails();
+
+        // name
+        String lUserId = user.get(SessionManagement.KEY_USERID);
+
         ArrayList<clsParameters> lstParameters = new ArrayList<>();
         clsParameters objParam = new clsParameters();
         objParam.ParameterName = "UserId";
-        objParam.ParameterValue = "14";
+        objParam.ParameterValue = lUserId;
         lstParameters.add(objParam);
 
         objParam = new clsParameters();

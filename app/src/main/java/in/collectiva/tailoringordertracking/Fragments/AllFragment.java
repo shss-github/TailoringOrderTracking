@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,13 +82,21 @@ public class AllFragment extends Fragment {
         String lMethodName = "GetOrders";
         jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
-        ListView lstAll = (ListView) view.findViewById(R.id.lstAllOrderList);
-        SimpleAdapter simpleAdapter = new SimpleAdapter(getActivity(), JSONOrder.newInstance().GetJSONOrderList(jsonString),
-                R.layout.orderrow, new String[] {"OrderId", "OrderDetail", "DeliveryDate", "Status"},
-                new int[] {R.id.txtOrderRowId, R.id.txtOrderRowDetail, R.id.txtOrderRowDeliveryDate,
-                         R.id.txtOrderRowStatus});
+        TextView ltxtAllNoRecords = (TextView) view.findViewById(R.id.txtAllNoRecords);
+        ltxtAllNoRecords.setText("");
 
-        lstAll.setAdapter(simpleAdapter);
+        if (jsonString.equals("0")) {
+            ltxtAllNoRecords.setText("No records found!");
+        } else {
+
+            ListView lstAll = (ListView) view.findViewById(R.id.lstAllOrderList);
+            SimpleAdapter simpleAdapter = new SimpleAdapter(getActivity(), JSONOrder.newInstance().GetJSONOrderList(jsonString),
+                    R.layout.orderrow, new String[]{"OrderId", "OrderDetail", "DeliveryDate", "Status"},
+                    new int[]{R.id.txtOrderRowId, R.id.txtOrderRowDetail, R.id.txtOrderRowDeliveryDate,
+                            R.id.txtOrderRowStatus});
+
+            lstAll.setAdapter(simpleAdapter);
+        }
     }
 
 }

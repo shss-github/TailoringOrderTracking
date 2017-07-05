@@ -16,13 +16,12 @@
         <activity android:name=".Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".Register" />
-        <activity android:name=".Login">
-
-        </activity>
+        <activity android:name=".Login"></activity>
         <activity
             android:name=".HomeMenu"
             android:theme="@style/AppThemeNoActionBar" />
@@ -60,6 +59,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeMenu" />
         </activity>
+        <activity android:name=".LogoutActivity"></activity>
     </application>
 
 </manifest>

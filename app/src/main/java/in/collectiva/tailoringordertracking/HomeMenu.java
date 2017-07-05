@@ -48,7 +48,7 @@ public class HomeMenu extends AppCompatActivity {
         Button lbtnMenuMakeList = (Button) findViewById(R.id.btnMenuMakeList);
         Button lbtnMenuReadyList = (Button) findViewById(R.id.btnMenuReadyList);
         Button lbtnMenuEditProfile = (Button) findViewById(R.id.btnMenuEditProfile);
-        Button btnMenuLogout = (Button) findViewById(R.id.btnMenuLogout);
+        Button lbtnMenuLogout = (Button) findViewById(R.id.btnMenuLogout);
 
         /**
          * Call this function whenever you want to check user login
@@ -69,14 +69,36 @@ public class HomeMenu extends AppCompatActivity {
         lbtnMenuItems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeMenu.this, Item.class));
+            startActivity(new Intent(HomeMenu.this, Item.class));
             }
         });
 
         lbtnMenuMyOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeMenu.this, MyOrders.class));
+            startActivity(new Intent(HomeMenu.this, MyOrders.class));
+            }
+        });
+
+        lbtnMenuMakeList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            startActivity(new Intent(HomeMenu.this, MakeList.class));
+            }
+        });
+
+        lbtnMenuReadyList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            startActivity(new Intent(HomeMenu.this, ReadyList.class));
+            }
+        });
+
+        lbtnMenuLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            session.logoutUser();
+            startActivity(new Intent(HomeMenu.this, Home.class));
             }
         });
     }
