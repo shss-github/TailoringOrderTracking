@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Register" />
-        <activity android:name=".Login"></activity>
+        <activity android:name=".Login" />
         <activity
             android:name=".HomeMenu"
             android:theme="@style/AppThemeNoActionBar" />
@@ -59,7 +59,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeMenu" />
         </activity>
-        <activity android:name=".LogoutActivity"></activity>
+        <activity android:name=".LogoutActivity" />
+        <activity android:name=".update_user"></activity>
     </application>
 
 </manifest>
