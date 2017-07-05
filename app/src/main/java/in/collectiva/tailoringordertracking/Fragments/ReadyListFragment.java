@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,15 +64,18 @@ public class ReadyListFragment extends Fragment {
 
         objParam = new clsParameters();
         objParam.ParameterName = "StatusId";
-        objParam.ParameterValue = "2";
+        objParam.ParameterValue = "3";
         lstParameters.add(objParam);
 
         String lMethodName = "GetOrdersByStatus";
         jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
+        /*TextView ltxtReadyNoRecords = (TextView) view.findViewById(R.id.txtReadyNoRecords);
+        ltxtReadyNoRecords.setText("");*/
+
         if(jsonString == "0")
         {
-
+            //ltxtReadyNoRecords.setText("No records found!");
         }
         else {
 

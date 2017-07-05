@@ -83,18 +83,18 @@ public class MakeListFragment extends Fragment {
 
         objParam = new clsParameters();
         objParam.ParameterName = "StatusId";
-        objParam.ParameterValue = "5";
+        objParam.ParameterValue = "2";
         lstParameters.add(objParam);
 
         String lMethodName = "GetOrdersByStatus";
         jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
-        TextView ltxtMakeNoRecords = (TextView) view.findViewById(R.id.txtMakeNoRecords);
-        ltxtMakeNoRecords.setText("");
+        /*TextView ltxtMakeNoRecords = (TextView) view.findViewById(R.id.txtMakeNoRecords);
+        ltxtMakeNoRecords.setText("");*/
 
         if(jsonString.equals("0"))
         {
-            ltxtMakeNoRecords.setText("No records found!");
+            //ltxtMakeNoRecords.setText("No records found!");
         }
         else {
 
