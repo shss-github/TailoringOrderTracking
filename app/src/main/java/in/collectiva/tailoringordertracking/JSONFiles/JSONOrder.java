@@ -74,7 +74,7 @@ public class JSONOrder {
         String OrderNo = "";
         String DeliveryDate = "";
         String MobileNo = "";
-        String Name = "";
+        String Name = "", Status = "";
 
         try {
             OrderId = lOrder.getString("OrderId");
@@ -82,12 +82,13 @@ public class JSONOrder {
             DeliveryDate = lOrder.getString("DeliveryDate");
             MobileNo = lOrder.getString("MobileNo");
             Name = lOrder.getString("Name");
+            Status = lOrder.getString("StatusName");
 
             lOrderMap.put("OrderId", OrderId);
             lOrderMap.put("OrderDetail", lSerialNo + ". " + Name + " (" + MobileNo + ")");
             lOrderMap.put("DeliveryDate", "No. " + OrderNo + " dt. " + ConvertStringToDate(DeliveryDate));
             lOrderMap.put("MobileNo", MobileNo);
-            lOrderMap.put("Status", "Status - Pending");
+            lOrderMap.put("Status", "Status - " + Status);
 
         } catch (JSONException e) {
             e.printStackTrace();

@@ -35,8 +35,13 @@ public class MyOrders extends AppCompatActivity implements TabLayout.OnTabSelect
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);*/
 
+        BindTab(0);
+    }
+
+    public void BindTab(int Indx) {
         //Initializing the tablayout
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout.removeAllTabs();
 
         //Adding the tabs using addTab() method
         tabLayout.addTab(tabLayout.newTab().setText("All"));
@@ -52,6 +57,9 @@ public class MyOrders extends AppCompatActivity implements TabLayout.OnTabSelect
 
         //Adding adapter to pager
         viewPager.setAdapter(adapter);
+
+        tabLayout.getTabAt(Indx).select();
+        viewPager.setCurrentItem(Indx);
 
         //Adding onTabSelectedListener to swipe views
         tabLayout.setOnTabSelectedListener(this);
