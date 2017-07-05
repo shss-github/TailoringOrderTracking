@@ -61,20 +61,6 @@ public class MakeListFragment extends Fragment {
         // User Id
         String lUserId = user.get(SessionManagement.KEY_USERID);
 
-        /*ArrayList<clsParameters> lstParameters = new ArrayList<>();
-        clsParameters objParam = new clsParameters();
-        objParam.ParameterName = "UserId";
-        objParam.ParameterValue = lUserId;
-        lstParameters.add(objParam);
-
-        objParam = new clsParameters();
-        objParam.ParameterName = "OrderId";
-        objParam.ParameterValue = "0";
-        lstParameters.add(objParam);
-
-        String lMethodName = "GetOrders";
-        jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);*/
-
         ArrayList<clsParameters> lstParameters = new ArrayList<>();
         clsParameters objParam = new clsParameters();
         objParam.ParameterName = "UserId";
@@ -89,12 +75,12 @@ public class MakeListFragment extends Fragment {
         String lMethodName = "GetOrdersByStatus";
         jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
-        /*TextView ltxtMakeNoRecords = (TextView) view.findViewById(R.id.txtMakeNoRecords);
-        ltxtMakeNoRecords.setText("");*/
+        TextView ltxtMakeNoRecords = (TextView) view.findViewById(R.id.txtMakeNoRecords);
+        ltxtMakeNoRecords.setText("");
 
         if(jsonString.equals("0"))
         {
-            //ltxtMakeNoRecords.setText("No records found!");
+            ltxtMakeNoRecords.setText("No records found!");
         }
         else {
 

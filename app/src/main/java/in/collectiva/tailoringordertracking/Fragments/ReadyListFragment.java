@@ -70,12 +70,12 @@ public class ReadyListFragment extends Fragment {
         String lMethodName = "GetOrdersByStatus";
         jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
-        /*TextView ltxtReadyNoRecords = (TextView) view.findViewById(R.id.txtReadyNoRecords);
-        ltxtReadyNoRecords.setText("");*/
+        TextView ltxtReadyNoRecords = (TextView) view.findViewById(R.id.txtReadyNoRecords);
+        ltxtReadyNoRecords.setText("");
 
-        if(jsonString == "0")
+        if(jsonString.equals("0"))
         {
-            //ltxtReadyNoRecords.setText("No records found!");
+            ltxtReadyNoRecords.setText("No records found!");
         }
         else {
 
