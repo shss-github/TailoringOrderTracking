@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtSpinnerItemName" android:textSize="@dimen/NormalFontSize" />
+            android:id="@+id/txtSpinnerItemName"/>
 
         <TextView
             android:layout_width="fill_parent"
