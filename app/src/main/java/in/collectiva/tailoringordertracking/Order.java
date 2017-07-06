@@ -11,6 +11,8 @@ import android.app.Activity;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,6 +27,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import in.collectiva.tailoringordertracking.CommonFunction.CRUDProcess;
@@ -44,6 +47,11 @@ public class Order extends AppCompatActivity implements AdapterView.OnItemSelect
 
     // Session Manager Class
     SessionManagement session;
+    double lRate = 0.00;
+
+    TextView ltvRate;
+    TextView ltvAmount;
+    EditText ltxtQty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +59,29 @@ public class Order extends AppCompatActivity implements AdapterView.OnItemSelect
         setContentView(R.layout.activity_order);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         BindSpinner();
+
+        ltvRate = (TextView) findViewById(R.id.tvRate);
+        ltvAmount = (TextView) findViewById(R.id.tvAmount);
+        ltxtQty = (EditText) findViewById(R.id.txtQty);
+
+        //EditText edtQty = (EditText) findViewById(R.id.txtQty);
+        ltxtQty.addTextChangedListener(new TextWatcher() {
+
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                calculateAmount();
+            }
+
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+            }
+        });
 
         //DatePicker dtDate = (DatePicker)findViewById(R.id.dtOrderDate);
         //dtDate.setCalendarViewShown(true);
@@ -88,6 +117,20 @@ public class Order extends AppCompatActivity implements AdapterView.OnItemSelect
                 datePicker.show();
             }
         });
+    }
+
+    private void calculateAmount() {
+        Integer lQty = 0;
+        double lAmount = 0.00;
+
+        if(ltxtQty.getText().toString().trim().equals("") != true && lRate > 0.00)
+        {
+            lQty = Integer.parseInt(ltxtQty.getText().toString());
+            lAmount = (lQty * lRate);
+        }
+
+        ltvRate.setText("Rate : " + lRate);
+        ltvAmount.setText("Amount : " + lAmount);
     }
 
     public void BindSpinner()
@@ -139,11 +182,22 @@ public class Order extends AppCompatActivity implements AdapterView.OnItemSelect
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
-        String item = parent.getItemAtPosition(position).toString();
+
+        // Calculate Order amount
+        HashMap<String, String> litem = (HashMap<String, String>)parent.getItemAtPosition(position);
+        if(litem != null)
+        {
+            lRate = Double.parseDouble(litem.get("Amount"));
+        }
+        else {
+            lRate = 0.00;
+        }
+        calculateAmount();
+
 
         // Showing selected spinner item
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+        String item = parent.getItemAtPosition(position).toString();
+        Toast.makeText(parent.getContext(), "Selected: " + lRate , Toast.LENGTH_LONG).show();
     }
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
