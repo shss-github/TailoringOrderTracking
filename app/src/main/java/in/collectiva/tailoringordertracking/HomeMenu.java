@@ -189,6 +189,7 @@ public class HomeMenu extends AppCompatActivity {
                 startActivity(new Intent(HomeMenu.this, ReadyList.class));
                 break;
             case 5: //Edit Profile
+                startActivity(new Intent(HomeMenu.this, OrderEntry.class));
                 break;
             case 6: //Logout
                 session.logoutUser();
