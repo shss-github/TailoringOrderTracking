@@ -15,7 +15,7 @@
             android:id="@+id/btnOrderDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Order Detail" android:textSize="@dimen/NormalFontSize" />
+            android:text="Add Order" android:textSize="@dimen/NormalFontSize" />
 
         <ListView
             android:id="@+id/lstOrderDetail"

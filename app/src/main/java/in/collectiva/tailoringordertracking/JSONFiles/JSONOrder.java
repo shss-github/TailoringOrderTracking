@@ -85,8 +85,8 @@ public class JSONOrder {
             Status = lOrder.getString("StatusName");
 
             lOrderMap.put("OrderId", OrderId);
-            lOrderMap.put("OrderDetail", lSerialNo + ". " + Name + " (" + MobileNo + ")");
-            lOrderMap.put("DeliveryDate", "No. " + OrderNo + " dt. " + ConvertStringToDate(DeliveryDate));
+            lOrderMap.put("OrderDetail", Name + " (" + MobileNo + ")");
+            lOrderMap.put("DeliveryDate", "Order #" + OrderNo + " dt. " + ConvertStringToDate(DeliveryDate));
             lOrderMap.put("MobileNo", MobileNo);
             lOrderMap.put("Status", "Status - " + Status);
 

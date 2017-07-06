@@ -1,6 +1,7 @@
 package in.collectiva.tailoringordertracking;
 
 import android.os.StrictMode;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,8 @@ import java.util.HashMap;
 
 import in.collectiva.tailoringordertracking.CommonFunction.CRUDProcess;
 import in.collectiva.tailoringordertracking.CommonFunction.SessionManagement;
+import in.collectiva.tailoringordertracking.Fragments.AddOrder;
+import in.collectiva.tailoringordertracking.Fragments.ItemFragment;
 import in.collectiva.tailoringordertracking.JSONFiles.JSONItems;
 import in.collectiva.tailoringordertracking.JSONFiles.JSONOrder;
 import in.collectiva.tailoringordertracking.cConstant.clsParameters;
@@ -58,18 +61,24 @@ public class OrderEntry extends AppCompatActivity {
 
         ArrayList<clsParameters> lstParameters = new ArrayList<>();
         clsParameters objParam = new clsParameters();
-        objParam.ParameterName = "OrderId";
-        objParam.ParameterValue = "1";
+        objParam.ParameterName = "UserId";
+        objParam.ParameterValue = lUserId;
         lstParameters.add(objParam);
 
-        String lMethodName = "GetOrderDetailByOrderId";
+        objParam = new clsParameters();
+        objParam.ParameterName = "OrderId";
+        objParam.ParameterValue = "0";
+        lstParameters.add(objParam);
+
+        String lMethodName = "GetOrders";
         jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
         ListView lstOrderDetail = (ListView) findViewById(R.id.lstOrderDetail);
 
-        SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONOrder.newInstance().GetJSONOrderList(jsonString), R.layout.row,
-                new String[] {"OrderDetailId", "Qty", "Amount"},
-                new int[] {R.id.txtRowItemId, R.id.ItemDetail, R.id.txtRowAmount});
+        SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONOrder.newInstance().GetJSONOrderList(jsonString),
+                R.layout.orderentryrow, new String[]{"OrderId", "OrderDetail", "DeliveryDate", "Status"},
+                new int[]{R.id.txtOrderRowId, R.id.txtOrderEntryRowDesc1, R.id.txtOrderEntryRowDesc2,
+                        R.id.txtOrderEntryRowDesc3});
         lstOrderDetail.setAdapter(simpleAdapter);
 
         lstOrderDetail.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -86,7 +95,13 @@ public class OrderEntry extends AppCompatActivity {
     private View.OnClickListener lbtnOrderDetailListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //showAlertDialog();
+        showAddOrderAlertDialog();
         }
     };
+
+    private void showAddOrderAlertDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        AddOrder alertDialog = AddOrder.newInstance("Add Order");
+        alertDialog.show(fm, "fragment_add_order");
+    }
 }
