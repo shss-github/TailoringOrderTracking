@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal"
+        android:layout_gravity="left"
+        android:gravity="left">
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtOrderItemId"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="1dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/txtOrderItemName"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/NormalFontSize" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtOrderItemRate"
+                android:textSize="@dimen/NormalFontSize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lltItemOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="invisible">
+
+            <TextView
+                android:id="@+id/txtOrderItemAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/NormalFontSize"
+                    android:gravity="right"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/imgPlus"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:contentDescription="Plus"
+                    app:srcCompat="@drawable/add" />
+
+                <TextView
+                    android:id="@+id/txtOrderItemQty"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/NormalFontSize" />
+
+                <ImageButton
+                    android:id="@+id/imgMinus"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:contentDescription="Minus"
+                    app:srcCompat="@drawable/delete" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtOrderSapcing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="4dp" />
+</LinearLayout>

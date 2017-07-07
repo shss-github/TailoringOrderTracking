@@ -1,5 +1,6 @@
 package in.collectiva.tailoringordertracking;
 
+import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -105,7 +106,8 @@ public class OrderEntry extends AppCompatActivity {
                     limgOrderEntryRowAddOrderDetail.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            showAddOrderAlertDialog();
+                            //showAddOrderAlertDialog();
+                            startActivity(new Intent(OrderEntry.this, OrderItems.class));
                         }
                     });
 

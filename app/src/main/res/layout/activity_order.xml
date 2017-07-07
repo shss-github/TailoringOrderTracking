@@ -7,45 +7,45 @@
     tools:context="in.collectiva.tailoringordertracking.Order">
 
     <LinearLayout
-        android:layout_width="304dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/btnAddOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Order"
+            android:textSize="@dimen/NormalFontSize" />
 
         <Spinner
             android:id="@+id/sprItem"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:textSize="15dp"
+            tools:ignore="SpUsage" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/tvQty"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Qty :"/>
+            android:text="Qty :"/>-->
 
         <EditText
             android:id="@+id/txtQty"
-            android:layout_width="200dp"
-            android:layout_height="25dp"
-            android:background="#d4d4d4"
-            android:ems="10"
-            android:inputType="number"
-            android:paddingBottom="5dp"
-            android:textColor="#000000"/>
-
-        <TextView
-            android:id="@+id/tvRate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Rate :"
-            android:paddingBottom="5dp"/>
-
-        <TextView
-            android:id="@+id/tvAmount"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Amount :"
-            android:paddingBottom="5dp"/>
+            android:layout_height="25dp"
+            android:layout_marginBottom="5dp"
+            android:background="#aaaaaa"
+            android:ems="10"
+            android:hint="Enter Qty"
+            android:inputType="number"
+            android:textColor="#000000"
+            android:textColorHint="#676767"
+            android:textSize="15dp"
+            tools:ignore="HardcodedText,SpUsage" />
 
         <!--<DatePicker
             android:id="@+id/dtOrderDate"
@@ -53,42 +53,65 @@
             android:layout_height="wrap_content"
             android:calendarViewShown="true"
             android:spinnersShown="false"
-            android:datePickerMode="calendar"/>
+            android:datePickerMode="calendar"/>-->
 
-        <CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@android:id/text1"
-            style="?android:attr/spinnerDropDownItemStyle"
-            android:singleLine="true"
-            android:layout_width="match_parent"
-            android:layout_height="?android:attr/dropdownListPreferredItemHeight"
-            android:ellipsize="marquee"/>-->
-        <TextView
+        <!--<TextView
             android:id="@+id/tvDate"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Order Date :" />
+            android:text="Order Date :" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:paddingBottom="5dp">
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/txtDate"
                 android:layout_width="200dp"
                 android:layout_height="25dp"
-                android:background="#d4d4d4"
+                android:background="#aaaaaa"
+                android:enabled="false"
+                android:hint="Enter Order Date"
+                android:inputType="date"
                 android:textColor="#000000"
-                android:enabled="false"/>
+                android:textColorHint="#676767"
+                android:textSize="15dp"
+                tools:ignore="HardcodedText,SpUsage" />
 
             <ImageButton
                 android:id="@+id/imgDate"
                 android:layout_width="30dp"
                 android:layout_height="25dp"
-                app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+                android:contentDescription="Select Date"
+                app:srcCompat="@android:drawable/ic_menu_my_calendar"
+                tools:ignore="HardcodedText" />
+
+            <ImageButton
+                android:id="@+id/imgOrderItemPlus"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="Plus"
+                app:srcCompat="@android:drawable/ic_menu_add" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Rate :"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/tvAmount"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Amount :"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
