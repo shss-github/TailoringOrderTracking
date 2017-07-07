@@ -5,8 +5,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -75,21 +79,50 @@ public class OrderEntry extends AppCompatActivity {
 
         ListView lstOrderDetail = (ListView) findViewById(R.id.lstOrderDetail);
 
-        SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONOrder.newInstance().GetJSONOrderList(jsonString),
-                R.layout.orderentryrow, new String[]{"OrderId", "OrderDetail", "DeliveryDate", "Status"},
-                new int[]{R.id.txtOrderRowId, R.id.txtOrderEntryRowDesc1, R.id.txtOrderEntryRowDesc2,
-                        R.id.txtOrderEntryRowDesc3});
-        lstOrderDetail.setAdapter(simpleAdapter);
+        TextView ltxtOrderEntryNoRecords = (TextView) findViewById(R.id.txtOrderEntryNoRecords);
+        ltxtOrderEntryNoRecords.setText("");
 
-        lstOrderDetail.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (jsonString.equals("0")) {
+            ltxtOrderEntryNoRecords.setText("No records found!");
+        } else {
 
-                // selected item
-                String selected = ((TextView) view.findViewById(R.id.txtRowItemId)).getText().toString();
-                //showEditAlertDialog(selected);
+            /*SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONOrder.newInstance().GetJSONOrderList(jsonString),
+                    R.layout.orderentryrow, new String[]{"OrderId", "OrderDetail", "DeliveryDate", "Status"},
+                    new int[]{R.id.txtOrderRowId, R.id.txtOrderEntryRowDesc1, R.id.txtOrderEntryRowDesc2,
+                            R.id.txtOrderEntryRowDesc3});
+            lstOrderDetail.setAdapter(simpleAdapter);*/
 
-            }
-        });
+            SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONOrder.newInstance().GetJSONOrderList(jsonString),
+                    R.layout.orderentryrow, new String[]{"OrderId", "OrderDetail", "DeliveryDate", "Status"},
+                    new int[]{R.id.txtOrderRowId, R.id.txtOrderEntryRowDesc1, R.id.txtOrderEntryRowDesc2,
+                            R.id.txtOrderEntryRowDesc3}) {
+                @Override
+                public View getView (int position, View convertView, ViewGroup parent) {
+                    View view = super.getView(position, convertView, parent);
+                    TextView ltxtOrderEntryRowId = ((TextView) view.findViewById(R.id.txtOrderEntryRowId));
+
+                    ImageView limgOrderEntryRowAddOrderDetail = ((ImageView) view.findViewById(R.id.imgOrderEntryRowAddOrderDetail));
+                    limgOrderEntryRowAddOrderDetail.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            showAddOrderAlertDialog();
+                        }
+                    });
+
+                    return view;
+                }
+
+            };
+            lstOrderDetail.setAdapter(simpleAdapter);
+
+
+            /*for(int i = 0; i < lstOrderDetail.getCount(); i++) {
+                Item item = (Item) lstOrderDetail.getAdapter().getItem(i);
+                TextView ltxtOrderEntryRowId = ((TextView) item.findViewById(R.id.txtOrderEntryRowId));
+                ImageView limgOrderEntryRowAddOrderDetail = ((ImageView) item.findViewById(R.id.imgOrderEntryRowAddOrderDetail));
+                showAddOrderAlertDialog();
+            }*/
+        }
     }
 
     private View.OnClickListener lbtnOrderDetailListener = new View.OnClickListener() {

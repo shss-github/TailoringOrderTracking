@@ -101,6 +101,13 @@ public class HomeMenu extends AppCompatActivity {
             }
         });
 
+        lbtnMenuEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            startActivity(new Intent(HomeMenu.this, OrderEntry.class));
+            }
+        });
+
         lbtnMenuLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,8 +116,6 @@ public class HomeMenu extends AppCompatActivity {
             }
         });
     }
-
-
 
     private void DrawerLayoutInitialization() {
         mTitle = mDrawerTitle = getTitle();

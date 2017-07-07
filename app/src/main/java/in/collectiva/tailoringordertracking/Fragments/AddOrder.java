@@ -10,8 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+
+import in.collectiva.tailoringordertracking.CommonFunction.CRUDProcess;
+import in.collectiva.tailoringordertracking.CommonFunction.SessionManagement;
+import in.collectiva.tailoringordertracking.Item;
+import in.collectiva.tailoringordertracking.OrderEntry;
 import in.collectiva.tailoringordertracking.R;
+import in.collectiva.tailoringordertracking.cConstant.clsParameters;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +34,14 @@ public class AddOrder extends DialogFragment {
     private EditText ledtAddOrderDeliveryDate;
     private Button lbtnAddOrderSave;
     private Button lbtnAddOrderClose;
+
+    // Session Manager Class
+    SessionManagement session;
+
+    final CRUDProcess objCRUD = new CRUDProcess();
+    private static final String NAMESPACE = "http://ws.collectiva.in/";
+    private static final String REQURL = "http://ws.collectiva.in/AndroidTailoringService.svc"; //"http://ws.collectiva.in/AndroidTestService.svc";
+    final String SOAP_ACTION = "http://ws.collectiva.in/IAndroidTailoringService/"; //http://ws.collectiva.in/IAndroidTestService/RegisterUser";
 
     public AddOrder() {
         // Required empty public constructor
@@ -39,6 +58,9 @@ public class AddOrder extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Session Manager
+        session = new SessionManagement(getActivity().getApplicationContext());
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add_order, container, false);
     }
@@ -69,6 +91,65 @@ public class AddOrder extends DialogFragment {
         @Override
         public void onClick(View v) {
 
+            boolean ProceedToSave = true;
+            if (ledtAddOrderName.getText().toString().trim().equals("")) {
+                ProceedToSave = false;
+                ledtAddOrderName.setError("Name is required!");
+            } else if (ledtAddOrderMobileNo.getText().toString().trim().equals("")) {
+                ProceedToSave = false;
+                ledtAddOrderMobileNo.setError("Mobile No. is required!");
+            } else if (ledtAddOrderDeliveryDate.getText().toString().trim().equals("")) {
+                ProceedToSave = false;
+                ledtAddOrderDeliveryDate.setError("Delivery Date is required!");
+            }
+
+            try {
+                // get user data from session
+                HashMap<String, String> user = session.getUserDetails();
+                String lUserId = user.get(SessionManagement.KEY_USERID);
+
+                //Here Creating List for the Parameters, which we need to pass to the method.
+                ArrayList lstParameters = new ArrayList<>();
+                clsParameters objParam = new clsParameters();
+                objParam.ParameterName = "OrderId";
+                objParam.ParameterValue = "0";
+                lstParameters.add(objParam);
+
+                objParam = new clsParameters();
+                objParam.ParameterName = "Name";
+                objParam.ParameterValue = ledtAddOrderName.getText().toString();
+                lstParameters.add(objParam);
+
+                objParam = new clsParameters();
+                objParam.ParameterName = "MobileNo";
+                objParam.ParameterValue = ledtAddOrderMobileNo.getText().toString();
+                lstParameters.add(objParam);
+
+                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+                objParam = new clsParameters();
+                objParam.ParameterName = "DeliveryDate";
+                objParam.ParameterValue = "2017-07-12";
+                lstParameters.add(objParam);
+
+                objParam = new clsParameters();
+                objParam.ParameterName = "UserId";
+                objParam.ParameterValue = lUserId;
+                lstParameters.add(objParam);
+
+                String lMethodName = "SaveOrders";
+                String resultData = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
+
+                Toast.makeText(getActivity().getApplicationContext(), "Successfully Saved!", Toast.LENGTH_LONG).show();
+
+                AddOrder.this.getDialog().dismiss();
+
+                //Refresh the Grid in the Parent
+                OrderEntry activity = (OrderEntry) getActivity();
+                activity.BindListView();
+            } catch (Exception e) {
+                Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            }
         }
     };
 
