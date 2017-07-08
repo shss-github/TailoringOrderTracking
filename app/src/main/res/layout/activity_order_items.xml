@@ -42,17 +42,25 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/txtCurrentOrderId"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="1dp"
+            android:visibility="gone" />
+
         <ListView
             android:id="@+id/lstOrderItems"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:dividerHeight="1dp"
-            android:padding="10dp"></ListView>
+            android:layout_height="300dp"
+            android:layout_margin="5dp"
+            android:dividerHeight="1dp"></ListView>
 
         <Button
             android:id="@+id/btnAddItem"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:text="Proceed" android:textSize="@dimen/NormalFontSize" />
 
     </LinearLayout>

@@ -95,19 +95,23 @@ public class OrderEntry extends AppCompatActivity {
 
             SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONOrder.newInstance().GetJSONOrderList(jsonString),
                     R.layout.orderentryrow, new String[]{"OrderId", "OrderDetail", "DeliveryDate", "Status"},
-                    new int[]{R.id.txtOrderRowId, R.id.txtOrderEntryRowDesc1, R.id.txtOrderEntryRowDesc2,
+                    new int[]{R.id.txtOrderEntryRowId, R.id.txtOrderEntryRowDesc1, R.id.txtOrderEntryRowDesc2,
                             R.id.txtOrderEntryRowDesc3}) {
                 @Override
                 public View getView (int position, View convertView, ViewGroup parent) {
                     View view = super.getView(position, convertView, parent);
-                    TextView ltxtOrderEntryRowId = ((TextView) view.findViewById(R.id.txtOrderEntryRowId));
+                    final TextView ltxtOrderEntryRowId = ((TextView) view.findViewById(R.id.txtOrderEntryRowId));
 
                     ImageView limgOrderEntryRowAddOrderDetail = ((ImageView) view.findViewById(R.id.imgOrderEntryRowAddOrderDetail));
                     limgOrderEntryRowAddOrderDetail.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             //showAddOrderAlertDialog();
-                            startActivity(new Intent(OrderEntry.this, OrderItems.class));
+                            //startActivity(new Intent(OrderEntry.this, OrderItems.class));
+
+                            Intent intent = new Intent(getBaseContext(), OrderItems.class);
+                            intent.putExtra("CURRENT_ORDER_ID", ltxtOrderEntryRowId.getText().toString());
+                            startActivity(intent);
                         }
                     });
 
