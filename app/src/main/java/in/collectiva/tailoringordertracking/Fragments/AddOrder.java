@@ -1,6 +1,7 @@
 package in.collectiva.tailoringordertracking.Fragments;
 
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -9,11 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -42,6 +45,9 @@ public class AddOrder extends DialogFragment {
     private static final String NAMESPACE = "http://ws.collectiva.in/";
     private static final String REQURL = "http://ws.collectiva.in/AndroidTailoringService.svc"; //"http://ws.collectiva.in/AndroidTestService.svc";
     final String SOAP_ACTION = "http://ws.collectiva.in/IAndroidTailoringService/"; //http://ws.collectiva.in/IAndroidTestService/RegisterUser";
+
+    EditText txtDate;
+    private int mYear, mMonth, mDay, mHour, mMinute;
 
     public AddOrder() {
         // Required empty public constructor
@@ -79,6 +85,9 @@ public class AddOrder extends DialogFragment {
         lbtnAddOrderSave.setOnClickListener(lbtnAddOrderSaveListener);
         lbtnAddOrderClose.setOnClickListener(lbtnAddOrderCloseListener);
 
+        txtDate = (EditText) view.findViewById(R.id.edtAddOrderDeliveryDate);
+        txtDate.setOnClickListener(lbtnDatePickerListener);
+
         // Set title
         getDialog().setTitle("Add Order");
         // Show soft keyboard automatically and request focus to field
@@ -86,6 +95,28 @@ public class AddOrder extends DialogFragment {
         //getDialog().getWindow().setSoftInputMode(
         //WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
     }
+
+    private View.OnClickListener lbtnDatePickerListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // Get Current Date
+            final Calendar c = Calendar.getInstance();
+            mYear = c.get(Calendar.YEAR);
+            mMonth = c.get(Calendar.MONTH);
+            mDay = c.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                    new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+                            txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        }
+                    }, mYear, mMonth, mDay);
+            datePickerDialog.show();
+        }
+    };
+
 
     private View.OnClickListener lbtnAddOrderSaveListener = new View.OnClickListener() {
         @Override
@@ -129,7 +160,7 @@ public class AddOrder extends DialogFragment {
 
                 objParam = new clsParameters();
                 objParam.ParameterName = "DeliveryDate";
-                objParam.ParameterValue = "2017-07-12";
+                objParam.ParameterValue = ledtAddOrderDeliveryDate.getText().toString(); //"2017-07-12";
                 lstParameters.add(objParam);
 
                 objParam = new clsParameters();

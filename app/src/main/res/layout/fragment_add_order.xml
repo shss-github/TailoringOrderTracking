@@ -1,6 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="200dp"
     android:layout_height="match_parent"
     tools:context="in.collectiva.tailoringordertracking.Fragments.AddOrder">
 
@@ -47,10 +47,19 @@
 
         <EditText
             android:id="@+id/edtAddOrderDeliveryDate"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName" />
+
+        <!--<Button
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_date"
+            android:background="@drawable/list"
+            android:layout_alignBottom="@+id/edtAddOrderDeliveryDate"
+            android:layout_toRightOf="@+id/edtAddOrderDeliveryDate"
+            android:layout_toEndOf="@+id/edtAddOrderDeliveryDate" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
