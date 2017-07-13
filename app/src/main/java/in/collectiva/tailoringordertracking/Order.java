@@ -3,6 +3,7 @@ package in.collectiva.tailoringordertracking;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
@@ -59,8 +60,8 @@ public class Order extends AppCompatActivity implements AdapterView.OnItemSelect
         setContentView(R.layout.activity_order);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        BindSpinner();
 
+        BindSpinner();
         ltvRate = (TextView) findViewById(R.id.tvRate);
         ltvAmount = (TextView) findViewById(R.id.tvAmount);
         ltxtQty = (EditText) findViewById(R.id.txtQty);
@@ -117,6 +118,16 @@ public class Order extends AppCompatActivity implements AdapterView.OnItemSelect
                 datePicker.show();
             }
         });
+
+        // Show Order Item Screen
+        ImageButton limgItemPlus = (ImageButton) findViewById(R.id.imgOrderItemPlus);
+        limgItemPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Order.this, OrderItems.class));
+            }
+        });
+
     }
 
     private void calculateAmount() {
@@ -196,8 +207,8 @@ public class Order extends AppCompatActivity implements AdapterView.OnItemSelect
 
 
         // Showing selected spinner item
-        String item = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), "Selected: " + lRate , Toast.LENGTH_LONG).show();
+        //String item = parent.getItemAtPosition(position).toString();
+        //Toast.makeText(parent.getContext(), "Selected: " + lRate , Toast.LENGTH_LONG).show();
     }
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub

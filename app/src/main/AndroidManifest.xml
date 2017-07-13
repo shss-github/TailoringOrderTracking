@@ -69,7 +69,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeMenu" />
         </activity>
-        <activity android:name=".OrderEntry"></activity>
+        <activity android:name=".OrderEntry" />
+        <activity
+            android:name=".OrderItems"
+            android:label="@string/title_activity_order_items"
+            android:parentActivityName=".Order">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Order" />
+
+        </activity>
     </application>
 
 </manifest>
