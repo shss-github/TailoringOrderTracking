@@ -13,11 +13,12 @@
         tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp">
 
-        <fragment android:name="in.collectiva.tailoringordertracking.Fragments.MakeListFragment"
+        <fragment
             android:id="@+id/make_list"
-            android:layout_weight="1"
+            android:name="in.collectiva.tailoringordertracking.Fragments.MakeListFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             tools:layout="@layout/fragment_make_list" />
 
     </LinearLayout>
