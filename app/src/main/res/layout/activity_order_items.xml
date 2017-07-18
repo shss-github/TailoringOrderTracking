@@ -9,13 +9,64 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <!---->
+
+        <TextView
+            android:id="@+id/txtCurrentOrderId"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="1dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtOrderItemsRowSpacing"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="3dp" />
+
+            <TextView
+                android:id="@+id/txtOrderItemsDesc2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="@dimen/NormalFontSize" />
+
+            <TextView
+                android:id="@+id/txtOrderItemsDesc1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="@dimen/SmallFontSize" />
+
+            <TextView
+                android:id="@+id/txtOrderItemsDesc3"
+                android:layout_width="fill_parent"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/SmallFontSize" />
+
+            <!--<TextView
+                android:id="@+id/txtOrderItemsRowSpacing"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="3dp" />-->
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <EditText
@@ -35,33 +86,39 @@
             <ImageButton
                 android:id="@+id/imgSearch"
                 android:layout_width="50dp"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:contentDescription="Search Item"
                 app:srcCompat="@android:drawable/ic_menu_search"
                 tools:ignore="HardcodedText" />
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/txtCurrentOrderId"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="1dp"
-            android:visibility="gone" />
-
-        <ListView
-            android:id="@+id/lstOrderItems"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_margin="5dp"
-            android:dividerHeight="1dp"></ListView>
-
-        <Button
-            android:id="@+id/btnAddItem"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="Proceed" android:textSize="@dimen/NormalFontSize" />
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/lstOrderItems"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="5dp"
+                android:dividerHeight="1dp"></ListView>
+
+            <TextView
+                android:id="@+id/txtOrderItemsNoRecords"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+
+            <Button
+                android:id="@+id/btnOrderItemsProceed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="Proceed"
+                android:textSize="@dimen/NormalFontSize" />
+        </LinearLayout>
 
     </LinearLayout>
 

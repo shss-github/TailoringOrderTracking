@@ -65,13 +65,19 @@
                     android:id="@+id/btnMenuMakeList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Make List" />
+                    android:text="In Progress List" />
 
                 <Button
                     android:id="@+id/btnMenuReadyList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Ready List" />
+
+                <Button
+                    android:id="@+id/btnMenuDeliveredList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Delivered List" />
 
                 <Button
                     android:id="@+id/btnMenuEditProfile"

@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.text.DateFormat;
+import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -110,7 +111,8 @@ public class AddOrder extends DialogFragment {
                         @Override
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
-                            txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            //txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            txtDate.setText(dayOfMonth + "-" + new DateFormatSymbols().getMonths()[monthOfYear] + "-" + year);
                         }
                     }, mYear, mMonth, mDay);
             datePickerDialog.show();
@@ -135,49 +137,51 @@ public class AddOrder extends DialogFragment {
             }
 
             try {
-                // get user data from session
-                HashMap<String, String> user = session.getUserDetails();
-                String lUserId = user.get(SessionManagement.KEY_USERID);
+                if(ProceedToSave == true) {
+                    // get user data from session
+                    HashMap<String, String> user = session.getUserDetails();
+                    String lUserId = user.get(SessionManagement.KEY_USERID);
 
-                //Here Creating List for the Parameters, which we need to pass to the method.
-                ArrayList lstParameters = new ArrayList<>();
-                clsParameters objParam = new clsParameters();
-                objParam.ParameterName = "OrderId";
-                objParam.ParameterValue = "0";
-                lstParameters.add(objParam);
+                    //Here Creating List for the Parameters, which we need to pass to the method.
+                    ArrayList lstParameters = new ArrayList<>();
+                    clsParameters objParam = new clsParameters();
+                    objParam.ParameterName = "OrderId";
+                    objParam.ParameterValue = "0";
+                    lstParameters.add(objParam);
 
-                objParam = new clsParameters();
-                objParam.ParameterName = "Name";
-                objParam.ParameterValue = ledtAddOrderName.getText().toString();
-                lstParameters.add(objParam);
+                    objParam = new clsParameters();
+                    objParam.ParameterName = "Name";
+                    objParam.ParameterValue = ledtAddOrderName.getText().toString();
+                    lstParameters.add(objParam);
 
-                objParam = new clsParameters();
-                objParam.ParameterName = "MobileNo";
-                objParam.ParameterValue = ledtAddOrderMobileNo.getText().toString();
-                lstParameters.add(objParam);
+                    objParam = new clsParameters();
+                    objParam.ParameterName = "MobileNo";
+                    objParam.ParameterValue = ledtAddOrderMobileNo.getText().toString();
+                    lstParameters.add(objParam);
 
-                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+                    String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 
-                objParam = new clsParameters();
-                objParam.ParameterName = "DeliveryDate";
-                objParam.ParameterValue = ledtAddOrderDeliveryDate.getText().toString(); //"2017-07-12";
-                lstParameters.add(objParam);
+                    objParam = new clsParameters();
+                    objParam.ParameterName = "DeliveryDate";
+                    objParam.ParameterValue = ledtAddOrderDeliveryDate.getText().toString(); //"2017-07-12";
+                    lstParameters.add(objParam);
 
-                objParam = new clsParameters();
-                objParam.ParameterName = "UserId";
-                objParam.ParameterValue = lUserId;
-                lstParameters.add(objParam);
+                    objParam = new clsParameters();
+                    objParam.ParameterName = "UserId";
+                    objParam.ParameterValue = lUserId;
+                    lstParameters.add(objParam);
 
-                String lMethodName = "SaveOrders";
-                String resultData = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
+                    String lMethodName = "SaveOrders";
+                    String resultData = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
-                Toast.makeText(getActivity().getApplicationContext(), "Successfully Saved!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Successfully Saved!", Toast.LENGTH_LONG).show();
 
-                AddOrder.this.getDialog().dismiss();
+                    AddOrder.this.getDialog().dismiss();
 
-                //Refresh the Grid in the Parent
-                OrderEntry activity = (OrderEntry) getActivity();
-                activity.BindListView();
+                    //Refresh the Grid in the Parent
+                    OrderEntry activity = (OrderEntry) getActivity();
+                    activity.BindListView();
+                }
             } catch (Exception e) {
                 Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
             }

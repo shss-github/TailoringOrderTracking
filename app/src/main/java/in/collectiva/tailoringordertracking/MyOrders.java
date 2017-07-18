@@ -44,9 +44,9 @@ public class MyOrders extends AppCompatActivity implements TabLayout.OnTabSelect
         tabLayout.removeAllTabs();
 
         //Adding the tabs using addTab() method
-        tabLayout.addTab(tabLayout.newTab().setText("All"));
-        tabLayout.addTab(tabLayout.newTab().setText("Make List"));
-        tabLayout.addTab(tabLayout.newTab().setText("Ready List"));
+        tabLayout.addTab(tabLayout.newTab().setText("Pending"));
+        tabLayout.addTab(tabLayout.newTab().setText("In Progress"));
+        tabLayout.addTab(tabLayout.newTab().setText("Ready"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         //Initializing viewPager

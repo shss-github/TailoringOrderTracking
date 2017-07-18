@@ -68,7 +68,7 @@ public class ReadyListFragment extends Fragment {
 
         objParam = new clsParameters();
         objParam.ParameterName = "StatusId";
-        objParam.ParameterValue = "2";
+        objParam.ParameterValue = "3";
         lstParameters.add(objParam);
 
         String lMethodName = "GetOrdersByStatus";
@@ -118,7 +118,7 @@ public class ReadyListFragment extends Fragment {
 
                             objParam = new clsParameters();
                             objParam.ParameterName = "StatusID";
-                            objParam.ParameterValue = "3";
+                            objParam.ParameterValue = "4";
                             lstParameters.add(objParam);
 
                             String lMethodName = "UpdateOrderStatus";

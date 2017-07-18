@@ -47,6 +47,7 @@ public class HomeMenu extends AppCompatActivity {
         Button lbtnMenuOrderTracking = (Button) findViewById(R.id.btnMenuOrderTracking);
         Button lbtnMenuMakeList = (Button) findViewById(R.id.btnMenuMakeList);
         Button lbtnMenuReadyList = (Button) findViewById(R.id.btnMenuReadyList);
+        Button lbtnMenuDeliveredList = (Button) findViewById(R.id.btnMenuDeliveredList);
         Button lbtnMenuEditProfile = (Button) findViewById(R.id.btnMenuEditProfile);
         Button lbtnMenuLogout = (Button) findViewById(R.id.btnMenuLogout);
 
@@ -76,7 +77,7 @@ public class HomeMenu extends AppCompatActivity {
         lbtnMenuOrderTracking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeMenu.this, Order.class));
+                startActivity(new Intent(HomeMenu.this, OrderEntry.class));
             }
         });
 
@@ -101,10 +102,17 @@ public class HomeMenu extends AppCompatActivity {
             }
         });
 
+        lbtnMenuDeliveredList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeMenu.this, ReadyList.class));
+            }
+        });
+
         lbtnMenuEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            startActivity(new Intent(HomeMenu.this, OrderEntry.class));
+            startActivity(new Intent(HomeMenu.this, Order.class));
             }
         });
 
@@ -124,15 +132,16 @@ public class HomeMenu extends AppCompatActivity {
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         setupToolbar();
-        DataModel[] drawerItem = new DataModel[7];
+        DataModel[] drawerItem = new DataModel[8];
 
         drawerItem[0] = new DataModel(R.drawable.itemadd, "Item Master");
         drawerItem[1] = new DataModel(R.drawable.itemadd, "Order Entry");
         drawerItem[2] = new DataModel(R.drawable.list, "Order List");
-        drawerItem[3] = new DataModel(R.drawable.list, "Make List");
+        drawerItem[3] = new DataModel(R.drawable.list, "In Progress List");
         drawerItem[4] = new DataModel(R.drawable.list, "Ready List");
-        drawerItem[5] = new DataModel(R.drawable.editprofile, "Edit Profile");
-        drawerItem[6] = new DataModel(R.drawable.logout, "Logout");
+        drawerItem[5] = new DataModel(R.drawable.list, "Delivered List");
+        drawerItem[6] = new DataModel(R.drawable.editprofile, "Edit Profile");
+        drawerItem[7] = new DataModel(R.drawable.logout, "Logout");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -181,7 +190,7 @@ public class HomeMenu extends AppCompatActivity {
                 startActivity(new Intent(HomeMenu.this, Item.class));
                 break;
             case 1:
-                startActivity(new Intent(HomeMenu.this, Order.class));
+                startActivity(new Intent(HomeMenu.this, OrderEntry.class));
                 break;
             case 2:
                 //fragment = new FixturesFragment();
@@ -193,10 +202,13 @@ public class HomeMenu extends AppCompatActivity {
             case 4:
                 startActivity(new Intent(HomeMenu.this, ReadyList.class));
                 break;
-            case 5: //Edit Profile
-                startActivity(new Intent(HomeMenu.this, OrderEntry.class));
+            case 5:
+                startActivity(new Intent(HomeMenu.this, ReadyList.class));
                 break;
-            case 6: //Logout
+            case 6: //Edit Profile
+                startActivity(new Intent(HomeMenu.this, Order.class));
+                break;
+            case 7: //Logout
                 session.logoutUser();
                 startActivity(new Intent(HomeMenu.this, Home.class));
                 break;

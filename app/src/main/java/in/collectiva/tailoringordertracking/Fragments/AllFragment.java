@@ -1,11 +1,14 @@
 package in.collectiva.tailoringordertracking.Fragments;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -18,6 +21,7 @@ import in.collectiva.tailoringordertracking.CommonFunction.CRUDProcess;
 import in.collectiva.tailoringordertracking.CommonFunction.SessionManagement;
 import in.collectiva.tailoringordertracking.JSONFiles.JSONItems;
 import in.collectiva.tailoringordertracking.JSONFiles.JSONOrder;
+import in.collectiva.tailoringordertracking.MyOrders;
 import in.collectiva.tailoringordertracking.R;
 import in.collectiva.tailoringordertracking.cConstant.clsParameters;
 
@@ -28,7 +32,7 @@ import in.collectiva.tailoringordertracking.cConstant.clsParameters;
 //Our class extending fragment
 public class AllFragment extends Fragment {
 
-    private String jsonString;
+    private String jsonString, lSelectedOrderId;
     private static final String NAMESPACE = "http://ws.collectiva.in/";
     private static final String REQURL = "http://ws.collectiva.in/AndroidTailoringService.svc"; //"http://ws.collectiva.in/AndroidTestService.svc";
     final String SOAP_ACTION = "http://ws.collectiva.in/IAndroidTailoringService/"; //http://ws.collectiva.in/IAndroidTestService/RegisterUser";
@@ -68,7 +72,7 @@ public class AllFragment extends Fragment {
         // User Id
         String lUserId = user.get(SessionManagement.KEY_USERID);
 
-        ArrayList<clsParameters> lstParameters = new ArrayList<>();
+        /*ArrayList<clsParameters> lstParameters = new ArrayList<>();
         clsParameters objParam = new clsParameters();
         objParam.ParameterName = "UserId";
         objParam.ParameterValue = lUserId;
@@ -80,6 +84,20 @@ public class AllFragment extends Fragment {
         lstParameters.add(objParam);
 
         String lMethodName = "GetOrders";
+        jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);*/
+
+        ArrayList<clsParameters> lstParameters = new ArrayList<>();
+        clsParameters objParam = new clsParameters();
+        objParam.ParameterName = "UserId";
+        objParam.ParameterValue = lUserId;
+        lstParameters.add(objParam);
+
+        objParam = new clsParameters();
+        objParam.ParameterName = "StatusId";
+        objParam.ParameterValue = "1";
+        lstParameters.add(objParam);
+
+        String lMethodName = "GetOrdersByStatus";
         jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
         TextView ltxtAllNoRecords = (TextView) view.findViewById(R.id.txtAllNoRecords);
@@ -96,6 +114,58 @@ public class AllFragment extends Fragment {
                             R.id.txtOrderRowStatus});
 
             lstAll.setAdapter(simpleAdapter);
+
+            lstAll.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    // selected item
+                    lSelectedOrderId = ((TextView) view.findViewById(R.id.txtOrderRowId)).getText().toString();
+                    String OrderDetail = ((TextView) view.findViewById(R.id.txtOrderRowDeliveryDate)).getText().toString();
+
+                    // 1. Instantiate an AlertDialog.Builder with its constructor
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                    // 2. Chain together various setter methods to set the dialog characteristics
+                    builder.setMessage("Are you sure to Update the Status as 'In-Progress' for the Order " + OrderDetail + "?")
+                            .setTitle("");
+
+                    // Add the buttons
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User clicked OK button
+
+                            ArrayList<clsParameters> lstParameters = new ArrayList<>();
+                            clsParameters objParam = new clsParameters();
+                            objParam.ParameterName = "OrderID";
+                            objParam.ParameterValue = lSelectedOrderId;
+                            lstParameters.add(objParam);
+
+                            objParam = new clsParameters();
+                            objParam.ParameterName = "StatusID";
+                            objParam.ParameterValue = "2";
+                            lstParameters.add(objParam);
+
+                            String lMethodName = "UpdateOrderStatus";
+                            jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
+
+                            //Refresh the Grid in the Parent
+                            MyOrders activity = (MyOrders) getActivity();
+                            activity.BindTab(0);
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User cancelled the dialog
+                        }
+                    });
+
+                    // 3. Get the AlertDialog from create()
+                    AlertDialog dialog = builder.create();
+
+
+                    dialog.show();
+                }
+            });
         }
     }
 

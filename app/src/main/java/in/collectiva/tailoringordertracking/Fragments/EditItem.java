@@ -84,15 +84,18 @@ public class EditItem extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         // Get field from view and set events.
         ltxtEditItemId = (TextView) view.findViewById(R.id.txtEditItemId);
         ltxtEditItemId.setText(getArguments().getString(lItemId));
 
+        // get user data from session
+        HashMap<String, String> user = session.getUserDetails();
+        String lUserId = user.get(SessionManagement.KEY_USERID);
+
         ArrayList<clsParameters> lstParameters = new ArrayList<>();
         clsParameters objParam = new clsParameters();
         objParam.ParameterName = "UserId";
-        objParam.ParameterValue = "14";
+        objParam.ParameterValue = lUserId;
         lstParameters.add(objParam);
 
         objParam = new clsParameters();

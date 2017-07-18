@@ -111,8 +111,11 @@ public class JSONOrder {
             obj.OrderId = lItm.getInt("OrderId");
             obj.Name = lItm.getString("Name");
             obj.OrderNo = lItm.getString("OrderNo");
-            obj.DeliveryDate = ConvertStringToDate(lDeliveryDate);
             obj.MobileNo = lItm.getString("MobileNo");
+
+            obj.OrderDetail = lItm.getString("Name") + " (" + lItm.getString("MobileNo") + ")";
+            obj.DeliveryDate = "Order #" + lItm.getString("OrderNo") + " dt. " + ConvertStringToDate(lItm.getString("DeliveryDate"));
+            obj.Status = "Status - " + lItm.getString("StatusName");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -122,7 +125,7 @@ public class JSONOrder {
 
     private String ConvertStringToDate(String dtStart) {
         //String dtStart = "2010-10-15T09:27:37Z";
-        SimpleDateFormat lFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+        SimpleDateFormat lFormat = new SimpleDateFormat("dd/mm/yyyy", Locale.US);
         Date date = null;
         try {
             date = lFormat.parse(dtStart);

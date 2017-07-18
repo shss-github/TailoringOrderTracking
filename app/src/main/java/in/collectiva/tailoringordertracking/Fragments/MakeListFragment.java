@@ -77,7 +77,7 @@ public class MakeListFragment extends Fragment {
 
         objParam = new clsParameters();
         objParam.ParameterName = "StatusId";
-        objParam.ParameterValue = "1";
+        objParam.ParameterValue = "2";
         lstParameters.add(objParam);
 
         String lMethodName = "GetOrdersByStatus";
@@ -125,7 +125,7 @@ public class MakeListFragment extends Fragment {
 
                             objParam = new clsParameters();
                             objParam.ParameterName = "StatusID";
-                            objParam.ParameterValue = "2";
+                            objParam.ParameterValue = "3";
                             lstParameters.add(objParam);
 
                             String lMethodName = "UpdateOrderStatus";

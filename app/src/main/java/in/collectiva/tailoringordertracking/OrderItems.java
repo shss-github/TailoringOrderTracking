@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -23,6 +24,8 @@ import in.collectiva.tailoringordertracking.CommonFunction.CRUDProcess;
 import in.collectiva.tailoringordertracking.CommonFunction.SessionManagement;
 import in.collectiva.tailoringordertracking.CommonFunction.SessionOrderDetail;
 import in.collectiva.tailoringordertracking.JSONFiles.JSONItems;
+import in.collectiva.tailoringordertracking.JSONFiles.JSONOrder;
+import in.collectiva.tailoringordertracking.cConstant.clsOrder;
 import in.collectiva.tailoringordertracking.cConstant.clsOrderDetail;
 import in.collectiva.tailoringordertracking.cConstant.clsParameters;
 
@@ -40,6 +43,18 @@ public class OrderItems extends AppCompatActivity {
     SessionManagement session;
     SessionOrderDetail sessionOrder;
 
+    /*private View.OnClickListener lbtnOrderItemsProceedListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            ArrayList<clsOrderDetail> lstOrderItems = sessionOrder.getOrderDetail();
+            for (clsOrderDetail itm:lstOrderItems) {
+                Toast.makeText(getApplicationContext(),
+                        "Order Id : " + itm.OrderId + ", Item Id :" + itm.ItemId + ", Amount :" + itm.Amount,
+                        Toast.LENGTH_LONG);
+            }
+        }
+    };*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,15 +71,65 @@ public class OrderItems extends AppCompatActivity {
         String lOrderId = getIntent().getStringExtra("CURRENT_ORDER_ID");
         ltxtCurrentOrderId.setText(lOrderId);
 
+        /*Button lbtnOrderItemsProceed = (Button) findViewById(R.id.btnOrderItemsProceed);
+        lbtnOrderItemsProceed.setOnClickListener(lbtnOrderItemsProceedListener);*/
+
+        BindOrderDetails(lOrderId);
         BindListItem();
+    }
+
+    private void BindOrderDetails(String lOrderId)
+    {
+        TextView ltxtOrderItemsDesc1 = ((TextView) findViewById(R.id.txtOrderItemsDesc1));
+        TextView ltxtOrderItemsDesc2 = ((TextView) findViewById(R.id.txtOrderItemsDesc2));
+        TextView ltxtOrderItemsDesc3 = ((TextView) findViewById(R.id.txtOrderItemsDesc3));
+
+        // get user data from session
+        HashMap<String, String> user = session.getUserDetails();
+
+        // name
+        String lUserId = user.get(SessionManagement.KEY_USERID);
+
+        ArrayList<clsParameters> lstParameters = new ArrayList<>();
+        clsParameters objParam = new clsParameters();
+        objParam.ParameterName = "UserId";
+        objParam.ParameterValue = lUserId;
+        lstParameters.add(objParam);
+
+        objParam = new clsParameters();
+        objParam.ParameterName = "OrderId";
+        objParam.ParameterValue = lOrderId;
+        lstParameters.add(objParam);
+
+        String lMethodName = "GetOrders";
+        jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
+
+        if (jsonString.equals("0")) {
+
+        }
+        else
+        {
+            clsOrder itm = JSONOrder.newInstance().GetJSONOrder(jsonString);
+
+            ltxtOrderItemsDesc1.setText(itm.OrderDetail);
+            ltxtOrderItemsDesc2.setText(itm.DeliveryDate);
+            ltxtOrderItemsDesc3.setText(itm.Status);
+
+            itm = null;
+        }
     }
 
     private void BindListItem()
     {
+        // get user data from session
+        HashMap<String, String> user = session.getUserDetails();
+        // name
+        String lUserId = user.get(SessionManagement.KEY_USERID);
+
         ArrayList<clsParameters> lstParameters = new ArrayList<>();
         clsParameters objParam = new clsParameters();
         objParam.ParameterName = "UserId";
-        objParam.ParameterValue = "14";
+        objParam.ParameterValue = lUserId;
         lstParameters.add(objParam);
 
         objParam = new clsParameters();
@@ -75,13 +140,25 @@ public class OrderItems extends AppCompatActivity {
         String lMethodName = "GetItems";
         jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
-        SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONItems.newInstance().GetJSONItemList(jsonString), R.layout.order_item_row,
-                new String[] {"ItemId", "ItemName", "Amount"},
-                new int[] {R.id.txtOrderItemId, R.id.txtOrderItemName, R.id.txtOrderItemRate});
+        TextView ltxtOrderItemsNoRecords = (TextView) findViewById(R.id.txtOrderItemsNoRecords);
+        ltxtOrderItemsNoRecords.setText("");
 
-        ListView lstOrderItems = (ListView) findViewById(R.id.lstOrderItems);
-        lstOrderItems.setAdapter(simpleAdapter);
-        lstOrderItems.setOnItemClickListener(lstOrderItemsItemClickListener);
+        Button btnAddItem = (Button) findViewById(R.id.btnAddItem);
+        btnAddItem.setVisibility(View.VISIBLE);
+
+        if (jsonString.equals("0")) {
+            ltxtOrderItemsNoRecords.setText("No records found!");
+            btnAddItem.setVisibility(View.GONE);
+        }
+        else{
+            SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONItems.newInstance().GetJSONItemList(jsonString),
+                    R.layout.order_item_row, new String[] {"ItemId", "ItemName", "Amount"},
+                    new int[] {R.id.txtOrderItemId, R.id.txtOrderItemName, R.id.txtOrderItemRate});
+
+            ListView lstOrderItems = (ListView) findViewById(R.id.lstOrderItems);
+            lstOrderItems.setAdapter(simpleAdapter);
+            //lstOrderItems.setOnItemClickListener(lstOrderItemsItemClickListener);
+        }
     }
 
     private AdapterView.OnItemClickListener lstOrderItemsItemClickListener = new AdapterView.OnItemClickListener() {

@@ -93,23 +93,30 @@ public class Item extends AppCompatActivity {
         String lMethodName = "GetItems";
         jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
-        ListView lstItem = (ListView) findViewById(R.id.lstItems);
+        TextView ltxtItemNoRecords = (TextView) findViewById(R.id.txtItemNoRecords);
+        ltxtItemNoRecords.setText("");
 
-        SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONItems.newInstance().GetJSONItemList(jsonString), R.layout.row,
-                new String[] {"ItemId", "ItemDetail", "Amount"},
-                new int[] {R.id.txtRowItemId, R.id.ItemDetail, R.id.txtRowAmount});
-        lstItem.setAdapter(simpleAdapter);
+        if (jsonString.equals("0")) {
+            ltxtItemNoRecords.setText("No records found!");
+        } else {
+            ListView lstItem = (ListView) findViewById(R.id.lstItems);
 
-        lstItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONItems.newInstance().GetJSONItemList(jsonString), R.layout.row,
+                    new String[]{"ItemId", "ItemDetail", "Amount"},
+                    new int[]{R.id.txtRowItemId, R.id.ItemDetail, R.id.txtRowAmount});
+            lstItem.setAdapter(simpleAdapter);
 
-                // selected item
-                String selected = ((TextView) view.findViewById(R.id.txtRowItemId)).getText().toString();
-                //showAlertDialog();
-                showEditAlertDialog(selected);
+            lstItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            }
-        });
+                    // selected item
+                    String selected = ((TextView) view.findViewById(R.id.txtRowItemId)).getText().toString();
+                    //showAlertDialog();
+                    showEditAlertDialog(selected);
+
+                }
+            });
+        }
     }
 
     private View.OnClickListener lbtnAddItemListener = new View.OnClickListener() {
