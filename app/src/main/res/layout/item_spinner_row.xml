@@ -2,25 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/txtSpinnerItemId"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtSpinnerItemId" android:visibility="invisible" android:textSize="4dp"  />
+            android:textSize="4dp"
+            android:visibility="invisible" />
 
         <TextView
+            android:id="@+id/txtSpinnerItemAmount"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtSpinnerItemAmount" android:visibility="invisible" android:textSize="4dp" />
+            android:textSize="4dp"
+            android:visibility="invisible" />
 
         <TextView
+            android:id="@+id/txtSpinnerItemName"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtSpinnerItemName"/>
+            android:layout_height="wrap_content" />
 
         <!--<TextView
             android:layout_width="fill_parent"
