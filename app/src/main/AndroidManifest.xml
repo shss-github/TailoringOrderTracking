@@ -77,8 +77,8 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Order" />
-
         </activity>
+        <activity android:name=".DeliveredList"></activity>
     </application>
 
 </manifest>
