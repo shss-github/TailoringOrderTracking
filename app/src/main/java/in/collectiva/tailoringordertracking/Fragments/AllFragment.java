@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ import in.collectiva.tailoringordertracking.CommonFunction.CRUDProcess;
 import in.collectiva.tailoringordertracking.CommonFunction.SessionManagement;
 import in.collectiva.tailoringordertracking.JSONFiles.JSONItems;
 import in.collectiva.tailoringordertracking.JSONFiles.JSONOrder;
+import in.collectiva.tailoringordertracking.JSONFiles.JSONOrderItemSummary;
 import in.collectiva.tailoringordertracking.MyOrders;
 import in.collectiva.tailoringordertracking.R;
 import in.collectiva.tailoringordertracking.cConstant.clsParameters;
@@ -47,6 +49,7 @@ public class AllFragment extends Fragment {
 
     private TextView ltxtAllNoRecords;
     private ListView lstAll;
+    private ListView lstAllSummary;
     private Spinner spinner;
     private EditText edAsOnDate;
 
@@ -134,6 +137,7 @@ public class AllFragment extends Fragment {
 
         ltxtAllNoRecords = (TextView) view.findViewById(R.id.txtAllNoRecords);
         lstAll = (ListView) view.findViewById(R.id.lstAllOrderList);
+        lstAllSummary = (ListView) view.findViewById(R.id.lstAllOrderListSummary);
 
         Button btnGetResult = (Button) view.findViewById(R.id.btnGetOrder);
         btnGetResult.setOnClickListener(lbtnGetOrderDetail);
@@ -187,6 +191,8 @@ public class AllFragment extends Fragment {
 
                         lstAll.setAdapter(simpleAdapter);
                     }
+
+                    LoadListOrderDetailItemSummary();
                 } catch (Exception e) {
                     Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                 }
@@ -214,5 +220,45 @@ public class AllFragment extends Fragment {
             datePickerDialog.show();
         }
     };
+
+    private void LoadListOrderDetailItemSummary()
+    {
+        try {
+            ArrayList<clsParameters> lstParametersItemSummary = new ArrayList<>();
+            clsParameters objParam = new clsParameters();
+            objParam.ParameterName = "UserId";
+            objParam.ParameterValue = lUserId;
+            lstParametersItemSummary.add(objParam);
+
+            objParam = new clsParameters();
+            objParam.ParameterName = "FilterBy";
+            objParam.ParameterValue = spinner.getSelectedItem().toString();
+            lstParametersItemSummary.add(objParam);
+
+            objParam = new clsParameters();
+            objParam.ParameterName = "FilterDate";
+            objParam.ParameterValue = edAsOnDate.getText().toString();
+            lstParametersItemSummary.add(objParam);
+
+            String lMethodName = "GetOrderDetailByParticulars";
+            jsonString = "";
+            jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParametersItemSummary);
+
+            ltxtAllNoRecords.setText("");
+
+            if (jsonString.equals("0")) {
+                ltxtAllNoRecords.setText("No records found!");
+            } else {
+                Log.d("jsonString",jsonString);
+                SimpleAdapter simpleAdapterItemSummary = new SimpleAdapter(getActivity(), JSONOrderItemSummary.newInstance().GetJSONOrderItemSummaryList(jsonString),
+                        R.layout.order_item_summary_row, new String[]{"OrderItemName", "OrderNoOfQty"},
+                        new int[]{R.id.txtOrderItemSummaryRowItemName, R.id.txtOrderItemSummaryRowNoOfQty});
+
+                lstAllSummary.setAdapter(simpleAdapterItemSummary);
+            }
+        } catch(Exception e) {
+            throw e;
+        }
+    }
 }
 
