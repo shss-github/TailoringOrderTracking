@@ -15,19 +15,6 @@
         android:layout_margin="10dp" >
 
         <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Name (Proprietor Name)"/>
-
-        <EditText
-            android:id="@+id/editName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-        <TextView
             android:id="@+id/textShopName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,6 +28,19 @@
             android:inputType="textPersonName" />
 
         <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contact Person"/>
+
+        <EditText
+            android:id="@+id/editContactPerson"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <!--<TextView
             android:id="@+id/textAddress1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -88,13 +88,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="6"
-            android:inputType="number" />
+            android:inputType="number" />-->
 
         <Button
             android:id="@+id/btnUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Update" />
+
+        <TextView
+            android:id="@+id/textMyLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="My Location" />
+
+        <TextView
+            android:id="@+id/textLatLangitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <Button
+            android:id="@+id/btnChangeLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Change Location" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
