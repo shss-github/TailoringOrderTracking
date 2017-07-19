@@ -105,7 +105,7 @@ public class HomeMenu extends AppCompatActivity {
         lbtnMenuDeliveredList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeMenu.this, ReadyList.class));
+                startActivity(new Intent(HomeMenu.this, DeliveredList.class));
             }
         });
 
@@ -203,7 +203,7 @@ public class HomeMenu extends AppCompatActivity {
                 startActivity(new Intent(HomeMenu.this, ReadyList.class));
                 break;
             case 5:
-                startActivity(new Intent(HomeMenu.this, ReadyList.class));
+                startActivity(new Intent(HomeMenu.this, DeliveredList.class));
                 break;
             case 6: //Edit Profile
                 startActivity(new Intent(HomeMenu.this, Order.class));

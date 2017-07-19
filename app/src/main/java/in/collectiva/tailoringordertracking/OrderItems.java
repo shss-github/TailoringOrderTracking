@@ -87,7 +87,6 @@ public class OrderItems extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             ArrayList<clsOrderDetail> lst = sessionOrder.getOrderDetail();
-            Toast.makeText(getApplicationContext(), "Count - " + lst.size(), Toast.LENGTH_SHORT).show();
 
             for (clsOrderDetail itm:lst) {
                 ArrayList lstParameters = new ArrayList<>();
@@ -128,6 +127,7 @@ public class OrderItems extends AppCompatActivity {
             sessionOrder.clearOrderDetail();
 
             //Redirect to Order Entry Page
+            Toast.makeText(getApplicationContext(), "Order Saved Successfully!", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(OrderItems.this, OrderEntry.class));
         }
     };
