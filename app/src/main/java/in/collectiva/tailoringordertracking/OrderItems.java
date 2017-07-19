@@ -1,13 +1,17 @@
 package in.collectiva.tailoringordertracking;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -18,6 +22,7 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import in.collectiva.tailoringordertracking.CommonFunction.CRUDProcess;
@@ -71,12 +76,61 @@ public class OrderItems extends AppCompatActivity {
         String lOrderId = getIntent().getStringExtra("CURRENT_ORDER_ID");
         ltxtCurrentOrderId.setText(lOrderId);
 
-        /*Button lbtnOrderItemsProceed = (Button) findViewById(R.id.btnOrderItemsProceed);
-        lbtnOrderItemsProceed.setOnClickListener(lbtnOrderItemsProceedListener);*/
+        Button lbtnOrderItemsProceed = (Button) findViewById(R.id.btnOrderItemsProceed);
+        lbtnOrderItemsProceed.setOnClickListener(lbtnOrderItemsProceedListener);
 
         BindOrderDetails(lOrderId);
         BindListItem();
     }
+
+    private View.OnClickListener lbtnOrderItemsProceedListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            ArrayList<clsOrderDetail> lst = sessionOrder.getOrderDetail();
+            Toast.makeText(getApplicationContext(), "Count - " + lst.size(), Toast.LENGTH_SHORT).show();
+
+            for (clsOrderDetail itm:lst) {
+                ArrayList lstParameters = new ArrayList<>();
+                clsParameters objParam = new clsParameters();
+                objParam.ParameterName = "OrderId";
+                objParam.ParameterValue = new Long(itm.OrderId).toString();
+                lstParameters.add(objParam);
+
+                objParam = new clsParameters();
+                objParam.ParameterName = "OrderDetailId";
+                objParam.ParameterValue = new Long(itm.OrderDetailId).toString();
+                lstParameters.add(objParam);
+
+                objParam = new clsParameters();
+                objParam.ParameterName = "ItemId";
+                objParam.ParameterValue = new Long(itm.ItemId).toString();
+                lstParameters.add(objParam);
+
+                objParam = new clsParameters();
+                objParam.ParameterName = "Qty";
+                objParam.ParameterValue = new Long(itm.Qty).toString();
+                lstParameters.add(objParam);
+
+                objParam = new clsParameters();
+                objParam.ParameterName = "Rate";
+                objParam.ParameterValue = new Double(itm.Rate).toString();
+                lstParameters.add(objParam);
+
+                objParam = new clsParameters();
+                objParam.ParameterName = "Amount";
+                objParam.ParameterValue = new Double(itm.Amount).toString();;
+                lstParameters.add(objParam);
+
+                String lMethodName = "SaveOrderDetail";
+                String resultData = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
+            }
+
+            sessionOrder.clearOrderDetail();
+
+            //Redirect to Order Entry Page
+            startActivity(new Intent(OrderItems.this, Order.class));
+        }
+    };
 
     private void BindOrderDetails(String lOrderId)
     {
@@ -143,21 +197,22 @@ public class OrderItems extends AppCompatActivity {
         TextView ltxtOrderItemsNoRecords = (TextView) findViewById(R.id.txtOrderItemsNoRecords);
         ltxtOrderItemsNoRecords.setText("");
 
-        Button btnAddItem = (Button) findViewById(R.id.btnAddItem);
-        btnAddItem.setVisibility(View.VISIBLE);
+        Button lbtnOrderItemsProceed = (Button) findViewById(R.id.btnOrderItemsProceed);
+        lbtnOrderItemsProceed.setVisibility(View.VISIBLE);
 
         if (jsonString.equals("0")) {
             ltxtOrderItemsNoRecords.setText("No records found!");
-            btnAddItem.setVisibility(View.GONE);
+            lbtnOrderItemsProceed.setVisibility(View.GONE);
         }
-        else{
+        else {
             SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONItems.newInstance().GetJSONItemList(jsonString),
                     R.layout.order_item_row, new String[] {"ItemId", "ItemName", "Amount"},
                     new int[] {R.id.txtOrderItemId, R.id.txtOrderItemName, R.id.txtOrderItemRate});
 
             ListView lstOrderItems = (ListView) findViewById(R.id.lstOrderItems);
             lstOrderItems.setAdapter(simpleAdapter);
-            //lstOrderItems.setOnItemClickListener(lstOrderItemsItemClickListener);
+
+            lstOrderItems.setOnItemClickListener(lstOrderItemsItemClickListener);
         }
     }
 
@@ -175,6 +230,7 @@ public class OrderItems extends AppCompatActivity {
             final TextView ltxtOrderItemId = (TextView) view.findViewById(R.id.txtOrderItemId);
             final TextView ltxtOrderItemQty = (TextView) view.findViewById(R.id.txtOrderItemQty);
             final TextView ltxtOrderItemAmount = (TextView) view.findViewById(R.id.txtOrderItemAmount);
+            final TextView ltxtOrderItemName = (TextView) view.findViewById(R.id.txtOrderItemName);
 
             ltxtOrderDetailId.setText("0");
             ltxtOrderItemQty.setText("0");
@@ -192,14 +248,15 @@ public class OrderItems extends AppCompatActivity {
                 ltxtOrderItemAmount.setText("Rs. " + String.valueOf(exItem.Amount));
                 //ltItemContainer.setBackgroundColor(Color.parseColor("#eee.eee"));
             }
-            ltItemOption.setVisibility(View.VISIBLE);
+            //ltxtOrderItemName.setText(ltxtOrderItemName.getText().toString() + "-Selected");
 
-            /*if (ltItemOption.getVisibility() == View.VISIBLE) {
+
+            if (ltItemOption.getVisibility() == View.VISIBLE) {
                 ltItemOption.setVisibility(View.GONE);
             }
             else {
                 ltItemOption.setVisibility(View.VISIBLE);
-            }*/
+            }
 
             lPlus.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -253,4 +310,8 @@ public class OrderItems extends AppCompatActivity {
             });
         }
     };
+
+
 }
+
+
