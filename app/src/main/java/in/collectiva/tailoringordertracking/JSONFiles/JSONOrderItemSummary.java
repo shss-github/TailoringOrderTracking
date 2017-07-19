@@ -49,9 +49,6 @@ public class JSONOrderItemSummary {
         List<HashMap<String, String>> lOrderItemSummaryList = new ArrayList<HashMap<String, String>>();
         HashMap<String, String> lOrderItemSummary = null;
 
-        /*lOrderItemSummary = getOrderItemSummary(String.valueOf(""), String.valueOf(""));
-        lOrderItemSummaryList.add(lOrderItemSummary);*/
-
         /** Taking each country, parses and adds to list object */
         for (int i = 0; i < OrderItemSummaryCnt; i++) {
             try {
