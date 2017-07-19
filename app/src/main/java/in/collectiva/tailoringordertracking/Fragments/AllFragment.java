@@ -139,6 +139,10 @@ public class AllFragment extends Fragment {
         lstAll = (ListView) view.findViewById(R.id.lstAllOrderList);
         lstAllSummary = (ListView) view.findViewById(R.id.lstAllOrderListSummary);
 
+        // Load OrderList and OrderItemSummaryList
+        LoadListOrders();
+        LoadListOrderDetailItemSummary();
+
         Button btnGetResult = (Button) view.findViewById(R.id.btnGetOrder);
         btnGetResult.setOnClickListener(lbtnGetOrderDetail);
 
@@ -159,39 +163,7 @@ public class AllFragment extends Fragment {
 
             if (ProceedToGet) {
                 try {
-                    ArrayList<clsParameters> lstParameters = new ArrayList<>();
-                    clsParameters objParam = new clsParameters();
-                    objParam.ParameterName = "UserId";
-                    objParam.ParameterValue = lUserId;
-                    lstParameters.add(objParam);
-
-                    objParam = new clsParameters();
-                    objParam.ParameterName = "FilterBy";
-                    objParam.ParameterValue = spinner.getSelectedItem().toString();
-                    lstParameters.add(objParam);
-
-                    objParam = new clsParameters();
-                    objParam.ParameterName = "FilterDate";
-                    objParam.ParameterValue = edAsOnDate.getText().toString();
-                    lstParameters.add(objParam);
-
-                    String lMethodName = "GetOrdersByParticular";
-                    jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
-
-                   ltxtAllNoRecords.setText("");
-
-                    if (jsonString.equals("0")) {
-                        ltxtAllNoRecords.setText("No records found!");
-                    } else {
-                       // ltxtAllNoRecords.setText("records found!");
-                        SimpleAdapter simpleAdapter = new SimpleAdapter(getActivity(), JSONOrder.newInstance().GetJSONOrderList(jsonString),
-                                R.layout.orderrow, new String[]{"OrderId", "OrderDetail", "DeliveryDate", "Status"},
-                                new int[]{R.id.txtOrderRowId, R.id.txtOrderRowDetail, R.id.txtOrderRowDeliveryDate,
-                                        R.id.txtOrderRowStatus});
-
-                        lstAll.setAdapter(simpleAdapter);
-                    }
-
+                    LoadListOrders();
                     LoadListOrderDetailItemSummary();
                 } catch (Exception e) {
                     Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
@@ -220,6 +192,46 @@ public class AllFragment extends Fragment {
             datePickerDialog.show();
         }
     };
+
+    private  void  LoadListOrders()
+    {
+        try {
+            ArrayList<clsParameters> lstParameters = new ArrayList<>();
+            clsParameters objParam = new clsParameters();
+            objParam.ParameterName = "UserId";
+            objParam.ParameterValue = lUserId;
+            lstParameters.add(objParam);
+
+            objParam = new clsParameters();
+            objParam.ParameterName = "FilterBy";
+            objParam.ParameterValue = spinner.getSelectedItem().toString();
+            lstParameters.add(objParam);
+
+            objParam = new clsParameters();
+            objParam.ParameterName = "FilterDate";
+            objParam.ParameterValue = edAsOnDate.getText().toString();
+            lstParameters.add(objParam);
+
+            String lMethodName = "GetOrdersByParticular";
+            jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
+
+            ltxtAllNoRecords.setText("");
+
+            if (jsonString.equals("0")) {
+                ltxtAllNoRecords.setText("No records found!");
+            } else {
+                // ltxtAllNoRecords.setText("records found!");
+                SimpleAdapter simpleAdapter = new SimpleAdapter(getActivity(), JSONOrder.newInstance().GetJSONOrderList(jsonString),
+                        R.layout.orderrow, new String[]{"OrderId", "OrderDetail", "DeliveryDate", "Status"},
+                        new int[]{R.id.txtOrderRowId, R.id.txtOrderRowDetail, R.id.txtOrderRowDeliveryDate,
+                                R.id.txtOrderRowStatus});
+
+                lstAll.setAdapter(simpleAdapter);
+            }
+        } catch(Exception e) {
+            throw e;
+        }
+    }
 
     private void LoadListOrderDetailItemSummary()
     {
