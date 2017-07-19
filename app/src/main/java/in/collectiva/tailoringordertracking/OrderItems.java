@@ -128,7 +128,7 @@ public class OrderItems extends AppCompatActivity {
             sessionOrder.clearOrderDetail();
 
             //Redirect to Order Entry Page
-            startActivity(new Intent(OrderItems.this, Order.class));
+            startActivity(new Intent(OrderItems.this, OrderEntry.class));
         }
     };
 
