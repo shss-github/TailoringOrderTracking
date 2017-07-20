@@ -60,7 +60,7 @@
                 android:value=".HomeMenu" />
         </activity>
         <activity android:name=".LogoutActivity" />
-        <activity android:name=".update_user" />
+        <activity android:name=".UpdateUser" />
         <activity
             android:name=".Order"
             android:label="@string/title_activity_order"
