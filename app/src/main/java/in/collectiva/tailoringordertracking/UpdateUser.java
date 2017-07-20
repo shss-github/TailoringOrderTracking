@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.telephony.gsm.GsmCellLocation;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -101,7 +102,7 @@ public class UpdateUser extends AppCompatActivity {
             objParam.ParameterValue = lName;
             lstParameters.add(objParam);
 
-            String lMethodName = "UpdateUserByID";
+            String lMethodName = "UpdateUserById";
             String resultData = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
             if (resultData.equals("true")) {
@@ -110,6 +111,8 @@ public class UpdateUser extends AppCompatActivity {
                 Toast.makeText(UpdateUser.this, "User Detail Not Updated!", Toast.LENGTH_SHORT).show();
             }
             LoadUserDetails();
+
+            startActivity(new Intent(UpdateUser.this, HomeMenu.class));
         }
     };
 
@@ -133,7 +136,7 @@ public class UpdateUser extends AppCompatActivity {
         objParam.ParameterValue = UserID;
         lstParameters.add(objParam);
 
-        String lMethodName = "GetUserByID";
+        String lMethodName = "GetUserById";
         String resultData = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
         if (resultData.equals("0")) {
@@ -162,8 +165,6 @@ public class UpdateUser extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-            startActivity(new Intent(UpdateUser.this, HomeMenu.class));
         }
     }
 

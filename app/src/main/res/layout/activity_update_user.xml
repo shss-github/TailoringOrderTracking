@@ -15,19 +15,6 @@
         android:layout_margin="10dp" >
 
         <TextView
-            android:id="@+id/textShopName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Shop Name"/>
-
-        <EditText
-            android:id="@+id/editShopName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-        <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,6 +22,19 @@
 
         <EditText
             android:id="@+id/editContactPerson"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textShopName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Shop Name"/>
+
+        <EditText
+            android:id="@+id/editShopName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
