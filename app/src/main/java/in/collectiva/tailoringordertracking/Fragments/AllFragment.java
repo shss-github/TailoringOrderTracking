@@ -261,7 +261,7 @@ public class AllFragment extends Fragment {
             if (jsonString.equals("0")) {
                 ltxtAllNoRecords.setText("No records found!");
             } else {
-                Log.d("jsonString",jsonString);
+                //Log.d("jsonString",jsonString);
                 SimpleAdapter simpleAdapterItemSummary = new SimpleAdapter(getActivity(), JSONOrderItemSummary.newInstance().GetJSONOrderItemSummaryList(jsonString),
                         R.layout.order_item_summary_row, new String[]{"OrderItemName", "OrderNoOfQty"},
                         new int[]{R.id.txtOrderItemSummaryRowItemName, R.id.txtOrderItemSummaryRowNoOfQty});

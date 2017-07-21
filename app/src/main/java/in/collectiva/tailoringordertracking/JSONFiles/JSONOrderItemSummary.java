@@ -81,7 +81,6 @@ public class JSONOrderItemSummary {
             //lOrderItemSummaryMap.put("OrderItemName", lSerialNo + ". " + OrderItemName);
             lOrderItemSummaryMap.put("OrderItemName", OrderItemName);
             lOrderItemSummaryMap.put("OrderNoOfQty", OrderNoOfQty);
-            Log.d("ITemName", OrderItemName);
         } catch (JSONException e) {
             e.printStackTrace();
         }
