@@ -16,11 +16,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import in.collectiva.tailoringordertracking.AddOrderItems;
 import in.collectiva.tailoringordertracking.CommonFunction.CRUDProcess;
 import in.collectiva.tailoringordertracking.CommonFunction.SessionManagement;
 import in.collectiva.tailoringordertracking.Item;
@@ -31,15 +35,21 @@ import in.collectiva.tailoringordertracking.cConstant.clsParameters;
 
 public class NewOrderItems extends DialogFragment {
 
+    private Spinner lsprNewOrderItemName;
+    private TextView ltxtNewOrderId;
+
     private EditText ledtNewOrderItemRate;
     private EditText ledtNewOrderItemQty;
     private EditText ledtNewOrderItemAmount;
+
     private Button lbtnNewOrderItemSave;
     private Button lbtnNewOrderItemClose;
 
     // Session Manager Class
     SessionManagement session;
     double lRate = 0.00;
+
+    private static final String lOrderId = "OrderId";
 
     private String jsonString;
     private static final String NAMESPACE = "http://ws.collectiva.in/";
@@ -53,10 +63,10 @@ public class NewOrderItems extends DialogFragment {
         // Required empty public constructor
     }
 
-    public static NewOrderItems newInstance(String title) {
+    public static NewOrderItems newInstance(String OrderId) {
         NewOrderItems fragment = new NewOrderItems();
         Bundle args = new Bundle();
-        args.putString("title", title);
+        args.putString(lOrderId, OrderId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -89,6 +99,8 @@ public class NewOrderItems extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        ltxtNewOrderId = (TextView) view.findViewById(R.id.txtNewOrderId);
+
         ledtNewOrderItemRate = (EditText) view.findViewById(R.id.edtNewOrderItemRate);
         ledtNewOrderItemQty = (EditText) view.findViewById(R.id.edtNewOrderItemQty);
         ledtNewOrderItemAmount = (EditText) view.findViewById(R.id.edtNewOrderItemAmount);
@@ -98,10 +110,12 @@ public class NewOrderItems extends DialogFragment {
         lbtnNewOrderItemSave.setOnClickListener(lbtnNewOrderItemSaveListener);
         lbtnNewOrderItemClose.setOnClickListener(lbtnNewOrderItemCloseListener);
 
-        Spinner lspinner = (Spinner) view.findViewById(R.id.sprNewOrderItemName);
-        BindSpinner(lspinner);
+        ltxtNewOrderId.setText(getArguments().getString(lOrderId));
 
-        lspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        lsprNewOrderItemName = (Spinner) view.findViewById(R.id.sprNewOrderItemName);
+        BindSpinner(lsprNewOrderItemName);
+
+        lsprNewOrderItemName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 // Calculate Order amount
@@ -140,29 +154,64 @@ public class NewOrderItems extends DialogFragment {
         });
 
         getDialog().setTitle("Add Order Item");
-        lspinner.requestFocus();
+        lsprNewOrderItemName.requestFocus();
     }
 
     private View.OnClickListener lbtnNewOrderItemSaveListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
             boolean ProceedToSave = true;
             if (ledtNewOrderItemQty.getText().toString().trim().equals("")) {
                 ProceedToSave = false;
                 ledtNewOrderItemQty.setError("Quantity is required!");
             }
             try {
-                if(ProceedToSave) {
+                if(ProceedToSave)
+                {
+                    // Calculate Order amount
+                    HashMap<String, String> litem = (HashMap<String, String>)lsprNewOrderItemName.getSelectedItem();
 
+                    ArrayList lstParameters = new ArrayList<>();
+                    clsParameters objParam = new clsParameters();
+                    objParam.ParameterName = "OrderId";
+                    objParam.ParameterValue = ltxtNewOrderId.getText().toString();
+                    lstParameters.add(objParam);
 
+                    objParam = new clsParameters();
+                    objParam.ParameterName = "OrderDetailId";
+                    objParam.ParameterValue = "0";
+                    lstParameters.add(objParam);
+
+                    objParam = new clsParameters();
+                    objParam.ParameterName = "ItemId";
+                    objParam.ParameterValue = litem.get("ItemId");
+                    lstParameters.add(objParam);
+
+                    objParam = new clsParameters();
+                    objParam.ParameterName = "Qty";
+                    objParam.ParameterValue = ledtNewOrderItemQty.getText().toString();
+                    lstParameters.add(objParam);
+
+                    objParam = new clsParameters();
+                    objParam.ParameterName = "Rate";
+                    objParam.ParameterValue = ledtNewOrderItemRate.getText().toString();
+                    lstParameters.add(objParam);
+
+                    objParam = new clsParameters();
+                    objParam.ParameterName = "Amount";
+                    objParam.ParameterValue = ledtNewOrderItemAmount.getText().toString();
+                    lstParameters.add(objParam);
+
+                    String lMethodName = "SaveOrderDetail";
+                    String resultData = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
                     Toast.makeText(getActivity().getApplicationContext(), "Successfully Saved!", Toast.LENGTH_LONG).show();
-
                     NewOrderItems.this.getDialog().dismiss();
 
                     //Refresh the Grid in the Parent
-                    /*Item activity = (Item) getActivity();
-                    activity.BindListView();*/
+                    AddOrderItems activity = (AddOrderItems) getActivity();
+                    activity.BindListItem(ltxtNewOrderId.getText().toString());
                 }else {
                     //NewOrderItems.this.getDialog().cancel();
                 }

@@ -17,6 +17,8 @@ public class clsOrder
     public String MobileNo;
     public int StatusId;
     public String Status;
+    public double TotalAmount;
+    public int TotalQty;
 
     public clsOrder(){
         super();

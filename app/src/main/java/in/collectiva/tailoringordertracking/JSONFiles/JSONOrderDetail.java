@@ -83,7 +83,7 @@ public class JSONOrderDetail {
             lOrderMap.put("OrderId", OrderId);
             lOrderMap.put("OrderDetailId", OrderDetailId);
             lOrderMap.put("ItemId", ItemId);
-            lOrderMap.put("ItemName", ItemName);
+            lOrderMap.put("ItemName", lSerialNo + ". " + ItemName);
             lOrderMap.put("Qty", Qty);
             lOrderMap.put("Rate", Rate);
             lOrderMap.put("Amount", Amount);

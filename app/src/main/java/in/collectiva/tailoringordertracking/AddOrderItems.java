@@ -22,6 +22,7 @@ import in.collectiva.tailoringordertracking.Fragments.ModifyOrderItems;
 import in.collectiva.tailoringordertracking.Fragments.NewOrderItems;
 import in.collectiva.tailoringordertracking.JSONFiles.JSONItems;
 import in.collectiva.tailoringordertracking.JSONFiles.JSONOrder;
+import in.collectiva.tailoringordertracking.JSONFiles.JSONOrderDetail;
 import in.collectiva.tailoringordertracking.cConstant.clsOrder;
 import in.collectiva.tailoringordertracking.cConstant.clsParameters;
 
@@ -39,6 +40,8 @@ public class AddOrderItems extends AppCompatActivity {
     SessionManagement session;
     SessionOrderDetail sessionOrder;
 
+    private TextView ltxtAddOrderItemsOrderId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +54,7 @@ public class AddOrderItems extends AppCompatActivity {
         sessionOrder = new SessionOrderDetail(getApplicationContext());
         sessionOrder.clearOrderDetail();
 
-        TextView ltxtAddOrderItemsOrderId = ((TextView) findViewById(R.id.txtAddOrderItemsOrderId));
+        ltxtAddOrderItemsOrderId = ((TextView) findViewById(R.id.txtAddOrderItemsOrderId));
         String lOrderId = getIntent().getStringExtra("CURRENT_ORDER_ID");
         ltxtAddOrderItemsOrderId.setText(lOrderId);
 
@@ -67,6 +70,7 @@ public class AddOrderItems extends AppCompatActivity {
         TextView ltxtAddOrderItemsDesc1 = ((TextView) findViewById(R.id.txtAddOrderItemsDesc1));
         TextView ltxtAddOrderItemsDesc2 = ((TextView) findViewById(R.id.txtAddOrderItemsDesc2));
         TextView ltxtAddOrderItemsDesc3 = ((TextView) findViewById(R.id.txtAddOrderItemsDesc3));
+        TextView ltxtAddOrderItemsDesc4 = ((TextView) findViewById(R.id.txtAddOrderItemsDesc4));
 
         // get user data from session
         HashMap<String, String> user = session.getUserDetails();
@@ -96,12 +100,13 @@ public class AddOrderItems extends AppCompatActivity {
             ltxtAddOrderItemsDesc1.setText(itm.OrderDetail);
             ltxtAddOrderItemsDesc2.setText(itm.DeliveryDate);
             ltxtAddOrderItemsDesc3.setText(itm.Status);
+            ltxtAddOrderItemsDesc4.setText("Total : " +itm.TotalQty + " qty Rs. " + itm.TotalAmount);
 
             itm = null;
         }
     }
 
-    private void BindListItem(String lOrderId)
+    public void BindListItem(String lOrderId)
     {
         ArrayList<clsParameters> lstParameters = new ArrayList<>();
         clsParameters objParam = new clsParameters();
@@ -119,9 +124,11 @@ public class AddOrderItems extends AppCompatActivity {
             ltxtAddOrderItemsNoRecords.setText("No records found!");
         }
         else {
-            SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONItems.newInstance().GetJSONItemList(jsonString),
-                    R.layout.order_item_row, new String[] {"ItemId", "ItemName", "Amount"},
-                    new int[] {R.id.txtOrderItemId, R.id.txtOrderItemName, R.id.txtOrderItemRate});
+            SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONOrderDetail.newInstance().GetJSONOrderDetailList(jsonString),
+                    R.layout.order_detail_row, new String[] {"OrderDetailId", "OrderId",
+                    "ItemName", "OrderDetailDesc1", "OrderDetailDesc2"},
+                    new int[] {R.id.txtOrderItemDetailId, R.id.txtOrderItemDetailOrderId, R.id.txtItemName,
+                            R.id.txtOrderDetailDesc1, R.id.txtOrderDetailDesc2});
 
             ListView lstAddOrderItems = (ListView) findViewById(R.id.lstAddOrderItems);
             lstAddOrderItems.setAdapter(simpleAdapter);
@@ -130,7 +137,7 @@ public class AddOrderItems extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     // selected item
-                    String selected = ((TextView) view.findViewById(R.id.txtOrderItemId)).getText().toString();
+                    String selected = ((TextView) view.findViewById(R.id.txtOrderItemDetailId)).getText().toString();
                     //showAlertDialog();
                     showEditAlertDialog(selected);
 
@@ -142,19 +149,20 @@ public class AddOrderItems extends AppCompatActivity {
     private View.OnClickListener lbtnAddOrderItemsListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-        showAlertDialog();
+            String selected = ltxtAddOrderItemsOrderId.getText().toString(); //((TextView) v.findViewById(R.id.txtAddOrderItemsOrderId)).getText().toString();
+            showAlertDialog(selected);
         }
     };
 
-    private void showEditAlertDialog(String SelectedItemID) {
+    private void showEditAlertDialog(String SelectedOrderDetailID) {
         FragmentManager fm = getSupportFragmentManager();
-        ModifyOrderItems alertDialog = ModifyOrderItems.newInstance(SelectedItemID);
+        ModifyOrderItems alertDialog = ModifyOrderItems.newInstance(SelectedOrderDetailID);
         alertDialog.show(fm, "fragment_modify_order_items");
     }
 
-    private void showAlertDialog() {
+    private void showAlertDialog(String SelectedOrderId) {
         FragmentManager fm = getSupportFragmentManager();
-        NewOrderItems alertDialog = NewOrderItems.newInstance("Add Order Item");
+        NewOrderItems alertDialog = NewOrderItems.newInstance(SelectedOrderId);
         alertDialog.show(fm, "fragment_new_order_items");
     }
 }

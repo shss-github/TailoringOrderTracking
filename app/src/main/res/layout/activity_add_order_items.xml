@@ -51,6 +51,14 @@
                 android:gravity="center_horizontal"
                 android:textSize="@dimen/SmallFontSize" />
 
+            <TextView
+                android:id="@+id/txtAddOrderItemsDesc4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="@dimen/SmallFontSize"
+                android:text="Total Amount Rs.1500.00 for 10 qty" />
+
         </LinearLayout>
 
         <Button
@@ -73,11 +81,24 @@
                 android:layout_margin="5dp"
                 android:dividerHeight="1dp"></ListView>
 
+            <!--<TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="4dp" />
+
+            <View
+                android:layout_width="140dp"
+                android:layout_height="0.7dp"
+                android:background="#6a6a6b"
+                android:layout_gravity="right"
+                android:paddingRight="40dp" />-->
+
             <TextView
                 android:id="@+id/txtAddOrderItemsNoRecords"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center" />
+                android:gravity="center"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </LinearLayout>

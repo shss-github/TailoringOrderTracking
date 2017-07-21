@@ -75,6 +75,8 @@ public class JSONOrder {
         String DeliveryDate = "";
         String MobileNo = "";
         String Name = "", Status = "";
+        double TotalAmount =0.0;
+        int TotalQty = 0;
 
         try {
             OrderId = lOrder.getString("OrderId");
@@ -89,6 +91,8 @@ public class JSONOrder {
             lOrderMap.put("DeliveryDate", "Order #" + OrderNo + " dt. " + ConvertStringToDate(DeliveryDate));
             lOrderMap.put("MobileNo", MobileNo);
             lOrderMap.put("Status", "Status - " + Status);
+            lOrderMap.put("TotalAmount", String.valueOf(TotalAmount));
+            lOrderMap.put("TotalQty", String.valueOf(TotalQty));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -112,6 +116,8 @@ public class JSONOrder {
             obj.Name = lItm.getString("Name");
             obj.OrderNo = lItm.getString("OrderNo");
             obj.MobileNo = lItm.getString("MobileNo");
+            obj.TotalQty = lItm.getInt("TotalQty");
+            obj.TotalAmount = lItm.getDouble("TotalAmount");
 
             obj.OrderDetail = lItm.getString("Name") + " (" + lItm.getString("MobileNo") + ")";
             obj.DeliveryDate = "Order #" + lItm.getString("OrderNo") + " dt. " + ConvertStringToDate(lItm.getString("DeliveryDate"));
