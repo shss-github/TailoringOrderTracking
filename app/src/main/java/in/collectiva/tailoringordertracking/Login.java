@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -13,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import in.collectiva.tailoringordertracking.CommonFunction.CRUDProcess;
 import in.collectiva.tailoringordertracking.CommonFunction.SessionManagement;
@@ -35,6 +37,7 @@ public class Login extends AppCompatActivity {
         public void onClick(View v) {
             EditText ledtMobileNo = (EditText) findViewById(R.id.edt_Login_MobileNo);
             EditText ledtPassword = (EditText) findViewById(R.id.edt_Login_Password);
+            CheckBox lchkKeepMeAsLoggedIn = (CheckBox) findViewById(R.id.chkKeepMeAsLoggedIn);
 
             //Check for Duplication
             ArrayList<clsParameters> lstParameters = new ArrayList<>();
@@ -84,7 +87,7 @@ public class Login extends AppCompatActivity {
                         lName = c.getString("Name");
                         lMobileNo = c.getString("MobileNo");
 
-                        session.createLoginSession(lUserId, lName, lMobileNo);
+                        session.createLoginSession(lUserId, lName, lMobileNo, false);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -101,10 +104,21 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        Button lbtnLoginNow = (Button) findViewById(R.id.btnLoginNow);
+        lbtnLoginNow.setOnClickListener(lbtnLoginNowListener);
+
         // Session Manager
         session = new SessionManagement(getApplicationContext());
 
-        Button lbtnLoginNow = (Button) findViewById(R.id.btnLoginNow);
-        lbtnLoginNow.setOnClickListener(lbtnLoginNowListener);
+        if(session != null) {
+            // get user data from session
+            HashMap<String, String> user = session.getUserDetails();
+
+            // User Id
+            Boolean lKeepMeLoggedIn = Boolean.getBoolean(user.get(SessionManagement.KEY_KEEP_ME_LOGGED_IN));
+            if (lKeepMeLoggedIn) {
+                startActivity(new Intent(Login.this, HomeMenu.class));
+            }
+        }
     }
 }

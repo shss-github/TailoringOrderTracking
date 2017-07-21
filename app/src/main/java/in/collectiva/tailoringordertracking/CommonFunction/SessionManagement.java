@@ -27,6 +27,7 @@ public class SessionManagement {
 
     // All Shared Preferences Keys
     private static final String IS_LOGIN = "IsLoggedIn";
+    public static final String KEY_KEEP_ME_LOGGED_IN = "KeepMeLoggedIn";
 
     // User name (make variable public to access from outside)
     public static final String KEY_NAME = "Name";
@@ -43,7 +44,7 @@ public class SessionManagement {
     /**
      * Create login session
      * */
-    public void createLoginSession(int UserId, String Name, String MobileNo){
+    public void createLoginSession(int UserId, String Name, String MobileNo, Boolean IsKeepMeLoggedIn){
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
 
@@ -55,6 +56,8 @@ public class SessionManagement {
 
         // Storing email in pref
         editor.putString(KEY_MOBILENO, MobileNo);
+
+        editor.putBoolean(KEY_KEEP_ME_LOGGED_IN, IsKeepMeLoggedIn);
 
         // commit changes
         editor.commit();
@@ -96,7 +99,10 @@ public class SessionManagement {
         user.put(KEY_NAME, pref.getString(KEY_NAME, null));
 
         // Mobile NO
-        user.put(KEY_NAME, pref.getString(KEY_NAME, null));
+        user.put(KEY_MOBILENO, pref.getString(KEY_MOBILENO, null));
+
+        // Mobile NO
+        user.put(KEY_KEEP_ME_LOGGED_IN, String.valueOf(pref.getBoolean(KEY_KEEP_ME_LOGGED_IN, Boolean.FALSE)));
 
         // return user
         return user;

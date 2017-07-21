@@ -19,6 +19,7 @@
     <string name="title_activity_order">Order</string>
     <string name="item_dropdown_prompt">Choose an item</string>
     <string name="title_activity_order_items">Order Items</string>
+    <string name="spinner_default_value">Select Item Name</string>
 
     <string-array name="orders_array">
         <item>All</item>

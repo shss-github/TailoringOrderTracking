@@ -106,10 +106,11 @@ public class OrderEntry extends AppCompatActivity {
                     limgOrderEntryRowAddOrderDetail.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            //showAddOrderAlertDialog();
-                            //startActivity(new Intent(OrderEntry.this, OrderItems.class));
+                            /*Intent intent = new Intent(getBaseContext(), OrderItems.class);
+                            intent.putExtra("CURRENT_ORDER_ID", ltxtOrderEntryRowId.getText().toString());
+                            startActivity(intent);*/
 
-                            Intent intent = new Intent(getBaseContext(), OrderItems.class);
+                            Intent intent = new Intent(getBaseContext(), AddOrderItems.class);
                             intent.putExtra("CURRENT_ORDER_ID", ltxtOrderEntryRowId.getText().toString());
                             startActivity(intent);
                         }

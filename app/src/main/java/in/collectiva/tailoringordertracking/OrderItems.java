@@ -30,6 +30,7 @@ import in.collectiva.tailoringordertracking.CommonFunction.SessionManagement;
 import in.collectiva.tailoringordertracking.CommonFunction.SessionOrderDetail;
 import in.collectiva.tailoringordertracking.JSONFiles.JSONItems;
 import in.collectiva.tailoringordertracking.JSONFiles.JSONOrder;
+import in.collectiva.tailoringordertracking.JSONFiles.JSONOrderDetail;
 import in.collectiva.tailoringordertracking.cConstant.clsOrder;
 import in.collectiva.tailoringordertracking.cConstant.clsOrderDetail;
 import in.collectiva.tailoringordertracking.cConstant.clsParameters;
@@ -80,7 +81,7 @@ public class OrderItems extends AppCompatActivity {
         lbtnOrderItemsProceed.setOnClickListener(lbtnOrderItemsProceedListener);
 
         BindOrderDetails(lOrderId);
-        BindListItem();
+        BindListItem(lOrderId);
     }
 
     private View.OnClickListener lbtnOrderItemsProceedListener = new View.OnClickListener() {
@@ -173,7 +174,7 @@ public class OrderItems extends AppCompatActivity {
         }
     }
 
-    private void BindListItem()
+    private void BindListItem(String lOrderId)
     {
         // get user data from session
         HashMap<String, String> user = session.getUserDetails();
@@ -182,16 +183,11 @@ public class OrderItems extends AppCompatActivity {
 
         ArrayList<clsParameters> lstParameters = new ArrayList<>();
         clsParameters objParam = new clsParameters();
-        objParam.ParameterName = "UserId";
-        objParam.ParameterValue = lUserId;
+        objParam.ParameterName = "OrderId";
+        objParam.ParameterValue = lOrderId;
         lstParameters.add(objParam);
 
-        objParam = new clsParameters();
-        objParam.ParameterName = "ItemId";
-        objParam.ParameterValue = "0";
-        lstParameters.add(objParam);
-
-        String lMethodName = "GetItems";
+        String lMethodName = "GetOrderDetailByOrderId";
         jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
         TextView ltxtOrderItemsNoRecords = (TextView) findViewById(R.id.txtOrderItemsNoRecords);
@@ -205,9 +201,11 @@ public class OrderItems extends AppCompatActivity {
             lbtnOrderItemsProceed.setVisibility(View.GONE);
         }
         else {
-            SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONItems.newInstance().GetJSONItemList(jsonString),
-                    R.layout.order_item_row, new String[] {"ItemId", "ItemName", "Amount"},
-                    new int[] {R.id.txtOrderItemId, R.id.txtOrderItemName, R.id.txtOrderItemRate});
+            SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONOrderDetail.newInstance().GetJSONOrderDetailList(jsonString),
+                    R.layout.order_detail_row, new String[] {"OrderDetailId", "OrderId",
+                            "ItemName", "OrderDetailDesc1", "OrderDetailDesc2"},
+                    new int[] {R.id.txtOrderItemDetailId, R.id.txtOrderItemDetailOrderId, R.id.txtItemName,
+                            R.id.txtOrderDetailDesc1, R.id.txtOrderDetailDesc2});
 
             ListView lstOrderItems = (ListView) findViewById(R.id.lstOrderItems);
             lstOrderItems.setAdapter(simpleAdapter);
@@ -310,8 +308,6 @@ public class OrderItems extends AppCompatActivity {
             });
         }
     };
-
-
 }
 
 

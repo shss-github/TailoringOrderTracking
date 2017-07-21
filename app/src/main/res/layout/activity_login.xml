@@ -40,6 +40,11 @@
             android:ems="10"
             android:inputType="textPassword" />
 
+        <CheckBox
+            android:id="@+id/chkKeepMeAsLoggedIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Keep me as logged in?" />
 
         <Button
             android:id="@+id/btnLoginNow"

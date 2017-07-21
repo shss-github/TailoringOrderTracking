@@ -1,0 +1,105 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="in.collectiva.tailoringordertracking.Fragments.NewOrderItems">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp"
+        android:layout_margin="10dp" >
+
+        <TextView
+            android:id="@+id/txtNewOrderItemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Item Name" />
+
+        <Spinner
+            android:id="@+id/sprNewOrderItemName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:prompt="@string/spinner_default_value"
+            android:textSize="15dp"
+            tools:ignore="SpUsage" />
+
+        <!--<Spinner
+            android:id="@+id/sprNewOrderItemName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:textSize="15dp"
+            tools:ignore="SpUsage" />-->
+
+        <!--<EditText
+            android:id="@+id/edtNewOrderItemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />-->
+
+        <TextView
+            android:id="@+id/txtNewOrderItemRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rate" />
+
+        <EditText
+            android:id="@+id/edtNewOrderItemRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rs. 500"
+            android:enabled="false" />
+
+        <TextView
+            android:id="@+id/txtNewOrderItemQty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quantity" />
+
+        <EditText
+            android:id="@+id/edtNewOrderItemQty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:id="@+id/txtNewOrderItemAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Amount" />
+
+        <EditText
+            android:id="@+id/edtNewOrderItemAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rs. 1000"
+            android:enabled="false" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnNewOrderItemSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Save" />
+
+            <Button
+                android:id="@+id/btnNewOrderItemClose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Close" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

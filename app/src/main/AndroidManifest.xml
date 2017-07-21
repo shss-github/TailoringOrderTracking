@@ -63,22 +63,35 @@
         <activity android:name=".update_user" />
         <activity
             android:name=".Order"
-            android:label="@string/title_activity_order"
+            android:label="Order"
             android:parentActivityName=".HomeMenu">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeMenu" />
         </activity>
-        <activity android:name=".OrderEntry" />
+        <activity android:name=".OrderEntry"
+            android:label="Order List"
+            android:parentActivityName=".HomeMenu">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeMenu" />
+        </activity>
         <activity
             android:name=".OrderItems"
-            android:label="@string/title_activity_order_items"
+            android:label="Order Items"
             android:parentActivityName=".Order">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Order" />
         </activity>
-        <activity android:name=".DeliveredList"></activity>
+        <activity android:name=".DeliveredList" />
+        <activity android:name=".AddOrderItems"
+            android:label="Order Items"
+            android:parentActivityName=".OrderEntry">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".OrderEntry" />
+        </activity>
     </application>
 
 </manifest>

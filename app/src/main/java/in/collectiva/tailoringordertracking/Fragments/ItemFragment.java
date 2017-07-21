@@ -101,42 +101,44 @@ public class ItemFragment extends DialogFragment {
             }
 
             try {
-                // get user data from session
-                HashMap<String, String> user = session.getUserDetails();
-                String lUserId = user.get(SessionManagement.KEY_USERID);
+                if(ProceedToSave) {
+                    // get user data from session
+                    HashMap<String, String> user = session.getUserDetails();
+                    String lUserId = user.get(SessionManagement.KEY_USERID);
 
-                //Here Creating List for the Parameters, which we need to pass to the method.
-                ArrayList lstParameters = new ArrayList<>();
-                clsParameters objParam = new clsParameters();
-                objParam.ParameterName = "ItemId";
-                objParam.ParameterValue = "0";
-                lstParameters.add(objParam);
+                    //Here Creating List for the Parameters, which we need to pass to the method.
+                    ArrayList lstParameters = new ArrayList<>();
+                    clsParameters objParam = new clsParameters();
+                    objParam.ParameterName = "ItemId";
+                    objParam.ParameterValue = "0";
+                    lstParameters.add(objParam);
 
-                objParam = new clsParameters();
-                objParam.ParameterName = "ItemName";
-                objParam.ParameterValue = ledt_ItemName.getText().toString();
-                lstParameters.add(objParam);
+                    objParam = new clsParameters();
+                    objParam.ParameterName = "ItemName";
+                    objParam.ParameterValue = ledt_ItemName.getText().toString();
+                    lstParameters.add(objParam);
 
-                objParam = new clsParameters();
-                objParam.ParameterName = "Amount";
-                objParam.ParameterValue = ledt_ItemAmount.getText().toString();
-                lstParameters.add(objParam);
+                    objParam = new clsParameters();
+                    objParam.ParameterName = "Amount";
+                    objParam.ParameterValue = ledt_ItemAmount.getText().toString();
+                    lstParameters.add(objParam);
 
-                objParam = new clsParameters();
-                objParam.ParameterName = "UserId";
-                objParam.ParameterValue = lUserId;
-                lstParameters.add(objParam);
+                    objParam = new clsParameters();
+                    objParam.ParameterName = "UserId";
+                    objParam.ParameterValue = lUserId;
+                    lstParameters.add(objParam);
 
-                String lMethodName = "InsertItem";
-                String resultData = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
+                    String lMethodName = "InsertItem";
+                    String resultData = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
-                Toast.makeText(getActivity().getApplicationContext(), "Successfully Saved!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Successfully Saved!", Toast.LENGTH_LONG).show();
 
-                ItemFragment.this.getDialog().dismiss();
+                    ItemFragment.this.getDialog().dismiss();
 
-                //Refresh the Grid in the Parent
-                Item activity = (Item) getActivity();
-                activity.BindListView();
+                    //Refresh the Grid in the Parent
+                    Item activity = (Item) getActivity();
+                    activity.BindListView();
+                }
             } catch (Exception e) {
                 Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
             }
