@@ -244,7 +244,39 @@ public class EditOrderItems extends DialogFragment {
             if (ledtModifyOrderItemQty.getText().toString().trim().equals("")) {
                 ProceedToSave = false;
                 ledtModifyOrderItemQty.setError("Quantity is required!");
+            }else {
+                // Calculate Order amount
+                HashMap<String, String> litem1 = (HashMap<String, String>)lsprModifyOrderItemName.getSelectedItem();
+
+                ArrayList lstParameters1 = new ArrayList<>();
+                clsParameters objParam1 = new clsParameters();
+                objParam1.ParameterName = "OrderId";
+                objParam1.ParameterValue = ltxtModifyOrderItemOrderId.getText().toString();
+                lstParameters1.add(objParam1);
+
+                objParam1 = new clsParameters();
+                objParam1.ParameterName = "OrderDetailId";
+                objParam1.ParameterValue = ltxtModifyOrderItemId.getText().toString();
+                lstParameters1.add(objParam1);
+
+                objParam1 = new clsParameters();
+                objParam1.ParameterName = "ItemId";
+                objParam1.ParameterValue = litem1.get("ItemId");
+                lstParameters1.add(objParam1);
+
+                String lMethodName1 = "CheckDuplicateItemInOrderDetail";
+                String resultData1 = objCRUD.GetScalar(NAMESPACE, lMethodName1, REQURL, SOAP_ACTION + lMethodName1, lstParameters1);
+                ProceedToSave = Boolean.parseBoolean(resultData1);
+
+                if(ProceedToSave){
+                    ProceedToSave = false;
+                    Toast.makeText(getActivity(), "Item Name already exists.", Toast.LENGTH_SHORT).show();
+                } else {
+                    ProceedToSave = true;
+                    //Toast.makeText(getActivity(), "Item Name not exists.", Toast.LENGTH_SHORT).show();
+                }
             }
+
             try {
                 if(ProceedToSave)
                 {
