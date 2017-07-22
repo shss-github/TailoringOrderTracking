@@ -103,8 +103,45 @@ public class UpdateUser extends AppCompatActivity {
             if (gps.canGetLocation()) {
                 double latitude = gps.getLatitude();
                 double longitude = gps.getLongitude();
-               // \n is for new line
-                Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+
+                String strlatitude = Double.toString(latitude);
+                String strlongitude = Double.toString(longitude);
+                // \n is for new line
+                lTxtLatitude.setText(strlatitude);
+                lTxtLongitude.setText(strlongitude);
+
+                //Get User Detail From Session
+                HashMap<String, String> user = session.getUserDetails();
+                //Get User_Id
+                String UserID = user.get(SessionManagement.KEY_USERID);
+
+                ArrayList<clsParameters> lstParameters = new ArrayList<>();
+                clsParameters objParam = new clsParameters();
+                objParam.ParameterName = "UserId";
+                objParam.ParameterValue = UserID;
+                lstParameters.add(objParam);
+
+                objParam = new clsParameters();
+                objParam.ParameterName = "Latitude";
+                objParam.ParameterValue = strlatitude;
+                lstParameters.add(objParam);
+
+                objParam = new clsParameters();
+                objParam.ParameterName = "Longitude";
+                objParam.ParameterValue = strlongitude;
+                lstParameters.add(objParam);
+
+                String lMethodName = "UpdateUserLocation";
+                String resultData = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
+
+                if (resultData.equals("true")) {
+                    Toast.makeText(UpdateUser.this, "Location Updated Successfully!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(UpdateUser.this, "Location Not Updated!", Toast.LENGTH_SHORT).show();
+                }
+                LoadUserDetails();
+
+                //Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
             } else {
                 // can't get location
                 // GPS or Network is not enabled
@@ -175,7 +212,7 @@ public class UpdateUser extends AppCompatActivity {
         if (resultData.equals("0")) {
             Toast.makeText(UpdateUser.this, "Detail Not Found!", Toast.LENGTH_SHORT).show();
         } else {
-            String lName, lShopName, lMobile;
+            String lName, lShopName, lMobile, lLatitude, lLongitude;
             int lUserId;
             try {
                 //Convert the JSon String to JSonObject.
@@ -191,9 +228,13 @@ public class UpdateUser extends AppCompatActivity {
                 lName = c.getString("Name");
                 lMobile = c.getString("MobileNo");
                 lShopName = c.getString("ShopName");
+                lLatitude = c.getString("Latitude");
+                lLongitude = c.getString("Longitude");
 
                 lEditName.setText(lName);
                 lEditShopName.setText(lShopName);
+                lTxtLatitude.setText(lLatitude);
+                lTxtLongitude.setText(lLongitude);
 
             } catch (JSONException e) {
                 e.printStackTrace();
