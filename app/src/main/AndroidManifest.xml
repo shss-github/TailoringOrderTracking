@@ -98,6 +98,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".OrderEntry" />
         </activity>
+        <activity android:name=".ImportItems"></activity>
     </application>
 
 </manifest>

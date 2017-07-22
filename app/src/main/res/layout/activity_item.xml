@@ -16,7 +16,15 @@
             android:id="@+id/btnAddItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Items" android:textSize="@dimen/NormalFontSize" />
+            android:text="Add Items"
+            android:textSize="@dimen/NormalFontSize" />
+
+        <Button
+            android:id="@+id/btnImportItems"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Import Items"
+            android:textSize="@dimen/NormalFontSize" />
 
         <ListView
             android:id="@+id/lstItems"

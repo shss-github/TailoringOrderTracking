@@ -62,6 +62,9 @@ public class Item extends AppCompatActivity {
         Button lbtnAddItem = (Button) findViewById(R.id.btnAddItem);
         lbtnAddItem.setOnClickListener(lbtnAddItemListener);
 
+        Button lbtnImportItems = (Button) findViewById(R.id.btnImportItems);
+        lbtnImportItems.setOnClickListener(lbtnImportItemsListener);
+
         //To Enable the Network Permission in the Application
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -126,6 +129,14 @@ public class Item extends AppCompatActivity {
         }
     };
 
+    private View.OnClickListener lbtnImportItemsListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            startActivity(new Intent(Item.this, ImportItems.class));
+        }
+    };
+
+
     private void showEditAlertDialog(String SelectedItemID) {
         FragmentManager fm = getSupportFragmentManager();
         EditItem alertDialog = EditItem.newInstance(SelectedItemID);
@@ -137,13 +148,6 @@ public class Item extends AppCompatActivity {
         ItemFragment alertDialog = ItemFragment.newInstance("Add Item");
         alertDialog.show(fm, "fragment_item");
     }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }*/
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
