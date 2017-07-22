@@ -97,15 +97,13 @@ public class UpdateUser extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             // create class object
-            gps = new GPSTracker(UpdateUser.this);
+            gps = new GPSTracker(getApplicationContext(), UpdateUser.this);
 
             // check if GPS enabled
             if (gps.canGetLocation()) {
-
                 double latitude = gps.getLatitude();
                 double longitude = gps.getLongitude();
-
-                // \n is for new line
+               // \n is for new line
                 Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
             } else {
                 // can't get location
