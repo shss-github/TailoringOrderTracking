@@ -103,7 +103,13 @@
             android:text="My Location" />
 
         <TextView
-            android:id="@+id/textLatLangitude"
+            android:id="@+id/textLatitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textLangitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="" />

@@ -1,16 +1,27 @@
 package in.collectiva.tailoringordertracking;
 
+import android.Manifest;
+import android.accessibilityservice.AccessibilityService;
+import android.app.Service;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.StrictMode;
+import android.provider.Settings;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.telephony.gsm.GsmCellLocation;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,10 +32,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import in.collectiva.tailoringordertracking.CommonFunction.CRUDProcess;
+import in.collectiva.tailoringordertracking.CommonFunction.GPSTracker;
 import in.collectiva.tailoringordertracking.CommonFunction.SessionManagement;
 import in.collectiva.tailoringordertracking.cConstant.clsParameters;
 
@@ -32,7 +45,8 @@ public class UpdateUser extends AppCompatActivity {
 
     private EditText lEditName;
     private EditText lEditShopName;
-    private TextView lTxtLatLang;
+    private TextView lTxtLatitude;
+    private TextView lTxtLongitude;
     private String jsonString;
     private static final String NAMESPACE = "http://ws.collectiva.in/";
     private static final String REQURL = "http://ws.collectiva.in/AndroidTailoringService.svc";
@@ -43,6 +57,9 @@ public class UpdateUser extends AppCompatActivity {
     // Session Manager Class
     SessionManagement session;
 
+    // GPSTracker class
+    GPSTracker gps;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +67,8 @@ public class UpdateUser extends AppCompatActivity {
 
         lEditName = (EditText) findViewById(R.id.editContactPerson);
         lEditShopName = (EditText) findViewById(R.id.editShopName);
-        lTxtLatLang = (TextView) findViewById(R.id.textLatLangitude);
+        lTxtLatitude = (TextView) findViewById(R.id.textLatitude);
+        lTxtLongitude = (TextView) findViewById(R.id.textLangitude);
         /*EditText lEditAddress1 = (EditText) findViewById(R.id.editAddress1);
         EditText lEditAddress2 = (EditText) findViewById(R.id.editAddress2);
         EditText lEditState = (EditText) findViewById(R.id.editState);
@@ -74,6 +92,29 @@ public class UpdateUser extends AppCompatActivity {
         Button btnChangeLocation = (Button) findViewById(R.id.btnChangeLocation);
         btnChangeLocation.setOnClickListener(lbtnChangeLocation);
     }
+
+    private View.OnClickListener lbtnChangeLocation = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // create class object
+            gps = new GPSTracker(UpdateUser.this);
+
+            // check if GPS enabled
+            if (gps.canGetLocation()) {
+
+                double latitude = gps.getLatitude();
+                double longitude = gps.getLongitude();
+
+                // \n is for new line
+                Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+            } else {
+                // can't get location
+                // GPS or Network is not enabled
+                // Ask user to enable GPS/network in settings
+                gps.showSettingsAlert();
+            }
+        }
+    };
 
     private View.OnClickListener lbtnUpdateDetail = new View.OnClickListener() {
         @Override
@@ -116,12 +157,6 @@ public class UpdateUser extends AppCompatActivity {
         }
     };
 
-    private View.OnClickListener lbtnChangeLocation = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-        }
-    };
 
     public void LoadUserDetails() {
         //Get User Detail From Session
