@@ -34,21 +34,6 @@
             android:textSize="15dp"
             tools:ignore="SpUsage" />
 
-        <!--<Spinner
-            android:id="@+id/sprNewOrderItemName"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textSize="15dp"
-            tools:ignore="SpUsage" />-->
-
-        <!--<EditText
-            android:id="@+id/edtNewOrderItemName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />-->
-
         <TextView
             android:id="@+id/txtNewOrderItemRate"
             android:layout_width="match_parent"
@@ -59,7 +44,6 @@
             android:id="@+id/edtNewOrderItemRate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rs. 500"
             android:enabled="false" />
 
         <TextView
@@ -85,7 +69,6 @@
             android:id="@+id/edtNewOrderItemAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rs. 1000"
             android:enabled="false" />
 
         <LinearLayout
