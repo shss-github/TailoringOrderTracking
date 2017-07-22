@@ -4,8 +4,10 @@
 
     <!-- To Enable the Network Permission in the Application -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature android:name="android.hardware.location.gps" />
 
     <application
         android:allowBackup="true"
@@ -71,7 +73,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeMenu" />
         </activity>
-        <activity android:name=".OrderEntry"
+        <activity
+            android:name=".OrderEntry"
             android:label="Order List"
             android:parentActivityName=".HomeMenu">
             <meta-data
@@ -87,7 +90,8 @@
                 android:value=".Order" />
         </activity>
         <activity android:name=".DeliveredList" />
-        <activity android:name=".AddOrderItems"
+        <activity
+            android:name=".AddOrderItems"
             android:label="Order Items"
             android:parentActivityName=".OrderEntry">
             <meta-data
