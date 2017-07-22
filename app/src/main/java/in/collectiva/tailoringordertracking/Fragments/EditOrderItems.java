@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,11 +26,14 @@ import java.util.HashMap;
 import in.collectiva.tailoringordertracking.AddOrderItems;
 import in.collectiva.tailoringordertracking.CommonFunction.CRUDProcess;
 import in.collectiva.tailoringordertracking.CommonFunction.SessionManagement;
+import in.collectiva.tailoringordertracking.Item;
 import in.collectiva.tailoringordertracking.JSONFiles.JSONItems;
+import in.collectiva.tailoringordertracking.JSONFiles.JSONOrderDetail;
 import in.collectiva.tailoringordertracking.R;
+import in.collectiva.tailoringordertracking.cConstant.clsOrderDetail;
 import in.collectiva.tailoringordertracking.cConstant.clsParameters;
 
-public class ModifyOrderItems extends DialogFragment {
+public class EditOrderItems extends DialogFragment {
     private Spinner lsprModifyOrderItemName;
     private TextView ltxtModifyOrderItemId, ltxtModifyOrderItemOrderId;
 
@@ -38,7 +42,7 @@ public class ModifyOrderItems extends DialogFragment {
     private EditText ledtModifyOrderItemAmount;
 
     private Button lbtnModifyOrderItemSave;
-    private Button lbtnModifyOrderItemClose;
+    private Button lbtnModifyOrderItemDelete;
 
     // Session Manager Class
     SessionManagement session;
@@ -54,16 +58,21 @@ public class ModifyOrderItems extends DialogFragment {
     //Creating Object For the CRUDProcess common class.
     final CRUDProcess objCRUD = new CRUDProcess();
 
-    public ModifyOrderItems() {
+    public EditOrderItems() {
         // Required empty public constructor
     }
 
-    public static ModifyOrderItems newInstance(String SelectedOrderDetailID) {
-        ModifyOrderItems fragment = new ModifyOrderItems();
+    public static EditOrderItems newInstance(String SelectedOrderDetailID) {
+        EditOrderItems fragment = new EditOrderItems();
         Bundle args = new Bundle();
         args.putString(lSelectedOrderDetailID, SelectedOrderDetailID);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -73,44 +82,57 @@ public class ModifyOrderItems extends DialogFragment {
         session = new SessionManagement(getActivity().getApplicationContext());
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new_order_items, container, false);
-    }
-
-    private void calculateAmount() {
-        Integer lQty = 0;
-        double lAmount = 0.00;
-
-        if(ledtModifyOrderItemQty.getText().toString().trim().equals("") != true && lRate > 0.00)
-        {
-            lQty = Integer.parseInt(ledtModifyOrderItemQty.getText().toString());
-            lAmount = (lQty * lRate);
-        }
-
-        ledtModifyOrderItemRate.setText(String.valueOf(lRate));
-        ledtModifyOrderItemAmount.setText(String.valueOf(lAmount));
+        return inflater.inflate(R.layout.fragment_edit_order_items, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-        /*ltxtModifyOrderItemId = (TextView) view.findViewById(R.id.txtModifyOrderItemId);
-        ltxtModifyOrderItemId.setText("Hello World");
+        ltxtModifyOrderItemId = (TextView) view.findViewById(R.id.txtModifyOrderItemId);
         ltxtModifyOrderItemOrderId = (TextView) view.findViewById(R.id.txtModifyOrderItemOrderId);
-        ltxtModifyOrderItemId.setText(getArguments().getString(lSelectedOrderDetailID));
 
         ledtModifyOrderItemRate = (EditText) view.findViewById(R.id.edtModifyOrderItemRate);
         ledtModifyOrderItemQty = (EditText) view.findViewById(R.id.edtModifyOrderItemQty);
         ledtModifyOrderItemAmount = (EditText) view.findViewById(R.id.edtModifyOrderItemAmount);
 
         lbtnModifyOrderItemSave = (Button) view.findViewById(R.id.btnModifyOrderItemSave);
-        lbtnModifyOrderItemClose = (Button) view.findViewById(R.id.btnModifyOrderItemClose);
-        //lbtnModifyOrderItemSave.setOnClickListener(lbtnModifyOrderItemSaveListener);
-        //lbtnModifyOrderItemClose.setOnClickListener(lbtnModifyOrderItemCloseListener);
+        lbtnModifyOrderItemDelete = (Button) view.findViewById(R.id.btnModifyOrderItemDelete);
+        lbtnModifyOrderItemSave.setOnClickListener(lbtnModifyOrderItemSaveListener);
+        lbtnModifyOrderItemDelete.setOnClickListener(lbtnModifyOrderItemDeleteListener);
 
         lsprModifyOrderItemName = (Spinner) view.findViewById(R.id.sprModifyOrderItemName);
         BindSpinner(lsprModifyOrderItemName);
+
+        ltxtModifyOrderItemId.setText(getArguments().getString(lSelectedOrderDetailID));
+
+        // get user data from session
+        HashMap<String, String> user = session.getUserDetails();
+        String lUserId = user.get(SessionManagement.KEY_USERID);
+
+        ArrayList<clsParameters> lstParameters = new ArrayList<>();
+        clsParameters objParam = new clsParameters();
+        objParam.ParameterName = "OrderDetailId";
+        objParam.ParameterValue = ltxtModifyOrderItemId.getText().toString();
+        lstParameters.add(objParam);
+
+        String lMethodName = "GetOrderDetailById";
+        String jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
+
+        clsOrderDetail obj = JSONOrderDetail.newInstance().GetJSONOrderDetail(jsonString);
+
+        ltxtModifyOrderItemOrderId.setText(String.valueOf(obj.OrderId));
+        selectSpinnerValue(lsprModifyOrderItemName, String.valueOf(obj.ItemId));
+        ledtModifyOrderItemQty.setText(String.valueOf(obj.Qty));
+        ledtModifyOrderItemRate.setText(String.valueOf(obj.Rate));
+        ledtModifyOrderItemAmount.setText(String.valueOf(obj.Amount));
+
+        ImageView img = (ImageView) view.findViewById(R.id.imgEditOrderClose);
+        img.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                EditOrderItems.this.getDialog().dismiss();
+            }
+        });
 
         lsprModifyOrderItemName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
@@ -151,7 +173,67 @@ public class ModifyOrderItems extends DialogFragment {
         });
 
         getDialog().setTitle("Add Order Item");
-        lsprModifyOrderItemName.requestFocus();*/
+        lsprModifyOrderItemName.requestFocus();
+    }
+
+    private void selectSpinnerValue(Spinner spinner, String myVal)
+    {
+        int index = 0;
+        for(int i = 0; i < spinner.getCount(); i++){
+            HashMap<String, String> litem = (HashMap<String, String>)spinner.getItemAtPosition(i);
+            if( String.valueOf(litem.get("ItemId")).equals(myVal)){
+                spinner.setSelection(i);
+                break;
+            }
+        }
+    }
+
+    private void calculateAmount() {
+        Integer lQty = 0;
+        double lAmount = 0.00;
+
+        if(ledtModifyOrderItemQty.getText().toString().trim().equals("") != true && lRate > 0.00)
+        {
+            lQty = Integer.parseInt(ledtModifyOrderItemQty.getText().toString());
+            lAmount = (lQty * lRate);
+        }
+
+        ledtModifyOrderItemRate.setText(String.valueOf(lRate));
+        ledtModifyOrderItemAmount.setText(String.valueOf(lAmount));
+    }
+
+    public void BindSpinner(Spinner lspinner)
+    {
+        // get user data from session
+        HashMap<String, String> user = session.getUserDetails();
+
+        // name
+        String lUserId = user.get(SessionManagement.KEY_USERID);
+
+        ArrayList<clsParameters> lstParameters = new ArrayList<>();
+        clsParameters objParam = new clsParameters();
+        objParam.ParameterName = "UserId";
+        objParam.ParameterValue = lUserId;
+        lstParameters.add(objParam);
+
+        objParam = new clsParameters();
+        objParam.ParameterName = "ItemId";
+        objParam.ParameterValue = "0";
+        lstParameters.add(objParam);
+
+        String lMethodName = "GetItems";
+        jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
+
+        SimpleAdapter simpleAdapter = new SimpleAdapter(getActivity(),
+                JSONItems.newInstance().GetJSONItemList(jsonString), R.layout.item_spinner_row,
+                new String[] {"ItemId", "ItemName", "Amount"},
+                new int[] {R.id.txtSpinnerItemId, R.id.txtSpinnerItemName, R.id.txtSpinnerItemAmount});
+
+        // Drop down layout style - list view with radio button
+        //simpleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        lspinner.setAdapter(simpleAdapter);
+        //lspinner.setOnItemSelectedListener(Order.this);
     }
 
     private View.OnClickListener lbtnModifyOrderItemSaveListener = new View.OnClickListener() {
@@ -204,11 +286,11 @@ public class ModifyOrderItems extends DialogFragment {
                     String resultData = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
                     Toast.makeText(getActivity().getApplicationContext(), "Successfully Saved!", Toast.LENGTH_LONG).show();
-                    ModifyOrderItems.this.getDialog().dismiss();
+                    EditOrderItems.this.getDialog().dismiss();
 
                     //Refresh the Grid in the Parent
                     AddOrderItems activity = (AddOrderItems) getActivity();
-                    activity.BindListItem(ltxtModifyOrderItemOrderId.getText().toString());
+                    activity.BindData(ltxtModifyOrderItemOrderId.getText().toString());
                 }else {
                     //NewOrderItems.this.getDialog().cancel();
                 }
@@ -218,44 +300,30 @@ public class ModifyOrderItems extends DialogFragment {
         }
     };
 
-    private View.OnClickListener lbtnModifyOrderItemCloseListener = new View.OnClickListener() {
+    private View.OnClickListener lbtnModifyOrderItemDeleteListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //ModifyOrderItems.this.getDialog().cancel();
+            ArrayList lstParameters = new ArrayList<>();
+            clsParameters objParam = new clsParameters();
+            objParam.ParameterName = "OrderId";
+            objParam.ParameterValue = ltxtModifyOrderItemOrderId.getText().toString();
+            lstParameters.add(objParam);
+
+            objParam = new clsParameters();
+            objParam.ParameterName = "OrderDetailId";
+            objParam.ParameterValue = ltxtModifyOrderItemId.getText().toString();
+            lstParameters.add(objParam);
+
+            String lMethodName = "DeleteOrderDetailById";
+            String resultData = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
+
+            Toast.makeText(getActivity().getApplicationContext(), "Successfully Deleted!", Toast.LENGTH_LONG).show();
+
+            EditOrderItems.this.getDialog().dismiss();
+
+            //Refresh the Grid in the Parent
+            AddOrderItems activity = (AddOrderItems) getActivity();
+            activity.BindData(ltxtModifyOrderItemOrderId.getText().toString());
         }
     };
-
-    public void BindSpinner(Spinner lspinner)
-    {
-        // get user data from session
-        HashMap<String, String> user = session.getUserDetails();
-
-        // name
-        String lUserId = user.get(SessionManagement.KEY_USERID);
-
-        ArrayList<clsParameters> lstParameters = new ArrayList<>();
-        clsParameters objParam = new clsParameters();
-        objParam.ParameterName = "UserId";
-        objParam.ParameterValue = lUserId;
-        lstParameters.add(objParam);
-
-        objParam = new clsParameters();
-        objParam.ParameterName = "ItemId";
-        objParam.ParameterValue = "0";
-        lstParameters.add(objParam);
-
-        String lMethodName = "GetItems";
-        jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
-
-        SimpleAdapter simpleAdapter = new SimpleAdapter(getActivity(),
-                JSONItems.newInstance().GetJSONItemList(jsonString), R.layout.item_spinner_row,
-                new String[] {"ItemId", "ItemName", "Amount"},
-                new int[] {R.id.txtSpinnerItemId, R.id.txtSpinnerItemName, R.id.txtSpinnerItemAmount});
-
-        // Drop down layout style - list view with radio button
-        //simpleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        lspinner.setAdapter(simpleAdapter);
-        //lspinner.setOnItemSelectedListener(Order.this);
-    }
 }

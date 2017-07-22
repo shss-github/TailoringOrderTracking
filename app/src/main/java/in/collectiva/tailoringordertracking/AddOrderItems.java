@@ -17,6 +17,7 @@ import in.collectiva.tailoringordertracking.CommonFunction.CRUDProcess;
 import in.collectiva.tailoringordertracking.CommonFunction.SessionManagement;
 import in.collectiva.tailoringordertracking.CommonFunction.SessionOrderDetail;
 import in.collectiva.tailoringordertracking.Fragments.EditItem;
+import in.collectiva.tailoringordertracking.Fragments.EditOrderItems;
 import in.collectiva.tailoringordertracking.Fragments.ItemFragment;
 import in.collectiva.tailoringordertracking.Fragments.ModifyOrderItems;
 import in.collectiva.tailoringordertracking.Fragments.NewOrderItems;
@@ -61,11 +62,16 @@ public class AddOrderItems extends AppCompatActivity {
         Button lbtnAddOrderItems = (Button) findViewById(R.id.btnAddOrderItems);
         lbtnAddOrderItems.setOnClickListener(lbtnAddOrderItemsListener);
 
+        BindData(lOrderId);
+    }
+
+    public void BindData(String lOrderId)
+    {
         BindOrderDetails(lOrderId);
         BindListItem(lOrderId);
     }
 
-    private void BindOrderDetails(String lOrderId)
+    public void BindOrderDetails(String lOrderId)
     {
         TextView ltxtAddOrderItemsDesc1 = ((TextView) findViewById(R.id.txtAddOrderItemsDesc1));
         TextView ltxtAddOrderItemsDesc2 = ((TextView) findViewById(R.id.txtAddOrderItemsDesc2));
@@ -156,8 +162,8 @@ public class AddOrderItems extends AppCompatActivity {
 
     private void showEditAlertDialog(String SelectedOrderDetailID) {
         FragmentManager fm = getSupportFragmentManager();
-        ModifyOrderItems alertDialog = ModifyOrderItems.newInstance(SelectedOrderDetailID);
-        alertDialog.show(fm, "fragment_modify_order_items");
+        EditOrderItems alertDialog = EditOrderItems.newInstance(SelectedOrderDetailID);
+        alertDialog.show(fm, "fragment_edit_order_items");
     }
 
     private void showAlertDialog(String SelectedOrderId) {

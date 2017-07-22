@@ -1,0 +1,121 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="in.collectiva.tailoringordertracking.Fragments.EditOrderItems">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imgEditOrderClose"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="top|right"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:adjustViewBounds="true"
+            android:background="@android:drawable/ic_menu_close_clear_cancel"
+            android:description="@null"
+            android:scaleType="fitStart" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/txtModifyOrderItemId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:textSize="4dp" />
+
+        <TextView
+            android:id="@+id/txtModifyOrderItemOrderId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:textSize="4dp" />
+
+        <TextView
+            android:id="@+id/txtModifyOrderItemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Item Name" />
+
+        <Spinner
+            android:id="@+id/sprModifyOrderItemName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:prompt="@string/spinner_default_value"
+            tools:ignore="SpUsage" />
+
+        <TextView
+            android:id="@+id/txtModifyOrderItemRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rate" />
+
+        <EditText
+            android:id="@+id/edtModifyOrderItemRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false" />
+
+        <TextView
+            android:id="@+id/txtModifyOrderItemQty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quantity" />
+
+        <EditText
+            android:id="@+id/edtModifyOrderItemQty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:id="@+id/txtModifyOrderItemAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Amount" />
+
+        <EditText
+            android:id="@+id/edtModifyOrderItemAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnModifyOrderItemSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Save" />
+
+            <Button
+                android:id="@+id/btnModifyOrderItemDelete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Delete" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
