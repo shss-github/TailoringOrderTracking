@@ -71,8 +71,6 @@ public class ImportItems extends AppCompatActivity {
         String lMethodName = "GetConfigItems";
         jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
-        Toast.makeText(getApplicationContext(), "Controls Comes Here..!", Toast.LENGTH_SHORT).show();
-
         TextView ltxtImportItemNoRecords = (TextView) findViewById(R.id.txtImportItemNoRecords);
         ltxtImportItemNoRecords.setText("");
 
@@ -81,7 +79,6 @@ public class ImportItems extends AppCompatActivity {
             ListView lstAll = (ListView) findViewById(R.id.lstConfigItems);
             lstAll.setVisibility(View.GONE);
         } else {
-            Log.d("JSON : ", jsonString);
             ListView lstAll = (ListView) findViewById(R.id.lstConfigItems);
             lstAll.setVisibility(View.VISIBLE);
             SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONConfigItems.newInstance().GetJSONItemList(jsonString),
