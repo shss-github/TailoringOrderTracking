@@ -183,8 +183,11 @@ public class DeliveredList extends AppCompatActivity {
 
         if (jsonString.equals("0")) {
             ltxtMakeNoRecords.setText("No records found!");
+            ListView lstAll = (ListView) findViewById(R.id.lstDeliveredList);
+            lstAll.setVisibility(View.GONE);
         } else {
             ListView lstAll = (ListView) findViewById(R.id.lstDeliveredList);
+            lstAll.setVisibility(View.VISIBLE);
             SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONOrder.newInstance().GetJSONOrderList(jsonString),
                     R.layout.orderrow, new String[]{"OrderId", "OrderDetail", "DeliveryDate", "Status"},
                     new int[]{R.id.txtOrderRowId, R.id.txtOrderRowDetail, R.id.txtOrderRowDeliveryDate,
