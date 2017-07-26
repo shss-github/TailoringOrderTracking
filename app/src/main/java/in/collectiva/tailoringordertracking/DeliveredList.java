@@ -77,6 +77,7 @@ public class DeliveredList extends AppCompatActivity {
 
         LoadData(lUserId, CurDate, CurDate);
     }
+    
 
     private View.OnClickListener lbtnGetDetails = new View.OnClickListener() {
         @Override
