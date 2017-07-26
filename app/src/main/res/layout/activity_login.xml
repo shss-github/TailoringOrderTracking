@@ -4,54 +4,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context="in.collectiva.tailoringordertracking.Login">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_margin="10dp"
+        android:gravity="center"
         android:orientation="vertical"
-        tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp"
-        android:layout_margin="10dp" >
+        tools:layout_editor_absoluteY="8dp">
 
-        <TextView
-            android:id="@+id/textView3"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="10dp"
+                app:srcCompat="@drawable/login2" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Mobile Number" />
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edt_Login_MobileNo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="phone" />
+            <EditText
+                android:id="@+id/edt_Login_MobileNo"
+                style="@style/App_EditTextStyle"
+                android:layout_width="match_parent"
+                android:hint="Mobile No."
+                android:inputType="phone" />
 
-        <TextView
-            android:id="@+id/txtPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Password" />
 
-        <EditText
-            android:id="@+id/edt_Login_Password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/edt_Login_Password"
+                style="@style/App_EditTextStyle"
+                android:layout_width="match_parent"
+                android:hint="Password"
+                android:inputType="textPassword" />
 
-        <CheckBox
-            android:id="@+id/chkKeepMeAsLoggedIn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Keep me as logged in?" />
+                <CheckBox
+                    android:id="@+id/chkKeepMeAsLoggedIn"
+                    style="@style/LabelView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/colorTOT"
+                    android:text="Keep me as logged in?" />
 
-        <Button
-            android:id="@+id/btnLoginNow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Login" />
+            <Button
+                android:id="@+id/btnLoginNow"
+                style="@style/TOTBlueButton"
+                android:text="LOGIN" />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/LabelView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Don't have an account?" />
+
+                <TextView
+                    android:id="@+id/txtSignup"
+                    style="@style/LabelView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:text="@string/strSignup"
+                    android:textColor="#3F51B5" />
+            </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

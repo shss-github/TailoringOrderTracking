@@ -5,21 +5,54 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="fill_parent"
+        android:orientation="horizontal"
+        android:layout_gravity="left"
+        android:gravity="left">
 
-        <CheckBox
-            android:id="@+id/chkSelectImportItems"
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtConfigItemId" android:visibility="invisible" android:textSize="1dp"  />
+
+            <CheckBox
+                android:id="@+id/chkSelectImportItems"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:textSize="@dimen/NormalFontSize"
+                android:text="Select ME!"/>
+
+        </LinearLayout>
+
+       <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:text="Select ME!"/>
+            android:orientation="vertical"
+            android:layout_gravity="right"
+            android:gravity="center_horizontal" >
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtConfigItemId" android:visibility="invisible" android:textSize="4dp"  />
+            <!--<TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rate :  " />-->
+
+            <EditText
+                android:id="@+id/edtImportItemsRate"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint="Rate"
+                android:textSize="@dimen/NormalFontSize" />
+
+        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>

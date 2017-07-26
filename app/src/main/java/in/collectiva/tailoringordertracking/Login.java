@@ -7,11 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -106,6 +108,14 @@ public class Login extends AppCompatActivity {
 
         Button lbtnLoginNow = (Button) findViewById(R.id.btnLoginNow);
         lbtnLoginNow.setOnClickListener(lbtnLoginNowListener);
+
+        TextView ltxtSignup = (TextView) findViewById(R.id.txtSignup);
+        ltxtSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Login.this, Register.class));
+            }
+        });
 
         // Session Manager
         session = new SessionManagement(getApplicationContext());

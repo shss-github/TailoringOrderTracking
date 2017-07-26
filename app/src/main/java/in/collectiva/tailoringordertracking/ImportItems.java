@@ -4,6 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.SimpleAdapter;
@@ -40,11 +43,11 @@ public class ImportItems extends AppCompatActivity {
         // Session Manager
         session = new SessionManagement(getApplicationContext());
 
-
         rbtnGents = (RadioButton) findViewById(R.id.rbtnGents);
-        RadioButton rbtnLadies = (RadioButton) findViewById(R.id.rbtnLadies);
-
         rbtnGents.setChecked(true);
+
+        RadioButton rbtnLadies = (RadioButton) findViewById(R.id.rbtnLadies);
+        Button lbtnImportItems = (Button) findViewById(R.id.btnImportItems);
 
         rbtnGents.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,13 +63,68 @@ public class ImportItems extends AppCompatActivity {
             }
         });
 
-        /*String strGender = "";
+        lbtnImportItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        if (rbtnGents.isChecked()) {
-            strGender = "M";
-        } else {
-            strGender = "F";
-        }*/
+                ListView lstConfigItems = (ListView) findViewById(R.id.lstConfigItems);
+
+                // get user data from session
+                HashMap<String, String> user = session.getUserDetails();
+                String lUserId = user.get(SessionManagement.KEY_USERID);
+
+                boolean IsRateExists = true;
+
+                for (int i = 0; i < lstConfigItems.getCount(); i++) {
+                    View vwItem = lstConfigItems.getChildAt(i);
+
+                    CheckBox chkItem = (CheckBox) vwItem.findViewById(R.id.chkSelectImportItems);
+                    EditText ledtImportItemsRate = (EditText) vwItem.findViewById(R.id.edtImportItemsRate);
+
+                    if (chkItem.isChecked() && ledtImportItemsRate.getText().toString().equals("")) {
+                        IsRateExists = false;
+                        ledtImportItemsRate.setError("Rate is required");
+                    }else
+                        ledtImportItemsRate.setError(null);
+                }
+
+                if(IsRateExists) {
+                    for (int i = 0; i < lstConfigItems.getCount(); i++) {
+                        View vwItem = lstConfigItems.getChildAt(i);
+
+                        CheckBox chkItem = (CheckBox) vwItem.findViewById(R.id.chkSelectImportItems);
+                        TextView ltxtConfigItemId = (TextView) vwItem.findViewById(R.id.txtConfigItemId);
+                        EditText ledtImportItemsRate = (EditText) vwItem.findViewById(R.id.edtImportItemsRate);
+
+                        //Insert Into Item Table
+                        if (chkItem.isChecked()) {
+                            //Here Creating List for the Parameters, which we need to pass to the method.
+                            ArrayList lstParameters = new ArrayList<>();
+                            clsParameters objParam = new clsParameters();
+                            objParam.ParameterName = "ConfigItemId";
+                            objParam.ParameterValue = ltxtConfigItemId.getText().toString();
+                            lstParameters.add(objParam);
+
+                            objParam = new clsParameters();
+                            objParam.ParameterName = "Rate";
+                            objParam.ParameterValue = ledtImportItemsRate.getText().toString();
+                            lstParameters.add(objParam);
+
+                            objParam = new clsParameters();
+                            objParam.ParameterName = "UserId";
+                            objParam.ParameterValue = lUserId;
+                            lstParameters.add(objParam);
+
+                            String lMethodName = "SaveConfigItems";
+                            String resultData = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
+
+                        }
+                    }
+                    Toast.makeText(ImportItems.this, "Imported Successfully!", Toast.LENGTH_SHORT).show();
+                    LoadData();
+                }
+            }
+        });
 
         LoadData();
     }

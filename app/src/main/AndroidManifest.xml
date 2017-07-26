@@ -17,20 +17,37 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeActionBar">
         <activity android:name=".MainActivity" />
-        <activity android:name=".Home">
+        <activity
+            android:name=".Home"
+            android:label="Tailoring Order Tracking">
+
+        </activity>
+        <activity
+            android:name=".Register"
+            android:label="Create a New Account"
+            android:parentActivityName=".MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".Login"
+            android:label="Tailoring Order Tracking">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Register" />
-        <activity android:name=".Login" />
         <activity
             android:name=".HomeMenu"
+            android:label="Home"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".Item"
+            android:label="Item"
             android:parentActivityName=".HomeMenu">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
@@ -42,6 +59,7 @@
         <activity android:name=".ItemModify" />
         <activity
             android:name=".MyOrders"
+            android:label="Order List"
             android:parentActivityName=".HomeMenu">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -64,7 +82,14 @@
                 android:value=".HomeMenu" />
         </activity>
         <activity android:name=".LogoutActivity" />
-        <activity android:name=".UpdateUser" />
+        <activity
+            android:name=".UpdateUser"
+            android:label="Edit Profile"
+            android:parentActivityName=".HomeMenu">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeMenu" />
+        </activity>
         <activity
             android:name=".Order"
             android:label="Order"
@@ -75,7 +100,7 @@
         </activity>
         <activity
             android:name=".OrderEntry"
-            android:label="Order List"
+            android:label="Order Entry"
             android:parentActivityName=".HomeMenu">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -83,22 +108,36 @@
         </activity>
         <activity
             android:name=".OrderItems"
-            android:label="Order Items"
+            android:label="Order Entry > Order Items Entry"
             android:parentActivityName=".Order">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Order" />
         </activity>
-        <activity android:name=".DeliveredList" />
+        <activity
+            android:name=".DeliveredList"
+            android:label="Delivered List"
+            android:parentActivityName=".HomeMenu">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeMenu" />
+        </activity>
         <activity
             android:name=".AddOrderItems"
-            android:label="Order Items"
+            android:label="Order Items Entry"
             android:parentActivityName=".OrderEntry">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".OrderEntry" />
         </activity>
-        <activity android:name=".ImportItems"></activity>
+        <activity
+            android:name=".ImportItems"
+            android:label="Import Items"
+            android:parentActivityName=".Item">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Item" />
+        </activity>
     </application>
 
 </manifest>

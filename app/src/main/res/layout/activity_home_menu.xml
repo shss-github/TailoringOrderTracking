@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -43,17 +46,19 @@
                     android:text="Welcome {Name}"
                     android:textSize="18dp"/>
 
+
                 <Button
                     android:id="@+id/btnMenuItems"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Item Master" />
 
                 <Button
                     android:id="@+id/btnMenuOrderTracking"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Order Entry" />
+
 
                 <Button
                     android:id="@+id/btnMenuMyOrders"

@@ -4,66 +4,133 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="in.collectiva.tailoringordertracking.Home" >
+    android:background="#fff"
+    tools:context="in.collectiva.tailoringordertracking.Home">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_margin="10dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp"
-        android:layout_margin="10dp" >
+        tools:layout_editor_absoluteY="8dp">
+
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="top"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="top"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/editprofile" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Login"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="@dimen/NormalFontSize" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="top"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/editprofile" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Register"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="@dimen/NormalFontSize" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="5dp"
-            android:gravity="top">
+            android:gravity="top"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+
                 android:text="Login"
-                android:layout_alignParentLeft="true" />
+                android:textColor="#fff"
+                android:textSize="@dimen/NormalFontSize" />
 
             <Button
                 android:id="@+id/btnRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+
                 android:text="Create a New Account"
-                android:layout_alignParentRight="true" />
+                android:textColor="#fff"
+                android:textSize="@dimen/NormalFontSize" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <View
-                android:id="@+id/view2"
+            <!--<View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:background="#595959" />
+                android:background="#595959" />-->
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="TOT refers Tailoring Order Tracking. As the tailoring profession has evolved, so too have the methods of tailoring. There are a number of distinctive business models of which modern tailors may practice. While some may practice many, there are others who will practice only one or two."
                 android:textAlignment="gravity"
-                android:text="TOT refers Tailoring Order Tracking. As the tailoring profession has evolved, so too have the methods of tailoring. There are a number of distinctive business models of which modern tailors may practice. While some may practice many, there are others who will practice only one or two." />
+                android:textColor="#4d4d4d"
+                android:textSize="@dimen/NormalFontSize" />
 
             <TextView
                 android:id="@+id/txtDesc2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Local tailoring is as the name implies. Typically the tailor is met locally and the garment produced locally. This method enables the tailor to take professional measurements, assess posture and body shape to make unique modifications to the garment. "
                 android:textAlignment="gravity"
-                android:text="Local tailoring is as the name implies. Typically the tailor is met locally and the garment produced locally. This method enables the tailor to take professional measurements, assess posture and body shape to make unique modifications to the garment. Local tailors will typically have a showroom or shopfront allowing clients to choose fabrics from samples or return the garment easily should it require further modification." />
+                android:textColor="#4d4d4d"
+                android:textSize="@dimen/NormalFontSize" />
 
         </LinearLayout>
 
@@ -89,7 +156,6 @@
         </LinearLayout>-->
 
     </LinearLayout>
-
 
 
 </android.support.constraint.ConstraintLayout>
