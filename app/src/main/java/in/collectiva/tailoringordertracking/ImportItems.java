@@ -30,6 +30,7 @@ public class ImportItems extends AppCompatActivity {
     final CRUDProcess objCRUD = new CRUDProcess();
     // Session Manager Class
     SessionManagement session;
+    private RadioButton rbtnGents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,25 +39,51 @@ public class ImportItems extends AppCompatActivity {
 
         // Session Manager
         session = new SessionManagement(getApplicationContext());
-        // get user data from session
-        HashMap<String, String> user = session.getUserDetails();
-        // User Id
-        String lUserId = user.get(SessionManagement.KEY_USERID);
 
-        RadioButton rbtnGents = (RadioButton) findViewById(R.id.rbtnGents);
+
+        rbtnGents = (RadioButton) findViewById(R.id.rbtnGents);
         RadioButton rbtnLadies = (RadioButton) findViewById(R.id.rbtnLadies);
-        String strGender = "";
 
+        rbtnGents.setChecked(true);
+
+        rbtnGents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoadData();
+            }
+        });
+
+        rbtnLadies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoadData();
+            }
+        });
+
+        /*String strGender = "";
+
+        if (rbtnGents.isChecked()) {
+            strGender = "M";
+        } else {
+            strGender = "F";
+        }*/
+
+        LoadData();
+    }
+
+    private void LoadData() {
+
+        String strGender = "";
         if (rbtnGents.isChecked()) {
             strGender = "M";
         } else {
             strGender = "F";
         }
 
-        LoadData(lUserId, strGender);
-    }
+        // get user data from session
+        HashMap<String, String> user = session.getUserDetails();
+        String lUserId = user.get(SessionManagement.KEY_USERID);
 
-    private void LoadData(String lUserId, String Gender) {
         ArrayList<clsParameters> lstParameters = new ArrayList<>();
         clsParameters objParam = new clsParameters();
         objParam.ParameterName = "UserId";
@@ -65,7 +92,7 @@ public class ImportItems extends AppCompatActivity {
 
         objParam = new clsParameters();
         objParam.ParameterName = "Gender";
-        objParam.ParameterValue = Gender;
+        objParam.ParameterValue = strGender;
         lstParameters.add(objParam);
 
         String lMethodName = "GetConfigItems";
@@ -74,16 +101,22 @@ public class ImportItems extends AppCompatActivity {
         TextView ltxtImportItemNoRecords = (TextView) findViewById(R.id.txtImportItemNoRecords);
         ltxtImportItemNoRecords.setText("");
 
+        ListView lstAll = (ListView) findViewById(R.id.lstConfigItems);
+
         if (jsonString.equals("0")) {
             ltxtImportItemNoRecords.setText("No records found!");
-            ListView lstAll = (ListView) findViewById(R.id.lstConfigItems);
             lstAll.setVisibility(View.GONE);
         } else {
-            ListView lstAll = (ListView) findViewById(R.id.lstConfigItems);
             lstAll.setVisibility(View.VISIBLE);
             SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONConfigItems.newInstance().GetJSONItemList(jsonString),
                     R.layout.import_items, new String[]{"ConfigItemId", "ConfigItemName"},
+                    new int[]{R.id.txtConfigItemId, R.id.chkSelectImportItems});
+
+            /*
+             SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONConfigItems.newInstance().GetJSONItemList(jsonString),
+                    R.layout.import_items, new String[]{"ConfigItemId", "ConfigItemName"},
                     new int[]{R.id.txtConfigItemId, R.id.txtConfigItemName});
+            */
 
             lstAll.setAdapter(simpleAdapter);
         }

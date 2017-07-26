@@ -6,24 +6,20 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <CheckBox
-            android:id="@+id/chkSelect"
+            android:id="@+id/chkSelectImportItems"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:text="Select ME!"/>
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtConfigItemId" android:visibility="invisible" android:textSize="4dp"  />
-        <TextView
-            android:id="@+id/txtConfigItemName"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/NormalFontSize" />
     </LinearLayout>
 </LinearLayout>
