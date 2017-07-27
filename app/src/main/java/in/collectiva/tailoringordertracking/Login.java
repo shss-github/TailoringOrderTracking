@@ -1,12 +1,17 @@
 package in.collectiva.tailoringordertracking;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import in.collectiva.tailoringordertracking.CommonFunction.CRUDProcess;
+import in.collectiva.tailoringordertracking.CommonFunction.GeneralMethods;
 import in.collectiva.tailoringordertracking.CommonFunction.SessionManagement;
 import in.collectiva.tailoringordertracking.cConstant.clsParameters;
 
@@ -106,6 +112,15 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //To Enable the Network Permission in the Application
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
+        ImageView imgLoginHeader = (ImageView) findViewById(R.id.imgLoginHeader);
+        GeneralMethods.ResizeImage(imgLoginHeader, R.drawable.login2, getWindowManager().getDefaultDisplay(), getResources());
+
         Button lbtnLoginNow = (Button) findViewById(R.id.btnLoginNow);
         lbtnLoginNow.setOnClickListener(lbtnLoginNowListener);
 
@@ -131,4 +146,24 @@ public class Login extends AppCompatActivity {
             }
         }
     }
+
+    /*public void ResizeImage(int lDrawableId)
+    {
+        ImageView imgLoginHeader = (ImageView) findViewById(R.id.imgLoginHeader);
+
+        Display display = getWindowManager().getDefaultDisplay();
+        int displayWidth = display.getWidth();
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(getResources(), lDrawableId, options);
+        int width = options.outWidth;
+        if (width > displayWidth) {
+            int widthRatio = Math.round((float) width / (float) displayWidth);
+            options.inSampleSize = widthRatio;
+        }
+        options.inJustDecodeBounds = false;
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), lDrawableId, options);
+        imgLoginHeader.setImageBitmap(bitmap);
+    }*/
 }

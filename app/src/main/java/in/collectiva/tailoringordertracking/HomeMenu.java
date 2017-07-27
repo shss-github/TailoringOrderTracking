@@ -12,12 +12,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
 
+import in.collectiva.tailoringordertracking.CommonFunction.GeneralMethods;
 import in.collectiva.tailoringordertracking.CommonFunction.SessionManagement;
 
 public class HomeMenu extends AppCompatActivity {
@@ -40,6 +42,14 @@ public class HomeMenu extends AppCompatActivity {
 
         // Session Manager
         session = new SessionManagement(getApplicationContext());
+
+        //ImageView imgHomeHeading = (ImageView) findViewById(R.id.imgHomeHeading);
+        //ImageView imgHomeItemMaster = (ImageView) findViewById(R.id.imgHomeItemMaster);
+        //ImageView imgHomeOrderEntry = (ImageView) findViewById(R.id.imgHomeOrderEntry);
+
+        //GeneralMethods.ResizeImage(imgHomeHeading, R.drawable.tailoring, getWindowManager().getDefaultDisplay(), getResources());
+        //GeneralMethods.ResizeImage(imgHomeItemMaster, R.drawable.master, getWindowManager().getDefaultDisplay(), getResources());
+        //GeneralMethods.ResizeImage(imgHomeOrderEntry, R.drawable.orderentry, getWindowManager().getDefaultDisplay(), getResources());
 
         TextView ltxtWelcomeMsg = (TextView) findViewById(R.id.txtWelcomeMsg);
         Button lbtnMenuItems = (Button) findViewById(R.id.btnMenuItems);

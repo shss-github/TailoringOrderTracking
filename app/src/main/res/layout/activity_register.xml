@@ -4,69 +4,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="in.collectiva.tailoringordertracking.Register"
-    >
+    android:background="#fff"
+    tools:context="in.collectiva.tailoringordertracking.Register">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_margin="10dp"
+        android:gravity="center"
         android:orientation="vertical"
-        tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp"
-        android:layout_margin="10dp" >
+        tools:layout_editor_absoluteY="8dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_marginTop="70dp"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
+            android:paddingBottom="30dp">
 
-        <TextView
-            android:id="@+id/textView4"
+            <ImageView
+                android:id="@+id/imgRegisterHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name"/>
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginBottom="70dp">
 
-        <EditText
-            android:id="@+id/edtName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
+            <EditText
+                android:id="@+id/edtName"
+                style="@style/App_EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Name"
+                android:inputType="textPersonName" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mobile Number" />
+            <EditText
+                android:id="@+id/edtMobileNo"
+                style="@style/App_EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Mobile No"
+                android:inputType="phone" />
 
-        <EditText
-            android:id="@+id/edtMobileNo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="phone" />
+            <EditText
+                android:id="@+id/edtPassword"
+                style="@style/App_EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword" />
 
-        <TextView
-            android:id="@+id/txtPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Password" />
+            <!--<CheckBox
+                android:id="@+id/chkTerms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="I accept the Terms and Conditions" />-->
 
-        <EditText
-            android:id="@+id/edtPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword" />
+            <Button
+                android:id="@+id/btnRegisterNow"
+                style="@style/TOTBlueButton"
+                android:text="CREATE A NEW ACCOUNT" />
 
-        <!--<CheckBox
-            android:id="@+id/chkTerms"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="I accept the Terms and Conditions" />-->
-
-        <Button
-            android:id="@+id/btnRegisterNow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Create a New Account" />
-
+        </LinearLayout>
 
     </LinearLayout>
 

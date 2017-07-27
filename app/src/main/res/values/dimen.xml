@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="NormalFontSize">16dp</dimen>
+    <dimen name="FontSize14">13dp</dimen>
     <dimen name="SmallFontSize">12dp</dimen>
 </resources>

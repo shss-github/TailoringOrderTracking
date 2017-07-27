@@ -4,120 +4,576 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context=".MainActivity">
 
 
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
         <LinearLayout
-            android:id="@+id/container_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include
-                android:id="@+id/toolbar"
-                layout="@layout/toolbar" />
+            <LinearLayout
+                android:id="@+id/container_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include
+                    android:id="@+id/toolbar"
+                    layout="@layout/toolbar" />
+            </LinearLayout>
+
+
+            <FrameLayout
+                android:id="@+id/content_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <TextView
+                        android:id="@+id/txtWelcomeMsg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Welcome {Name}"
+                        android:textAlignment="center"
+                        android:textSize="18dp" />
+
+
+                    <Button
+                        android:id="@+id/btnMenuItems"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Item Master" />
+
+                    <Button
+                        android:id="@+id/btnMenuOrderTracking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Order Entry" />
+
+
+                    <Button
+                        android:id="@+id/btnMenuMyOrders"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Order List" />
+
+                    <Button
+                        android:id="@+id/btnMenuMakeList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="In Progress List" />
+
+                    <Button
+                        android:id="@+id/btnMenuReadyList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ready List" />
+
+                    <Button
+                        android:id="@+id/btnMenuDeliveredList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Delivered List" />
+
+                    <Button
+                        android:id="@+id/btnMenuEditProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Edit Profile" />
+
+                    <Button
+                        android:id="@+id/btnMenuLogout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Logout" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
         </LinearLayout>
 
-        <FrameLayout
-            android:id="@+id/content_frame"
+        <!--<LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <Button
+                    android:text="ITEM MASTER"
+                    style="@style/TOTMenuBlueButton" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <Button
+                    android:text="ORDER ENTRY"
+                    style="@style/TOTMenuBlueButton" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <Button
+                    android:text="INPROGRESS LIST"
+                    style="@style/TOTMenuBlueButton" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <Button
+                    android:text="READY LIST"
+                    style="@style/TOTMenuBlueButton" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <Button
+                    android:text="ORDER LIST"
+                    style="@style/TOTMenuBlueButton" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <Button
+                    android:text="DELIVERED LIST"
+                    style="@style/TOTMenuBlueButton" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <Button
+                    android:text="EDIT PROFILE"
+                    style="@style/TOTMenuBlueButton" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <Button
+                    android:text="LOGOUT"
+                    style="@style/TOTMenuBlueButton" />
+
+            </LinearLayout>
+        </LinearLayout>-->
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp">
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:orientation="vertical"
-                tools:layout_editor_absoluteY="8dp"
-                tools:layout_editor_absoluteX="8dp"
-                android:layout_margin="10dp" >
+                android:gravity="center"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/txtWelcomeMsg"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:text="Welcome {Name}"
-                    android:textSize="18dp"/>
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
 
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="130dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="4dp">
 
-                <Button
-                    android:id="@+id/btnMenuItems"
-                    android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/edit_text_style"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imgHomeItemMaster"
+                                android:layout_width="match_parent"
+                                android:layout_height="95dp"
+                                android:padding="3dp"
+                                android:src="@drawable/master" />
+
+                            <TextView
+                                style="@style/MenuLabelView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="ITEM MASTER"
+                                android:textAlignment="center" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="130dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="4dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/edit_text_style"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imgHomeOrderEntry"
+                                android:layout_width="match_parent"
+                                android:layout_height="95dp"
+                                android:padding="3dp"
+                                android:src="@drawable/orderentry" />
+
+                            <TextView
+                                style="@style/MenuLabelView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="ORDER ENTRY"
+                                android:textAlignment="center" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="Item Master" />
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
 
-                <Button
-                    android:id="@+id/btnMenuOrderTracking"
-                    android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="130dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="4dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/edit_text_style"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="95dp"
+                                android:padding="3dp"
+                                android:src="@drawable/inprogresslist" />
+
+                            <TextView
+                                style="@style/MenuLabelView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="INPROGRESS LIST"
+                                android:textAlignment="center" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="130dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="4dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/edit_text_style"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="95dp"
+                                android:padding="3dp"
+                                android:src="@drawable/readylist" />
+
+                            <TextView
+                                style="@style/MenuLabelView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="READY LIST"
+                                android:textAlignment="center" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="Order Entry" />
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
 
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="130dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="4dp">
 
-                <Button
-                    android:id="@+id/btnMenuMyOrders"
-                    android:layout_width="match_parent"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/edit_text_style"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="95dp"
+                                android:padding="3dp"
+                                android:src="@drawable/orderlist" />
+
+                            <TextView
+                                style="@style/MenuLabelView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="ORDER LIST"
+                                android:textAlignment="center" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="130dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="4dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/edit_text_style"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="95dp"
+                                android:padding="3dp"
+                                android:src="@drawable/deliveredlist" />
+
+                            <TextView
+                                style="@style/MenuLabelView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="DELIVERED LIST"
+                                android:textAlignment="center" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="Order List" />
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
 
-                <Button
-                    android:id="@+id/btnMenuMakeList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="In Progress List" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="130dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="4dp">
 
-                <Button
-                    android:id="@+id/btnMenuReadyList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Ready List" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/edit_text_style"
+                            android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btnMenuDeliveredList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Delivered List" />
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="95dp"
+                                android:padding="3dp"
+                                android:src="@drawable/menueditprofile1" />
 
-                <Button
-                    android:id="@+id/btnMenuEditProfile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Edit Profile" />
+                            <TextView
+                                style="@style/MenuLabelView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="EDIT PROFILE"
+                                android:textAlignment="center" />
+                        </LinearLayout>
 
-                <Button
-                    android:id="@+id/btnMenuLogout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Logout" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="130dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="4dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/edit_text_style"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="95dp"
+                                android:padding="3dp"
+                                android:src="@drawable/menulogout6" />
+
+                            <TextView
+                                style="@style/MenuLabelView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="LOGOUT"
+                                android:textAlignment="center" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
+        </ScrollView>
 
-        </FrameLayout>
 
-    </LinearLayout>
+        <ListView
+            android:id="@+id/left_drawer"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:background="#FFFFFF"
+            android:choiceMode="singleChoice"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="1dp" />
 
-    <ListView
-        android:id="@+id/left_drawer"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:background="#FFFFFF"
-        android:choiceMode="singleChoice"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp" />
+
 
 </android.support.v4.widget.DrawerLayout>
 
-<!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="in.collectiva.tailoringordertracking.HomeMenu">
-</android.support.constraint.ConstraintLayout>-->
+

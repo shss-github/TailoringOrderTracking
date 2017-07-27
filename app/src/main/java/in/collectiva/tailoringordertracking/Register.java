@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -17,6 +18,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import in.collectiva.tailoringordertracking.CommonFunction.CRUDProcess;
+import in.collectiva.tailoringordertracking.CommonFunction.GeneralMethods;
 import in.collectiva.tailoringordertracking.CommonFunction.SessionManagement;
 import in.collectiva.tailoringordertracking.cConstant.clsParameters;
 
@@ -118,5 +120,9 @@ public class Register extends AppCompatActivity {
 
         Button lbtnRegisterNow = (Button) findViewById(R.id.btnRegisterNow);
         lbtnRegisterNow.setOnClickListener(lbtnRegisterNowListener);
+
+        ImageView imgRegisterHeader = (ImageView) findViewById(R.id.imgRegisterHeader);
+        GeneralMethods.ResizeImage(imgRegisterHeader, R.drawable.signup, getWindowManager().getDefaultDisplay(), getResources());
+
     }
 }
