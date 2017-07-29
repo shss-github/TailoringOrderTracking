@@ -97,11 +97,11 @@ public class Login extends AppCompatActivity {
 
                         session.createLoginSession(lUserId, lName, lMobileNo, false);
 
+                        startActivity(new Intent(Login.this, HomeMenu.class));
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-                    startActivity(new Intent(Login.this, HomeMenu.class));
                 }
             }
         }

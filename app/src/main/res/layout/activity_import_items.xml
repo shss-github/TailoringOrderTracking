@@ -2,12 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#fff" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,14 +20,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" Select Gender :   "
-                android:textSize="@dimen/NormalFontSize"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                style="@style/LabelView"/>
 
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:textSize="@dimen/NormalFontSize">
+                style="@style/LabelView">
 
                 <RadioButton
                     android:id="@+id/rbtnGents"
@@ -33,38 +35,45 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="Gents"
-                    android:textSize="@dimen/NormalFontSize" />
+                    android:buttonTint="@color/colorTOT"
+                    style="@style/LabelView" />
 
                 <RadioButton
                     android:id="@+id/rbtnLadies"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ladies"
-                    android:textSize="@dimen/NormalFontSize" />
+                    android:buttonTint="@color/colorTOT"
+                    style="@style/LabelView" />
             </RadioGroup>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <ListView
                 android:id="@+id/lstConfigItems"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="280dp"
+                android:padding="10dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="0dip"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center|bottom">
 
                 <Button
                     android:id="@+id/btnImportItems"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Import" />
+                    android:text="Import Now"
+                    style="@style/TOTBlueButton"
+                    android:layout_gravity="center_horizontal|center"
+                    android:layout_margin="5dp"/>
             </LinearLayout>
 
             <TextView

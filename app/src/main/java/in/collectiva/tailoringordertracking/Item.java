@@ -1,6 +1,9 @@
 package in.collectiva.tailoringordertracking;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.StrictMode;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
@@ -10,8 +13,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.AdapterView;
 import android.widget.SimpleAdapter;
@@ -59,11 +64,17 @@ public class Item extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Button lbtnAddItem = (Button) findViewById(R.id.btnAddItem);
+        /*Button lbtnAddItem = (Button) findViewById(R.id.btnAddItem);
         lbtnAddItem.setOnClickListener(lbtnAddItemListener);
 
         Button lbtnImportItems = (Button) findViewById(R.id.btnImportItems);
-        lbtnImportItems.setOnClickListener(lbtnImportItemsListener);
+        lbtnImportItems.setOnClickListener(lbtnImportItemsListener);*/
+
+        LinearLayout linearItemAdd = (LinearLayout) findViewById(R.id.linearItemAdd);
+        LinearLayout linearItemImport = (LinearLayout) findViewById(R.id.linearItemImport);
+
+        linearItemAdd.setOnClickListener(lbtnAddItemListener);
+        linearItemImport.setOnClickListener(lbtnImportItemsListener);
 
         //To Enable the Network Permission in the Application
         if (android.os.Build.VERSION.SDK_INT > 9) {
@@ -105,8 +116,23 @@ public class Item extends AppCompatActivity {
             ListView lstItem = (ListView) findViewById(R.id.lstItems);
 
             SimpleAdapter simpleAdapter = new SimpleAdapter(this, JSONItems.newInstance().GetJSONItemList(jsonString), R.layout.row,
-                    new String[]{"ItemId", "ItemDetail", "Amount"},
+                    new String[]{"ItemId", "ItemDetail", "AmountDetail"},
                     new int[]{R.id.txtRowItemId, R.id.ItemDetail, R.id.txtRowAmount});
+            /*{
+
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    View v = super.getView(position, convertView, parent);
+                    if (position % 2 == 0) {
+                        //v.setBackgroundColor(Color.parseColor("#8e99d7"));
+                        v.setBackgroundColor(Color.parseColor("#ffffff"));
+                    } else {
+                        //v.setBackgroundColor(Color.parseColor("#eceef8"));
+                        v.setBackgroundColor(Color.parseColor("#809fff"));
+                    }
+
+                    return v;
+                }
+            };*/
             lstItem.setAdapter(simpleAdapter);
 
             lstItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {

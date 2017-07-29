@@ -2,13 +2,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context="in.collectiva.tailoringordertracking.Fragments.EditItem">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:orientation="vertical">
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="EDIT ITEM"
+            style="@style/BlueLabelView"
+            android:layout_gravity="top|left"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp" />
 
         <ImageView
             android:id="@+id/imgEditItemClose"
@@ -36,32 +47,34 @@
             android:id="@+id/txtEditItemId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="4dp" android:visibility="invisible" />
+            android:textSize="30dp" android:visibility="invisible" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/edtEditItemName1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Item Name" />
+            android:text="Item Name"
+            style="@style/LabelView" />-->
 
         <EditText
             android:id="@+id/edtEditItemName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
+            style="@style/App_EditTextStyle"
+            android:layout_width="250dp"
+            android:hint="Rate"
             android:inputType="textPersonName" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/edtEditItemAmount1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Amount" />
+            android:text="Amount"
+            style="@style/LabelView" />-->
 
         <EditText
             android:id="@+id/edtEditItemAmount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
+            style="@style/App_EditTextStyle"
+            android:layout_width="100dp"
+            android:hint="Rate"
             android:inputType="numberDecimal" />
 
         <LinearLayout
@@ -71,15 +84,14 @@
 
             <Button
                 android:id="@+id/btnEditItemUpdate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/TOTBlueButton"
                 android:layout_weight="1"
-                android:text="Save" />
+                android:text="Save"
+                android:layout_marginRight="10dp" />
 
             <Button
                 android:id="@+id/btnEditItemDelete"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/TOTBlueButton"
                 android:layout_weight="1"
                 android:text="Delete" />
         </LinearLayout>

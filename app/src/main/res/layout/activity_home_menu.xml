@@ -7,8 +7,6 @@
     android:background="#fff"
     tools:context=".MainActivity">
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -273,6 +271,7 @@
                     android:paddingRight="10dp">
 
                     <LinearLayout
+                        android:id="@+id/linearItem"
                         android:layout_width="0dp"
                         android:layout_height="130dp"
                         android:layout_weight="1"
@@ -305,6 +304,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/linearOrderEntry"
                         android:layout_width="0dp"
                         android:layout_height="130dp"
                         android:layout_weight="1"
@@ -348,6 +348,7 @@
                     android:paddingRight="10dp">
 
                     <LinearLayout
+                        android:id="@+id/linearInProgressList"
                         android:layout_width="0dp"
                         android:layout_height="130dp"
                         android:layout_weight="1"
@@ -379,6 +380,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/linearReadyList"
                         android:layout_width="0dp"
                         android:layout_height="130dp"
                         android:layout_weight="1"
@@ -421,6 +423,7 @@
                     android:paddingRight="10dp">
 
                     <LinearLayout
+                        android:id="@+id/linearOrderList"
                         android:layout_width="0dp"
                         android:layout_height="130dp"
                         android:layout_weight="1"
@@ -452,6 +455,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/linearDeliveredList"
                         android:layout_width="0dp"
                         android:layout_height="130dp"
                         android:layout_weight="1"
@@ -494,6 +498,7 @@
                     android:paddingRight="10dp">
 
                     <LinearLayout
+                        android:id="@+id/linearEditProfile"
                         android:layout_width="0dp"
                         android:layout_height="130dp"
                         android:layout_weight="1"
@@ -525,6 +530,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/linearLogout"
                         android:layout_width="0dp"
                         android:layout_height="130dp"
                         android:layout_weight="1"

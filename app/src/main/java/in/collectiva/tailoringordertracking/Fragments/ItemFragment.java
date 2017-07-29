@@ -64,7 +64,6 @@ public class ItemFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         // Session Manager
         session = new SessionManagement(getActivity().getApplicationContext());
-
         return inflater.inflate(R.layout.fragment_item, container);
     }
 
@@ -159,7 +158,7 @@ public class ItemFragment extends DialogFragment {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
         dialogBuilder.setView(openSourceLicensesView)
-                .setTitle((getString(R.string.dialog_title_items)))
+                .setTitle("Add Item");
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
@@ -172,8 +171,6 @@ public class ItemFragment extends DialogFragment {
                     }
                 });
                 //.setNeutralButton(android.R.string.ok, null);
-
-
 
         return dialogBuilder.create();
     }*/

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context="in.collectiva.tailoringordertracking.OrderEntry">
 
     <LinearLayout
@@ -13,22 +14,24 @@
 
         <Button
             android:id="@+id/btnOrderDetail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add Order" android:textSize="@dimen/NormalFontSize" />
+            style="@style/TOTBlueButton"
+            android:text="Add Order"
+            android:layout_margin="5dp" />
 
         <ListView
             android:id="@+id/lstOrderDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:dividerHeight="1dp"
+            android:divider="#d9ddf2"
             android:padding="10dp"></ListView>
 
         <TextView
             android:id="@+id/txtOrderEntryNoRecords"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:gravity="center" />
+            android:gravity="center"
+            style="@style/LabelView" />
 
     </LinearLayout>
 

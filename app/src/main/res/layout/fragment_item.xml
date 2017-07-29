@@ -2,9 +2,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context="in.collectiva.tailoringordertracking.Fragments.ItemFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="ADD ITEM"
+            style="@style/BlueLabelView"
+            android:layout_gravity="top|left"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -14,16 +33,36 @@
         android:layout_margin="10dp" >
 
         <TextView
+            android:id="@+id/txtNewItemId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:visibility="invisible" />
+
+        <!--<LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:background="#dcdcdc">
+            <TextView
+                android:id="@+id/txtItemName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Item" />
+        </LinearLayout>-->
+
+        <!--<TextView
             android:id="@+id/txtItemName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Item Name" />
+            android:text="Item Name" />-->
 
         <EditText
             android:id="@+id/txtItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
+            style="@style/App_EditTextStyle"
+            android:layout_width="250dp"
+            android:hint="Item Name"
             android:inputType="textPersonName" />
 
         <!--<EditText
@@ -31,19 +70,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="phone" />-->
+            android:inputType="phone" />
 
         <TextView
             android:id="@+id/txtAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Amount" />
+            android:text="Amount" />-->
 
         <EditText
             android:id="@+id/edt_ItemAmount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
+            style="@style/App_EditTextStyle"
+            android:layout_width="100dp"
+            android:hint="Rate"
             android:inputType="numberDecimal" />
 
         <LinearLayout
@@ -53,15 +92,14 @@
 
             <Button
                 android:id="@+id/btnItemSave"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/TOTBlueButton"
                 android:layout_weight="1"
-                android:text="Save" />
+                android:text="Save"
+                android:layout_marginRight="10dp"/>
 
             <Button
                 android:id="@+id/btnItemClose"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/TOTBlueButton"
                 android:layout_weight="1"
                 android:text="Close" />
         </LinearLayout>

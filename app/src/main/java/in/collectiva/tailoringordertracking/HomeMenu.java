@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,15 +44,85 @@ public class HomeMenu extends AppCompatActivity {
         // Session Manager
         session = new SessionManagement(getApplicationContext());
 
-        //ImageView imgHomeHeading = (ImageView) findViewById(R.id.imgHomeHeading);
-        //ImageView imgHomeItemMaster = (ImageView) findViewById(R.id.imgHomeItemMaster);
-        //ImageView imgHomeOrderEntry = (ImageView) findViewById(R.id.imgHomeOrderEntry);
+        LinearLayout linearItem = (LinearLayout) findViewById(R.id.linearItem);
+        LinearLayout linearOrderEntry = (LinearLayout) findViewById(R.id.linearOrderEntry);
+        LinearLayout linearInProgressList = (LinearLayout) findViewById(R.id.linearInProgressList);
+        LinearLayout linearReadyList = (LinearLayout) findViewById(R.id.linearReadyList);
+        LinearLayout linearOrderList = (LinearLayout) findViewById(R.id.linearOrderList);
+        LinearLayout linearDeliveredList = (LinearLayout) findViewById(R.id.linearDeliveredList);
+        LinearLayout linearEditProfile = (LinearLayout) findViewById(R.id.linearEditProfile);
+        LinearLayout linearLogout = (LinearLayout) findViewById(R.id.linearLogout);
 
-        //GeneralMethods.ResizeImage(imgHomeHeading, R.drawable.tailoring, getWindowManager().getDefaultDisplay(), getResources());
-        //GeneralMethods.ResizeImage(imgHomeItemMaster, R.drawable.master, getWindowManager().getDefaultDisplay(), getResources());
-        //GeneralMethods.ResizeImage(imgHomeOrderEntry, R.drawable.orderentry, getWindowManager().getDefaultDisplay(), getResources());
+        linearItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeMenu.this, Item.class));
+            }
+        });
+
+        linearOrderEntry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeMenu.this, OrderEntry.class));
+            }
+        });
+
+        linearInProgressList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeMenu.this, MakeList.class));
+            }
+        });
+
+        linearReadyList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeMenu.this, ReadyList.class));
+            }
+        });
+
+        linearOrderList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeMenu.this, MyOrders.class));
+            }
+        });
+
+        linearDeliveredList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeMenu.this, DeliveredList.class));
+            }
+        });
+
+        linearEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeMenu.this, UpdateUser.class));
+            }
+        });
+
+        linearLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                session.logoutUser();
+                startActivity(new Intent(HomeMenu.this, Login.class));
+            }
+        });
+
 
         TextView ltxtWelcomeMsg = (TextView) findViewById(R.id.txtWelcomeMsg);
+
+        session.checkLogin();
+
+        HashMap<String, String> user = session.getUserDetails();
+        String lName = user.get(SessionManagement.KEY_NAME);
+
+        ltxtWelcomeMsg.setText("Welcome " + lName + "!");
+        DrawerLayoutInitialization();
+
+        /*
+
         Button lbtnMenuItems = (Button) findViewById(R.id.btnMenuItems);
         Button lbtnMenuMyOrders = (Button) findViewById(R.id.btnMenuMyOrders);
         Button lbtnMenuOrderTracking = (Button) findViewById(R.id.btnMenuOrderTracking);
@@ -60,22 +131,6 @@ public class HomeMenu extends AppCompatActivity {
         Button lbtnMenuDeliveredList = (Button) findViewById(R.id.btnMenuDeliveredList);
         Button lbtnMenuEditProfile = (Button) findViewById(R.id.btnMenuEditProfile);
         Button lbtnMenuLogout = (Button) findViewById(R.id.btnMenuLogout);
-
-        /**
-         * Call this function whenever you want to check user login
-         * This will redirect user to LoginActivity is he is not
-         * logged in
-         * */
-        session.checkLogin();
-
-        // get user data from session
-        HashMap<String, String> user = session.getUserDetails();
-
-        // name
-        String lName = user.get(SessionManagement.KEY_NAME);
-
-        ltxtWelcomeMsg.setText("Welcome " + lName + "!");
-        DrawerLayoutInitialization();
 
         lbtnMenuItems.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,7 +187,7 @@ public class HomeMenu extends AppCompatActivity {
             session.logoutUser();
             startActivity(new Intent(HomeMenu.this, Home.class));
             }
-        });
+        });*/
     }
 
     private void DrawerLayoutInitialization() {
@@ -144,14 +199,14 @@ public class HomeMenu extends AppCompatActivity {
         setupToolbar();
         DataModel[] drawerItem = new DataModel[8];
 
-        drawerItem[0] = new DataModel(R.drawable.itemadd, "Item Master");
-        drawerItem[1] = new DataModel(R.drawable.itemadd, "Order Entry");
-        drawerItem[2] = new DataModel(R.drawable.list, "Order List");
-        drawerItem[3] = new DataModel(R.drawable.list, "In Progress List");
-        drawerItem[4] = new DataModel(R.drawable.list, "Ready List");
-        drawerItem[5] = new DataModel(R.drawable.list, "Delivered List");
+        drawerItem[0] = new DataModel(R.drawable.itemmastersmall, "Item Master");
+        drawerItem[1] = new DataModel(R.drawable.orderentrysmall, "Order Entry");
+        drawerItem[2] = new DataModel(R.drawable.pendinglistsmall, "In Progress List");
+        drawerItem[3] = new DataModel(R.drawable.readylistsmall, "Ready List");
+        drawerItem[4] = new DataModel(R.drawable.orderlistsmall, "Order List");
+        drawerItem[5] = new DataModel(R.drawable.deliveredlistsmall, "Delivered List");
         drawerItem[6] = new DataModel(R.drawable.editprofile, "Edit Profile");
-        drawerItem[7] = new DataModel(R.drawable.logout, "Logout");
+        drawerItem[7] = new DataModel(R.drawable.logoutsmall, "Logout");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);

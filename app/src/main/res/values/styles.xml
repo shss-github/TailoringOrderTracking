@@ -20,12 +20,20 @@
         <item name="android:padding">5dp</item>
     </style>
 
-    <style name="MenuLabelView" parent="android:Widget.TextView">
+    <style name="BlueLabelView" parent="android:Widget.TextView">
         <item name="android:textColor">#3F51B5</item>
+        <item name="android:textSize">@dimen/NormalFontSize</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MenuLabelView" parent="android:Widget.TextView">
+        <item name="android:textColor">#fff</item>
         <item name="android:textSize">@dimen/SmallFontSize</item>
         <item name="android:padding">5dp</item>
         <item name="android:gravity">bottom</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:background">#666666</item>
     </style>
 
     <style name="App_EditTextStyle" parent="@android:style/Widget.EditText">
@@ -50,9 +58,25 @@
 
     <style name="TOTMenuBlueButton" parent="android:Widget.Button">
         <item name="android:textColor">#fff</item>
-        <item name="android:textSize">@dimen/FontSize14</item>
+        <item name="android:textSize">@dimen/NormalFontSize</item>
         <item name="android:background">#3F51B5</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">35dp</item>
     </style>
+
+    <style name="LabelTitle" parent="android:Widget.TextView">
+        <item name="android:textSize">@dimen/NormalFontSize</item>
+        <item name="android:textColor">@color/colorTOT</item>
+    </style>
+
+    <style name="LabelDesc" parent="android:Widget.TextView">
+        <item name="android:textSize">@dimen/SmallFontSize</item>
+        <item name="android:textColor">@color/colorTOT</item>
+    </style>
+
+    <style name="LabelDescBlue" parent="android:Widget.TextView">
+        <item name="android:textSize">@dimen/SmallFontSize</item>
+        <item name="android:textColor">#3F51B5</item>
+    </style>
+
 </resources>

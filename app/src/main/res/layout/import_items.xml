@@ -10,7 +10,6 @@
         android:layout_gravity="left"
         android:gravity="left">
 
-
         <LinearLayout
             android:layout_width="200dp"
             android:layout_height="wrap_content"
@@ -29,7 +28,9 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
                 android:textSize="@dimen/NormalFontSize"
-                android:text="Select ME!"/>
+                android:text="Select ME!"
+                android:buttonTint="@color/colorTOT"
+                style="@style/LabelView" />
 
         </LinearLayout>
 
@@ -40,17 +41,12 @@
             android:layout_gravity="right"
             android:gravity="center_horizontal" >
 
-            <!--<TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rate :  " />-->
-
             <EditText
                 android:id="@+id/edtImportItemsRate"
                 android:layout_width="100dp"
-                android:layout_height="wrap_content"
+                style="@style/App_EditTextStyle"
                 android:hint="Rate"
-                android:textSize="@dimen/NormalFontSize" />
+                android:inputType="numberDecimal" />
 
         </LinearLayout>
 

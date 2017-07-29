@@ -24,27 +24,25 @@
                 android:id="@+id/txtOrderEntryRowDesc2"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/NormalFontSize" />
+                style="@style/LabelTitle" />
 
             <TextView
                 android:id="@+id/txtOrderEntryRowDesc1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/SmallFontSize" />
+                style="@style/LabelDesc" />
 
             <TextView
                 android:id="@+id/txtOrderEntryRowDesc3"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/SmallFontSize" />
+                style="@style/LabelDescBlue" />
 
             <TextView
                 android:id="@+id/txtOrderEntryRowSpacing"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textSize="3dp" />
-
-
 
         </LinearLayout>
 
@@ -55,16 +53,15 @@
 
             <ImageView
                 android:id="@+id/imgOrderEntryRowAddOrderDetail"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="top|right"
-
                 android:adjustViewBounds="true"
-                android:background="@android:drawable/ic_menu_add"
+                android:background="@drawable/additems"
                 android:description="@null"
-                android:scaleType="fitStart" />
+                android:scaleType="fitStart"
+                android:layout_marginTop="10dp" />
         </LinearLayout>
-
 
         <!--android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"-->

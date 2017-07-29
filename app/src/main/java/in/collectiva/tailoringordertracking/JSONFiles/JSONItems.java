@@ -74,6 +74,7 @@ public class JSONItems {
             lItemMap.put("ItemName", ItemName);
             lItemMap.put("ItemDetail", lSerialNo + ". " + ItemName);
             lItemMap.put("Amount", Amount);
+            lItemMap.put("AmountDetail", "Rs. " + Amount);
 
         } catch (JSONException e) {
             e.printStackTrace();
