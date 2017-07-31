@@ -60,7 +60,7 @@
             android:id="@+id/edtEditItemName"
             style="@style/App_EditTextStyle"
             android:layout_width="250dp"
-            android:hint="Rate"
+            android:hint="Item Name"
             android:inputType="textPersonName" />
 
         <!--<TextView

@@ -2,7 +2,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context="in.collectiva.tailoringordertracking.Fragments.NewOrderItems">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="ADD ORDER ITEM"
+            style="@style/BlueLabelView"
+            android:layout_gravity="top|left"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -16,59 +34,70 @@
             android:id="@+id/txtNewOrderId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="4dp"
+            android:textSize="30dp"
             android:visibility="invisible" />
 
         <TextView
             android:id="@+id/txtNewOrderItemName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Item Name" />
+            android:text="Item Name"
+            style="@style/LabelView" />
 
         <Spinner
             android:id="@+id/sprNewOrderItemName"
-            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:prompt="@string/spinner_default_value"
             android:textSize="15dp"
-            tools:ignore="SpUsage" />
+            tools:ignore="SpUsage"
+            style="@style/customtheme"
+            android:layout_width="250dp" />
 
         <TextView
             android:id="@+id/txtNewOrderItemRate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rate" />
+            android:text="Rate"
+            style="@style/LabelView" />
 
         <EditText
             android:id="@+id/edtNewOrderItemRate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/App_EditTextStyle"
+            android:layout_width="250dp"
             android:enabled="false" />
 
         <TextView
             android:id="@+id/txtNewOrderItemQty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Quantity" />
+            android:text="Quantity"
+            style="@style/LabelView" />
+
+        <!--<EditText
+            android:id="@+id/txtItem"
+            style="@style/App_EditTextStyle"
+            android:layout_width="250dp"
+            android:hint="Item Name"
+            android:inputType="textPersonName" />-->
 
         <EditText
             android:id="@+id/edtNewOrderItemQty"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
+            style="@style/App_EditTextStyle"
+            android:layout_width="250dp"
             android:inputType="numberDecimal" />
 
         <TextView
             android:id="@+id/txtNewOrderItemAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Amount" />
+            android:text="Amount"
+            style="@style/LabelView" />
 
         <EditText
             android:id="@+id/edtNewOrderItemAmount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/App_EditTextStyle"
+            android:layout_width="250dp"
             android:enabled="false" />
 
         <LinearLayout
@@ -78,15 +107,14 @@
 
             <Button
                 android:id="@+id/btnNewOrderItemSave"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/TOTBlueButton"
                 android:layout_weight="1"
-                android:text="Save" />
+                android:text="Save"
+                android:layout_marginRight="10dp" />
 
             <Button
                 android:id="@+id/btnNewOrderItemClose"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/TOTBlueButton"
                 android:layout_weight="1"
                 android:text="Close" />
         </LinearLayout>

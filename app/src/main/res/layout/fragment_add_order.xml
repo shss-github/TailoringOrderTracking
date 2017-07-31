@@ -2,9 +2,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="200dp"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context="in.collectiva.tailoringordertracking.Fragments.AddOrder">
 
     <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="ADD ORDER"
+            style="@style/BlueLabelView"
+            android:layout_gravity="top|left"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -14,42 +33,55 @@
         android:layout_margin="10dp" >
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:visibility="invisible" />
+
+        <!--<TextView
             android:id="@+id/txtAddOrderName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Name" />
 
         <EditText
+            android:id="@+id/txtItem"
+            style="@style/App_EditTextStyle"
+            android:layout_width="250dp"
+            android:hint="Item Name"
+            android:inputType="textPersonName" />-->
+
+        <EditText
             android:id="@+id/edtAddOrderName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
+            style="@style/App_EditTextStyle"
+            android:layout_width="250dp"
+            android:hint="Name"
             android:inputType="textPersonName" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/txtAddOrderMobileNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Mobile No." />
+            android:text="Mobile No." />-->
 
         <EditText
             android:id="@+id/edtAddOrderMobileNo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
+            style="@style/App_EditTextStyle"
+            android:layout_width="250dp"
+            android:hint="Mobile No."
             android:inputType="numberDecimal" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/txtAddOrderDeliveryDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Delivery Date" />
+            android:text="Delivery Date" />-->
 
         <EditText
             android:id="@+id/edtAddOrderDeliveryDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
+            style="@style/App_EditTextStyle"
+            android:layout_width="250dp"
+            android:hint="Delivery Date"
             android:inputType="textPersonName" />
 
         <!--<Button
@@ -68,15 +100,14 @@
 
             <Button
                 android:id="@+id/btnAddOrderSave"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/TOTBlueButton"
                 android:layout_weight="1"
-                android:text="Save" />
+                android:text="Save"
+                android:layout_marginRight="10dp" />
 
             <Button
                 android:id="@+id/btnAddOrderClose"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/TOTBlueButton"
                 android:layout_weight="1"
                 android:text="Close" />
         </LinearLayout>

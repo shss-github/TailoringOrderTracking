@@ -79,4 +79,18 @@
         <item name="android:textColor">#3F51B5</item>
     </style>
 
+    <style name="customtheme" parent="android:Widget.Spinner">
+        <!--<item name="android:spinnerItemStyle">@style/SpinnerItem</item>
+        <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItem</item>-->
+    </style>
+
+    <style name="SpinnerItem">
+        <item name="android:textColor">#000</item>
+        <item name="android:background">@drawable/cell_shape</item>
+    </style>
+
+    <style name="SpinnerDropDownItem">
+        <item name="android:textColor">#000</item>
+        <item name="android:background">@drawable/cell_shape</item>
+    </style>
 </resources>

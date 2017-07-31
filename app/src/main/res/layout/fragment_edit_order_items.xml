@@ -2,13 +2,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context="in.collectiva.tailoringordertracking.Fragments.EditOrderItems">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:orientation="vertical">
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="EDIT ITEM"
+            style="@style/BlueLabelView"
+            android:layout_gravity="top|left"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp" />
+
 
         <ImageView
             android:id="@+id/imgEditOrderClose"
@@ -23,7 +35,6 @@
             android:scaleType="fitStart" />
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -37,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="invisible"
-            android:textSize="4dp" />
+            android:textSize="30dp" />
 
         <TextView
             android:id="@+id/txtModifyOrderItemOrderId"
@@ -50,51 +61,63 @@
             android:id="@+id/txtModifyOrderItemName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Item Name" />
+            android:text="Item Name"
+            style="@style/LabelView" />
 
         <Spinner
             android:id="@+id/sprModifyOrderItemName"
-            android:layout_width="fill_parent"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:prompt="@string/spinner_default_value"
-            tools:ignore="SpUsage" />
+            tools:ignore="SpUsage"
+            style="@style/customtheme" />
 
         <TextView
             android:id="@+id/txtModifyOrderItemRate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rate" />
+            android:text="Rate"
+            style="@style/LabelView" />
+
+        <!--<EditText
+            android:id="@+id/edtEditItemName"
+            style="@style/App_EditTextStyle"
+            android:layout_width="250dp"
+            android:hint="Item Name"
+            android:inputType="textPersonName" />-->
 
         <EditText
             android:id="@+id/edtModifyOrderItemRate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/App_EditTextStyle"
+            android:layout_width="100dp"
             android:enabled="false" />
 
         <TextView
             android:id="@+id/txtModifyOrderItemQty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Quantity" />
+            android:text="Quantity"
+            style="@style/LabelView" />
 
         <EditText
             android:id="@+id/edtModifyOrderItemQty"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
+            style="@style/App_EditTextStyle"
+            android:layout_width="100dp"
+            android:hint="Quantity"
             android:inputType="numberDecimal" />
 
         <TextView
             android:id="@+id/txtModifyOrderItemAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Amount" />
+            android:text="Amount"
+            style="@style/LabelView" />
 
         <EditText
             android:id="@+id/edtModifyOrderItemAmount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/App_EditTextStyle"
+            android:layout_width="100dp"
             android:enabled="false" />
 
         <LinearLayout
@@ -104,15 +127,14 @@
 
             <Button
                 android:id="@+id/btnModifyOrderItemSave"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/TOTBlueButton"
                 android:layout_weight="1"
-                android:text="Save" />
+                android:text="Save"
+                android:layout_marginRight="10dp" />
 
             <Button
                 android:id="@+id/btnModifyOrderItemDelete"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/TOTBlueButton"
                 android:layout_weight="1"
                 android:text="Delete" />
         </LinearLayout>

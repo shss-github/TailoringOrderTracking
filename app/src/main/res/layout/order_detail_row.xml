@@ -34,13 +34,14 @@
                 android:id="@+id/txtItemName"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/NormalFontSize" />
+                style="@style/LabelTitle" />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtOrderDetailDesc1"
-                android:textSize="@dimen/NormalFontSize" />
+                android:textSize="14dp"
+                style="@style/LabelTitle" />
 
         </LinearLayout>
 
@@ -61,7 +62,8 @@
                 android:id="@+id/txtOrderDetailDesc2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/NormalFontSize"
+                style="@style/LabelTitle"
+                android:textSize="14dp"
                 android:gravity="right"
                 android:layout_gravity="right" />
 
