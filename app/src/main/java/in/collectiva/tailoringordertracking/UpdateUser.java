@@ -107,8 +107,8 @@ public class UpdateUser extends AppCompatActivity {
                 String strlatitude = Double.toString(latitude);
                 String strlongitude = Double.toString(longitude);
                 // \n is for new line
-                lTxtLatitude.setText(strlatitude);
-                lTxtLongitude.setText(strlongitude);
+                lTxtLatitude.setText("Latitude : " + strlatitude);
+                lTxtLongitude.setText("Longitude : " + strlongitude);
 
                 //Get User Detail From Session
                 HashMap<String, String> user = session.getUserDetails();
@@ -228,13 +228,17 @@ public class UpdateUser extends AppCompatActivity {
                 lName = c.getString("Name");
                 lMobile = c.getString("MobileNo");
                 lShopName = c.getString("ShopName");
+
+
+
                 lLatitude = c.getString("Latitude");
                 lLongitude = c.getString("Longitude");
 
                 lEditName.setText(lName);
                 lEditShopName.setText(lShopName);
-                lTxtLatitude.setText(lLatitude);
-                lTxtLongitude.setText(lLongitude);
+
+                lTxtLatitude.setText("Latitude : " + lLatitude);
+                lTxtLongitude.setText("Longitude : " + lLongitude);
 
             } catch (JSONException e) {
                 e.printStackTrace();

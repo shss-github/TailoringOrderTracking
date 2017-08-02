@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TOT</string>
+    <string name="app_name">Tailoring Order Tracking</string>
 
     <!-- DRAWER LAYOUT -->
     <string-array name="navigation_drawer_items_array">
@@ -21,6 +21,10 @@
     <string name="title_activity_order_items">Order Items</string>
     <string name="spinner_default_value">Select Item Name</string>
     <string name="strSignup"><u>Sign up</u></string>
+
+    <string name="SMSOrderEntry">Your Order No. {OrderNo} dt. {OrderDate} Delivery Date : {DeliveryDate}. - {TailorShopName}</string>
+    <string name="SMSInProgressList">Your Order No. {OrderNo} is ready to deliver. Balance Amount : {BalanceAmount}. - {TailorShopName}</string>
+    <string name="SMSReadyList">Your Order No. {OrderNo} is delivered. Thanks, Come Again. - {TailorShopName}</string>
 
     <string-array name="orders_array">
         <item>All</item>

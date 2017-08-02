@@ -242,7 +242,7 @@ public class NewOrderItems extends DialogFragment {
 
                     //Refresh the Grid in the Parent
                     AddOrderItems activity = (AddOrderItems) getActivity();
-                    activity.BindListItem(ltxtNewOrderId.getText().toString());
+                    activity.BindData(ltxtNewOrderId.getText().toString());
                 }else {
                     //NewOrderItems.this.getDialog().cancel();
                 }

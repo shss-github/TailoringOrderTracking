@@ -87,6 +87,10 @@ public class JSONOrder {
             Status = lOrder.getString("StatusName");
 
             lOrderMap.put("OrderId", OrderId);
+            /*lOrderMap.put("OrderDt", ConvertStringToDate(lOrder.getString("OrderDate")));
+            lOrderMap.put("DeliveryDt", ConvertStringToDate(lOrder.getString("DeliveryDate")));
+            lOrderMap.put("ShopName", lOrder.getString("ShopName"));*/
+
             lOrderMap.put("OrderDetail", Name + " (" + MobileNo + ")");
             lOrderMap.put("DeliveryDate", "Order #" + OrderNo + " dt. " + ConvertStringToDate(DeliveryDate));
             lOrderMap.put("MobileNo", MobileNo);
@@ -118,6 +122,11 @@ public class JSONOrder {
             obj.MobileNo = lItm.getString("MobileNo");
             obj.TotalQty = lItm.getInt("TotalQty");
             obj.TotalAmount = lItm.getDouble("TotalAmount");
+
+
+            obj.OrderDt = ConvertStringToDate(lItm.getString("OrderDate"));
+            obj.DeliveryDt = ConvertStringToDate(lItm.getString("DeliveryDate"));
+            obj.ShopName = lItm.getString("ShopName");
 
             obj.OrderDetail = lItm.getString("Name") + " (" + lItm.getString("MobileNo") + ")";
             obj.DeliveryDate = "Order #" + lItm.getString("OrderNo") + " dt. " + ConvertStringToDate(lItm.getString("DeliveryDate"));

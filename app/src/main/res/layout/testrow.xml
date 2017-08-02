@@ -19,7 +19,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtOrderRowDeliveryDate"
-            style="@style/LabelTitle" />
+            style="@style/LabelTitle"
+            android:text="Hello World"/>
 
         <TextView
             android:layout_width="fill_parent"
@@ -33,11 +34,6 @@
             android:id="@+id/txtOrderRowStatus"
             style="@style/LabelDescBlue" />
 
-        <TextView
-            android:id="@+id/txtOrderRowSpacing"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="3dp" />
 
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>

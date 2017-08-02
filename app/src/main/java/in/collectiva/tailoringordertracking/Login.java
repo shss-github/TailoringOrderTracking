@@ -78,7 +78,7 @@ public class Login extends AppCompatActivity {
 
                 } else {
 
-                    String lName, lMobileNo;
+                    String lName, lMobileNo, lShopName;
                     int lUserId;
                     try {
 
@@ -94,8 +94,12 @@ public class Login extends AppCompatActivity {
                         lUserId = c.getInt("UserId");
                         lName = c.getString("Name");
                         lMobileNo = c.getString("MobileNo");
+                        lShopName = c.getString("ShopName");
 
-                        session.createLoginSession(lUserId, lName, lMobileNo, false);
+                        /*String lstr = String.valueOf(lchkKeepMeAsLoggedIn.isChecked());
+                        Toast.makeText(Login.this, lstr , Toast.LENGTH_LONG).show();*/
+
+                        session.createLoginSession(lUserId, lName, lMobileNo, lShopName, lchkKeepMeAsLoggedIn.isChecked());
 
                         startActivity(new Intent(Login.this, HomeMenu.class));
 
@@ -136,14 +140,21 @@ public class Login extends AppCompatActivity {
         session = new SessionManagement(getApplicationContext());
 
         if(session != null) {
+            //session.logoutUser();
             // get user data from session
             HashMap<String, String> user = session.getUserDetails();
 
             // User Id
-            Boolean lKeepMeLoggedIn = Boolean.getBoolean(user.get(SessionManagement.KEY_KEEP_ME_LOGGED_IN));
-            if (lKeepMeLoggedIn) {
+            //Boolean lKeepMeLoggedIn = Boolean.getBoolean(user.get(SessionManagement.KEY_KEEP_ME_LOGGED_IN));
+            String lKeepMeLoggedIn = user.get(SessionManagement.KEY_KEEP_ME_LOGGED_IN);
+
+            if (lKeepMeLoggedIn.equals("Yes")) {
                 startActivity(new Intent(Login.this, HomeMenu.class));
             }
+        }
+        else
+        {
+            Toast.makeText(this, "Session = null", Toast.LENGTH_LONG).show();
         }
     }
 

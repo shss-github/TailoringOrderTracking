@@ -1,5 +1,6 @@
 package in.collectiva.tailoringordertracking;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -117,11 +118,13 @@ public class ImportItems extends AppCompatActivity {
 
                             String lMethodName = "SaveConfigItems";
                             String resultData = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
-
                         }
                     }
-                    Toast.makeText(ImportItems.this, "Imported Successfully!", Toast.LENGTH_SHORT).show();
-                    LoadData();
+                    /*Toast.makeText(ImportItems.this, "Imported Successfully!", Toast.LENGTH_SHORT).show();
+                    LoadData();*/
+
+                    //Refresh the Grid in the Parent
+                    startActivity(new Intent(ImportItems.this, Item.class));
                 }
             }
         });

@@ -1,8 +1,10 @@
 package in.collectiva.tailoringordertracking.Fragments;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -12,15 +14,19 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import in.collectiva.tailoringordertracking.CommonFunction.CRUDProcess;
+import in.collectiva.tailoringordertracking.CommonFunction.GeneralMethods;
 import in.collectiva.tailoringordertracking.CommonFunction.SessionManagement;
 import in.collectiva.tailoringordertracking.JSONFiles.JSONOrder;
 import in.collectiva.tailoringordertracking.MyOrders;
 import in.collectiva.tailoringordertracking.R;
+import in.collectiva.tailoringordertracking.cConstant.clsOrder;
 import in.collectiva.tailoringordertracking.cConstant.clsParameters;
 
 public class ReadyListFragment extends Fragment {
@@ -35,7 +41,6 @@ public class ReadyListFragment extends Fragment {
 
     // Session Manager Class
     SessionManagement session;
-
 
     //Overriden method onCreateView
     @Override
@@ -124,6 +129,8 @@ public class ReadyListFragment extends Fragment {
                             String lMethodName = "UpdateOrderStatus";
                             jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
+                            SendOrderSMS(lSelectedOrderId);
+
                             //Refresh the Grid in the Parent
                             MyOrders activity = (MyOrders) getActivity();
                             activity.BindTab(2);
@@ -140,6 +147,40 @@ public class ReadyListFragment extends Fragment {
                     dialog.show();
                 }
             });
+        }
+    }
+
+    private void SendOrderSMS(String OrderId) //(String OrderId)
+    {
+        HashMap<String, String> user = session.getUserDetails();
+        String lUserId = user.get(SessionManagement.KEY_USERID);
+
+        ArrayList lstParameters = new ArrayList<>();
+        clsParameters objParam = new clsParameters();
+        objParam.ParameterName = "UserId";
+        objParam.ParameterValue = lUserId;
+        lstParameters.add(objParam);
+
+        objParam = new clsParameters();
+        objParam.ParameterName = "OrderId";
+        objParam.ParameterValue = OrderId;
+        lstParameters.add(objParam);
+
+        String lMethodName = "GetOrders";
+        String jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
+
+        if (jsonString.equals("0")) {
+
+        } else {
+            clsOrder lObj = JSONOrder.newInstance().GetJSONOrder(jsonString);
+
+            String SMSMessage = getResources().getString(R.string.SMSReadyList);
+
+            SMSMessage = SMSMessage.replace("{OrderNo}", lObj.OrderNo);
+            SMSMessage = SMSMessage.replace("{TailorShopName}", lObj.ShopName);
+
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.SEND_SMS}, 1);
+            GeneralMethods.fnSendSMS(lObj.MobileNo, SMSMessage);
         }
     }
 

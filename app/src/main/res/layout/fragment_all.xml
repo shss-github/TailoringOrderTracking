@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#fff">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,26 +27,24 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp" />
+                android:layout_marginTop="5dp"
+                style="@style/customtheme" />
 
             <EditText
                 android:id="@+id/edtAsonDate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                style="@style/App_EditTextStyle"
+                android:inputType="date" />
 
             <Button
                 android:id="@+id/btnGetOrder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/TOTBlueButton"
                 android:text="Refresh" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
@@ -54,23 +53,36 @@
             <ListView
                 android:id="@+id/lstAllOrderList"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="160dp"
                 android:dividerHeight="1dp"
-                android:padding="10dp"></ListView>
+                android:padding="10dp"
+                android:divider="#d9ddf2"></ListView>
+
+            <TextView
+                android:id="@+id/txtPendingItemSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ITEM SUMMARY"
+                style="@style/BlueLabelView"
+                android:visibility="invisible" />
 
             <ListView
                 android:id="@+id/lstAllOrderListSummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:dividerHeight="1dp"
-                android:padding="10dp"></ListView>
+                android:padding="10dp"
+                android:divider="#d9ddf2"></ListView>
 
             <TextView
                 android:id="@+id/txtAllNoRecords"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:gravity="center" />
+                android:gravity="center"
+                style="@style/LabelView" />
+
         </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>

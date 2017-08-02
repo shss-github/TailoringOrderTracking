@@ -1,9 +1,11 @@
 package in.collectiva.tailoringordertracking.Fragments;
 
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -22,10 +24,14 @@ import java.util.Date;
 import java.util.HashMap;
 
 import in.collectiva.tailoringordertracking.CommonFunction.CRUDProcess;
+import in.collectiva.tailoringordertracking.CommonFunction.GeneralMethods;
 import in.collectiva.tailoringordertracking.CommonFunction.SessionManagement;
+import in.collectiva.tailoringordertracking.HomeMenu;
 import in.collectiva.tailoringordertracking.Item;
+import in.collectiva.tailoringordertracking.JSONFiles.JSONOrder;
 import in.collectiva.tailoringordertracking.OrderEntry;
 import in.collectiva.tailoringordertracking.R;
+import in.collectiva.tailoringordertracking.cConstant.clsOrder;
 import in.collectiva.tailoringordertracking.cConstant.clsParameters;
 
 /**
@@ -140,6 +146,7 @@ public class AddOrder extends DialogFragment {
                 if(ProceedToSave == true) {
                     // get user data from session
                     HashMap<String, String> user = session.getUserDetails();
+                    String lShopName = user.get(SessionManagement.KEY_SHOPNAME);
                     String lUserId = user.get(SessionManagement.KEY_USERID);
 
                     //Here Creating List for the Parameters, which we need to pass to the method.
@@ -174,6 +181,10 @@ public class AddOrder extends DialogFragment {
                     String lMethodName = "SaveOrders";
                     String resultData = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
+                    clsOrder obj = JSONOrder.newInstance().GetJSONOrder(resultData);
+
+                    SendOrderSMS(obj);
+
                     Toast.makeText(getActivity().getApplicationContext(), "Successfully Saved!", Toast.LENGTH_LONG).show();
 
                     AddOrder.this.getDialog().dismiss();
@@ -187,6 +198,54 @@ public class AddOrder extends DialogFragment {
             }
         }
     };
+
+    private void SendOrderSMS(clsOrder lObj) //(String OrderId)
+    {
+        String SMSMessage = getResources().getString(R.string.SMSOrderEntry);;
+        SMSMessage = SMSMessage.replace("{OrderNo}", lObj.OrderNo);
+        SMSMessage = SMSMessage.replace("{OrderDate}", lObj.OrderDt);
+        SMSMessage = SMSMessage.replace("{DeliveryDate}", lObj.DeliveryDt);
+        SMSMessage = SMSMessage.replace("{TailorShopName}", lObj.ShopName);
+
+        ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.SEND_SMS},1);
+        GeneralMethods.fnSendSMS(lObj.MobileNo, SMSMessage);
+
+        /*HashMap<String, String> user = session.getUserDetails();
+        String lUserId = user.get(SessionManagement.KEY_USERID);
+
+        ArrayList lstParameters = new ArrayList<>();
+        clsParameters objParam = new clsParameters();
+        objParam.ParameterName = "UserId";
+        objParam.ParameterValue = lUserId;
+        lstParameters.add(objParam);
+
+        objParam = new clsParameters();
+        objParam.ParameterName = "OrderId";
+        objParam.ParameterValue = OrderId;
+        lstParameters.add(objParam);
+
+        String lMethodName = "GetOrders";
+        String jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
+
+        Toast.makeText(getActivity(), jsonString, Toast.LENGTH_LONG).show();
+        if (jsonString.equals("0")) {
+            Toast.makeText(getActivity(), "Empty Data", Toast.LENGTH_LONG).show();
+        }
+        else {
+            clsOrder obj = JSONOrder.newInstance().GetJSONOrder(jsonString);
+
+            String SMSMessage = "Your Order No. {OrderNo} dt. {OrderDate} Delivery Date : {DeliveryDate} {TailorShopName}";
+            SMSMessage = SMSMessage.replace("{OrderNo}", obj.OrderNo);
+            SMSMessage = SMSMessage.replace("{OrderDate}", obj.OrderDt);
+            SMSMessage = SMSMessage.replace("{DeliveryDate}", obj.DeliveryDt);
+            SMSMessage = SMSMessage.replace("{TailorShopName}", obj.ShopName);
+
+            Toast.makeText(getActivity(), SMSMessage, Toast.LENGTH_LONG).show();
+            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.SEND_SMS},1);
+            GeneralMethods.fnSendSMS("8608778742", SMSMessage);
+            Toast.makeText(getActivity(), "Msg Sent Successfully", Toast.LENGTH_LONG).show();
+        }*/
+    }
 
     private View.OnClickListener lbtnAddOrderCloseListener = new View.OnClickListener() {
         @Override

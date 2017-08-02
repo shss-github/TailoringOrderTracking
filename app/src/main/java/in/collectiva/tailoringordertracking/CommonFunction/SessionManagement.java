@@ -32,6 +32,7 @@ public class SessionManagement {
     // User name (make variable public to access from outside)
     public static final String KEY_NAME = "Name";
     public static final String KEY_MOBILENO = "MobileNo";
+    public static final String KEY_SHOPNAME = "ShopName";
     public static final String KEY_USERID = "UserId";
 
     // Constructor
@@ -44,7 +45,7 @@ public class SessionManagement {
     /**
      * Create login session
      * */
-    public void createLoginSession(int UserId, String Name, String MobileNo, Boolean IsKeepMeLoggedIn){
+    public void createLoginSession(int UserId, String Name, String MobileNo, String ShopName, Boolean IsKeepMeLoggedIn){
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
 
@@ -57,7 +58,12 @@ public class SessionManagement {
         // Storing email in pref
         editor.putString(KEY_MOBILENO, MobileNo);
 
-        editor.putBoolean(KEY_KEEP_ME_LOGGED_IN, IsKeepMeLoggedIn);
+        editor.putString(KEY_SHOPNAME,  ShopName);
+
+        if(IsKeepMeLoggedIn)
+            editor.putString(KEY_KEEP_ME_LOGGED_IN, "Yes");
+        else
+            editor.putString(KEY_KEEP_ME_LOGGED_IN, "No");
 
         // commit changes
         editor.commit();
@@ -102,7 +108,11 @@ public class SessionManagement {
         user.put(KEY_MOBILENO, pref.getString(KEY_MOBILENO, null));
 
         // Mobile NO
-        user.put(KEY_KEEP_ME_LOGGED_IN, String.valueOf(pref.getBoolean(KEY_KEEP_ME_LOGGED_IN, Boolean.FALSE)));
+        user.put(KEY_SHOPNAME, pref.getString(KEY_SHOPNAME, null));
+
+        // Mobile NO
+        //user.put(KEY_KEEP_ME_LOGGED_IN, String.valueOf(pref.getBoolean(KEY_KEEP_ME_LOGGED_IN, Boolean.FALSE)));
+        user.put(KEY_KEEP_ME_LOGGED_IN, pref.getString(KEY_KEEP_ME_LOGGED_IN, "No"));
 
         // return user
         return user;

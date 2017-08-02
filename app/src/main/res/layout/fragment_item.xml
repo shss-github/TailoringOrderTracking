@@ -102,6 +102,7 @@
                 style="@style/TOTBlueButton"
                 android:layout_weight="1"
                 android:text="Close" />
+
         </LinearLayout>
     </LinearLayout>
 

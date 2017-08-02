@@ -1,6 +1,8 @@
 package in.collectiva.tailoringordertracking;
 
+import android.Manifest;
 import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -8,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -275,7 +278,7 @@ public class HomeMenu extends AppCompatActivity {
                 break;
             case 7: //Logout
                 session.logoutUser();
-                startActivity(new Intent(HomeMenu.this, Home.class));
+                startActivity(new Intent(HomeMenu.this, Login.class));
                 break;
             default:
                 break;

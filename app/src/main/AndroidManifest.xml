@@ -7,13 +7,16 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- SEND_SMS permission -->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
     <uses-feature android:name="android.hardware.location.gps" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_cloth"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_cloth"
         android:supportsRtl="true"
         android:theme="@style/AppThemeActionBar">
         <activity android:name=".MainActivity" />

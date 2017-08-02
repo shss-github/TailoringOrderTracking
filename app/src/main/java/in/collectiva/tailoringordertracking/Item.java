@@ -64,6 +64,7 @@ public class Item extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
         /*Button lbtnAddItem = (Button) findViewById(R.id.btnAddItem);
         lbtnAddItem.setOnClickListener(lbtnAddItemListener);
 

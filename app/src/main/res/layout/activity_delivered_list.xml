@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#fff"
+    android:padding="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,9 +14,8 @@
         <EditText
             android:id="@+id/edtFromDate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
+            style="@style/App_EditTextStyle"
+            android:inputType="date" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,9 +25,8 @@
             <EditText
                 android:id="@+id/edtToDate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                style="@style/App_EditTextStyle"
+                android:inputType="date" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -36,7 +36,7 @@
                 <Button
                     android:id="@+id/btnGetDetail"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/TOTBlueButton"
                     android:text="Get Detail" />
 
                 <LinearLayout
@@ -55,7 +55,8 @@
                         android:id="@+id/txtDeliveredNoRecords"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        style="@style/LabelView" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

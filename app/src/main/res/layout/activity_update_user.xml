@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="in.collectiva.tailoringordertracking.UpdateUser">
+    tools:context="in.collectiva.tailoringordertracking.UpdateUser"
+    android:background="#fff">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -18,26 +19,26 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Contact Person"/>
+            android:text="Contact Person"
+            style="@style/LabelView" />
 
         <EditText
             android:id="@+id/editContactPerson"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
+            style="@style/App_EditTextStyle"
             android:inputType="textPersonName" />
 
         <TextView
             android:id="@+id/textShopName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Shop Name"/>
+            android:text="Shop Name"
+            style="@style/LabelView" />
 
         <EditText
             android:id="@+id/editShopName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
+            style="@style/App_EditTextStyle"
             android:inputType="textPersonName" />
 
         <!--<TextView
@@ -93,32 +94,35 @@
         <Button
             android:id="@+id/btnUpdate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Update" />
+            android:text="Update"
+            style="@style/TOTBlueButton" />
 
         <TextView
             android:id="@+id/textMyLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="My Location" />
+            android:text="MY LOCATION"
+            style="@style/BlueLabelView" />
 
         <TextView
             android:id="@+id/textLatitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="" />
+            android:text=""
+            style="@style/LabelView" />
 
         <TextView
             android:id="@+id/textLangitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="" />
+            android:text=""
+            style="@style/LabelView" />
 
         <Button
             android:id="@+id/btnChangeLocation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Change Location" />
+            android:text="Update Current Location"
+            style="@style/TOTBlueButton" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

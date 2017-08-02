@@ -44,7 +44,6 @@ import in.collectiva.tailoringordertracking.cConstant.clsParameters;
 //Our class extending fragment
 public class AllFragment extends Fragment {
 
-
     private String jsonString, lSelectedOrderId;
 
     private TextView ltxtAllNoRecords;
@@ -52,6 +51,7 @@ public class AllFragment extends Fragment {
     private ListView lstAllSummary;
     private Spinner spinner;
     private EditText edAsOnDate;
+    private TextView txtPendingItemSummary;
 
     private static final String NAMESPACE = "http://ws.collectiva.in/";
     private static final String REQURL = "http://ws.collectiva.in/AndroidTailoringService.svc"; //"http://ws.collectiva.in/AndroidTestService.svc";
@@ -97,6 +97,8 @@ public class AllFragment extends Fragment {
         edAsOnDate = (EditText) view.findViewById(R.id.edtAsonDate);
         edAsOnDate.setOnClickListener(lbtnDatePickerListener);
         edAsOnDate.setVisibility(View.GONE);
+
+        txtPendingItemSummary = (TextView) view.findViewById(R.id.txtPendingItemSummary);
 
         spinner = (Spinner) view.findViewById(R.id.cboOption);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -218,15 +220,75 @@ public class AllFragment extends Fragment {
             ltxtAllNoRecords.setText("");
 
             if (jsonString.equals("0")) {
+                txtPendingItemSummary.setVisibility(View.GONE);
                 ltxtAllNoRecords.setText("No records found!");
             } else {
+                txtPendingItemSummary.setVisibility(View.VISIBLE);
                 // ltxtAllNoRecords.setText("records found!");
+
+
                 SimpleAdapter simpleAdapter = new SimpleAdapter(getActivity(), JSONOrder.newInstance().GetJSONOrderList(jsonString),
                         R.layout.orderrow, new String[]{"OrderId", "OrderDetail", "DeliveryDate", "Status"},
                         new int[]{R.id.txtOrderRowId, R.id.txtOrderRowDetail, R.id.txtOrderRowDeliveryDate,
                                 R.id.txtOrderRowStatus});
 
+                /*SimpleAdapter simpleAdapter = new SimpleAdapter(getActivity(), JSONOrder.newInstance().GetJSONOrderList(jsonString),
+                        R.layout.testrow, new String[]{"OrderId", "OrderDetail"},
+                            new int[]{R.id.txtOrderRowDetail, R.id.txtOrderRowDeliveryDate });*/
+
                 lstAll.setAdapter(simpleAdapter);
+
+                lstAll.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                        // selected item
+                        lSelectedOrderId = ((TextView) view.findViewById(R.id.txtOrderRowId)).getText().toString();
+                        String OrderDetail = ((TextView) view.findViewById(R.id.txtOrderRowDeliveryDate)).getText().toString();
+
+                        // 1. Instantiate an AlertDialog.Builder with its constructor
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                        // 2. Chain together various setter methods to set the dialog characteristics
+                        builder.setMessage("Are you sure to Update the Status as 'InProgress' for the Order " + OrderDetail + "?")
+                                .setTitle("");
+
+                        // Add the buttons
+                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // User clicked OK button
+
+                                ArrayList<clsParameters> lstParameters = new ArrayList<>();
+                                clsParameters objParam = new clsParameters();
+                                objParam.ParameterName = "OrderID";
+                                objParam.ParameterValue = lSelectedOrderId;
+                                lstParameters.add(objParam);
+
+                                objParam = new clsParameters();
+                                objParam.ParameterName = "StatusID";
+                                objParam.ParameterValue = "2";
+                                lstParameters.add(objParam);
+
+                                String lMethodName = "UpdateOrderStatus";
+                                jsonString = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
+
+                                //Refresh the Grid in the Parent
+                                MyOrders activity = (MyOrders) getActivity();
+                                activity.BindTab(1);
+                            }
+                        });
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // User cancelled the dialog
+                            }
+                        });
+
+                        // 3. Get the AlertDialog from create()
+                        AlertDialog dialog = builder.create();
+
+
+                        dialog.show();
+                    }
+                });
             }
         } catch(Exception e) {
             throw e;

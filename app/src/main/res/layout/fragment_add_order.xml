@@ -81,8 +81,7 @@
             android:id="@+id/edtAddOrderDeliveryDate"
             style="@style/App_EditTextStyle"
             android:layout_width="250dp"
-            android:hint="Delivery Date"
-            android:inputType="textPersonName" />
+            android:inputType="date" />
 
         <!--<Button
             android:layout_width="50dp"

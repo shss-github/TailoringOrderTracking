@@ -127,6 +127,11 @@ public class ItemFragment extends DialogFragment {
                     objParam.ParameterValue = lUserId;
                     lstParameters.add(objParam);
 
+                    objParam = new clsParameters();
+                    objParam.ParameterName = "ConfigItemId";
+                    objParam.ParameterValue = "0";
+                    lstParameters.add(objParam);
+
                     String lMethodName = "InsertItem";
                     String resultData = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 

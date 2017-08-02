@@ -98,7 +98,7 @@ public class Register extends AppCompatActivity {
                         lMethodName = "InsertUser";
                         resultData = objCRUD.GetScalar(NAMESPACE, lMethodName, REQURL, SOAP_ACTION + lMethodName, lstParameters);
 
-                        session.createLoginSession(Integer.parseInt(resultData), ledtName.getText().toString(), ledtMobileNo.getText().toString(), false);
+                        session.createLoginSession(Integer.parseInt(resultData), ledtName.getText().toString(), ledtMobileNo.getText().toString(), "", false);
 
                         startActivity(new Intent(Register.this, HomeMenu.class));
                         //Toast.makeText(Register.this, "Registered Successfully", Toast.LENGTH_LONG).show();

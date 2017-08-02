@@ -14,6 +14,9 @@ public class clsOrder
     public String Name;
     public String OrderNo;
     public String DeliveryDate;
+    public String OrderDt;
+    public String DeliveryDt;
+    public String ShopName;
     public String MobileNo;
     public int StatusId;
     public String Status;
